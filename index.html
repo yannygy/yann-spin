@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>YANN SPIN — Arcade</title>
+<title>YANN SPIN - Arcade</title>
 
 <style>
 *{
@@ -27,10 +26,7 @@ body{
   margin:auto;
 }
 
-/* =========================
-   WARNING
-========================= */
-
+/* WARNING */
 .warning-popup{
   position:fixed;
   inset:0;
@@ -39,7 +35,7 @@ body{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:rgba(0,0,0,.92);
+  background:rgba(0,0,0,.94);
 }
 
 .warning-box{
@@ -63,7 +59,6 @@ body{
   font-size:15px;
   line-height:1.6;
   font-weight:900;
-  text-shadow:0 0 12px #ffe00088;
 }
 
 .tiktok{
@@ -87,7 +82,6 @@ body{
   box-shadow:
     2px 2px #25f4ee,
     -2px -2px #fe2c55;
-  font-size:19px;
 }
 
 .warning-box button{
@@ -106,10 +100,7 @@ body{
   display:none;
 }
 
-/* =========================
-   HEADER
-========================= */
-
+/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
@@ -133,10 +124,7 @@ body{
   font-weight:bold;
 }
 
-/* =========================
-   TITLE
-========================= */
-
+/* TITLE */
 .title{
   text-align:center;
   margin-bottom:15px;
@@ -161,10 +149,7 @@ body{
   font-size:9px;
 }
 
-/* =========================
-   MACHINE
-========================= */
-
+/* MACHINE */
 .machine{
   padding:13px;
   border:2px solid #414152;
@@ -210,17 +195,9 @@ body{
 }
 
 @keyframes rolling{
-  0%{
-    transform:translateY(-9px);
-  }
-
-  50%{
-    transform:translateY(9px);
-  }
-
-  100%{
-    transform:translateY(-9px);
-  }
+  0%{transform:translateY(-9px);}
+  50%{transform:translateY(9px);}
+  100%{transform:translateY(-9px);}
 }
 
 .cell.win{
@@ -240,19 +217,11 @@ body{
 }
 
 @keyframes win{
-  from{
-    transform:scale(1);
-  }
-
-  to{
-    transform:scale(1.1);
-  }
+  from{transform:scale(1);}
+  to{transform:scale(1.1);}
 }
 
-/* =========================
-   BOX
-========================= */
-
+/* BOX */
 .box{
   margin-top:10px;
   padding:13px;
@@ -268,10 +237,7 @@ body{
   letter-spacing:2px;
 }
 
-/* =========================
-   BET
-========================= */
-
+/* BET */
 .bet-control{
   display:grid;
   grid-template-columns:48px 1fr 48px;
@@ -313,10 +279,23 @@ body{
   color:#ffe000;
 }
 
-/* =========================
-   SPIN COUNT
-========================= */
+/* HOKI INFO */
+.hoki-info{
+  margin-top:9px;
+  padding:9px;
+  border-radius:10px;
+  background:#11101a;
+  text-align:center;
+  color:#888;
+  font-size:8px;
+  line-height:1.7;
+}
 
+.hoki-info strong{
+  color:#00f5ff;
+}
+
+/* SPIN OPTIONS */
 .options{
   display:grid;
   grid-template-columns:repeat(5,1fr);
@@ -339,10 +318,7 @@ body{
   color:#001015;
 }
 
-/* =========================
-   SPEED
-========================= */
-
+/* SPEED */
 .speed{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -365,10 +341,7 @@ body{
   color:white;
 }
 
-/* =========================
-   SPIN
-========================= */
-
+/* SPIN */
 .spin{
   width:100%;
   padding:16px;
@@ -387,10 +360,7 @@ body{
   cursor:not-allowed;
 }
 
-/* =========================
-   RESULT
-========================= */
-
+/* RESULT */
 .result{
   display:none;
   margin-top:10px;
@@ -422,10 +392,7 @@ body{
   line-height:1.7;
 }
 
-/* =========================
-   SUMMARY
-========================= */
-
+/* SUMMARY */
 .summary{
   display:none;
   margin-top:10px;
@@ -457,10 +424,7 @@ body{
   color:white;
 }
 
-/* =========================
-   STATS
-========================= */
-
+/* STATS */
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -486,10 +450,7 @@ body{
   font-size:7px;
 }
 
-/* =========================
-   NOTIFICATION
-========================= */
-
+/* NOTIFICATION */
 .notification{
   position:fixed;
   z-index:9999;
@@ -511,7 +472,6 @@ body{
     opacity:0;
     transform:translate(-50%,-50%) scale(.6);
   }
-
   to{
     opacity:1;
     transform:translate(-50%,-50%) scale(1);
@@ -542,10 +502,7 @@ body{
   font-size:8px;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
+/* FOOTER */
 .footer{
   margin-top:20px;
   padding:15px;
@@ -599,47 +556,26 @@ body{
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     WARNING
-========================= -->
-
-<div
-  class="warning-popup"
-  id="warningPopup"
->
+<!-- WARNING -->
+<div class="warning-popup" id="warningPopup">
 
   <div class="warning-box">
 
-    <div class="warning-icon">
-      ⚠️
-    </div>
+    <div class="warning-icon">⚠️</div>
 
     <div class="warning-text">
-
       !!WARNING INI HANYA GAME SENANG-SENANG
       BUATAN YANN BUKAN UNTUK JUDI ONLINE!!
-
     </div>
 
     <div class="tiktok">
-
-      <div class="tiktok-icon">
-        ♪
-      </div>
-
-      <span>
-        @yanzjoy0
-      </span>
-
+      <div class="tiktok-icon">♪</div>
+      <span>@yanzjoy0</span>
     </div>
 
-    <button
-      onclick="closeWarning()"
-    >
+    <button onclick="closeWarning()">
       SAYA MENGERTI
     </button>
 
@@ -650,11 +586,6 @@ body{
 
 <div class="app">
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
 
   <div class="logo">
@@ -662,41 +593,22 @@ body{
   </div>
 
   <div class="balance">
-
-    💰
-    <span id="balance">
-      Rp500.000
-    </span>
-
+    💰 <span id="balance">Rp500.000</span>
   </div>
 
 </header>
 
 
-<!-- =========================
-     TITLE
-========================= -->
-
 <div class="title">
 
-  <small>
-    VIRTUAL ARCADE GAME
-  </small>
+  <small>VIRTUAL ARCADE GAME</small>
 
-  <h1>
-    LUCKY SPIN
-  </h1>
+  <h1>LUCKY SPIN</h1>
 
-  <p>
-    Game hiburan saldo virtual
-  </p>
+  <p>Game hiburan saldo virtual</p>
 
 </div>
 
-
-<!-- =========================
-     MACHINE
-========================= -->
 
 <section class="machine">
 
@@ -705,10 +617,7 @@ body{
   </div>
 
 
-  <div
-    class="slot"
-    id="slot"
-  >
+  <div class="slot" id="slot">
 
     <div class="cell"></div>
     <div class="cell"></div>
@@ -734,294 +643,221 @@ body{
   </div>
 
 
-<!-- =========================
-     BET
-========================= -->
+  <!-- BET -->
 
-<div class="box">
+  <div class="box">
 
-  <div class="label">
-    BET VIRTUAL
-  </div>
+    <div class="label">
+      BET VIRTUAL
+    </div>
 
-  <div class="bet-control">
+    <div class="bet-control">
 
-    <button
-      onclick="changeBet(-10000)"
-    >
-      −
-    </button>
+      <button onclick="changeBet(-1000)">
+        −
+      </button>
 
-    <input
-      id="betInput"
-      type="number"
-      min="1000"
-      step="1000"
-      value="20000"
-      oninput="manualBet()"
-    >
+      <input
+        id="betInput"
+        type="number"
+        min="1000"
+        step="1000"
+        value="20000"
+        oninput="manualBet()"
+      >
 
-    <button
-      onclick="changeBet(10000)"
-    >
-      +
-    </button>
+      <button onclick="changeBet(1000)">
+        +
+      </button>
 
-  </div>
+    </div>
 
-  <div class="bet-info">
+    <div class="bet-info">
 
-    <span>
-      MIN Rp1.000
-    </span>
+      <span>MIN Rp1.000</span>
 
-    <strong id="betDisplay">
-      Rp20.000
-    </strong>
+      <strong id="betDisplay">
+        Rp20.000
+      </strong>
 
-  </div>
-
-</div>
+    </div>
 
 
-<!-- =========================
-     JUMLAH SPIN
-========================= -->
+    <div class="hoki-info">
 
-<div class="box">
+      Peluang hoki berdasarkan bet:<br>
 
-  <div class="label">
-    JUMLAH SPIN — MAKSIMAL 100×
-  </div>
+      <strong id="hokiChance">
+        1,5%
+      </strong>
 
-  <div class="options">
-
-    <button
-      class="selected"
-      onclick="selectSpin(1,this)"
-    >
-      1×
-    </button>
-
-    <button onclick="selectSpin(5,this)">
-      5×
-    </button>
-
-    <button onclick="selectSpin(10,this)">
-      10×
-    </button>
-
-    <button onclick="selectSpin(20,this)">
-      20×
-    </button>
-
-    <button onclick="selectSpin(30,this)">
-      30×
-    </button>
-
-    <button onclick="selectSpin(40,this)">
-      40×
-    </button>
-
-    <button onclick="selectSpin(50,this)">
-      50×
-    </button>
-
-    <button onclick="selectSpin(60,this)">
-      60×
-    </button>
-
-    <button onclick="selectSpin(80,this)">
-      80×
-    </button>
-
-    <button onclick="selectSpin(100,this)">
-      100×
-    </button>
+    </div>
 
   </div>
 
-</div>
 
+  <!-- JUMLAH SPIN -->
 
-<!-- =========================
-     SPEED
-========================= -->
+  <div class="box">
 
-<div class="box">
+    <div class="label">
+      JUMLAH SPIN — MAKSIMAL 100×
+    </div>
 
-  <div class="label">
-    KECEPATAN SPIN
-  </div>
+    <div class="options">
 
-  <div class="speed">
+      <button class="selected"
+        onclick="selectSpin(1,this)">
+        1×
+      </button>
 
-    <button
-      id="normalSpeed"
-      class="selected"
-      onclick="setSpeed('normal')"
-    >
-      🐢 NORMAL
-    </button>
+      <button onclick="selectSpin(5,this)">
+        5×
+      </button>
 
-    <button
-      id="fastSpeed"
-      onclick="setSpeed('fast')"
-    >
-      ⚡ CEPAT
-    </button>
+      <button onclick="selectSpin(10,this)">
+        10×
+      </button>
 
-  </div>
+      <button onclick="selectSpin(20,this)">
+        20×
+      </button>
 
-</div>
+      <button onclick="selectSpin(30,this)">
+        30×
+      </button>
 
+      <button onclick="selectSpin(40,this)">
+        40×
+      </button>
 
-<!-- =========================
-     SPIN BUTTON
-========================= -->
+      <button onclick="selectSpin(50,this)">
+        50×
+      </button>
 
-<button
-  class="spin"
-  id="spinButton"
-  onclick="startSpin()"
->
-  🎰 SPIN 1×
-</button>
+      <button onclick="selectSpin(60,this)">
+        60×
+      </button>
 
+      <button onclick="selectSpin(80,this)">
+        80×
+      </button>
 
-<!-- =========================
-     RESULT
-========================= -->
+      <button onclick="selectSpin(100,this)">
+        100×
+      </button>
 
-<div
-  class="result"
-  id="result"
->
-
-  <h3 id="resultTitle">
-    -
-  </h3>
-
-  <div
-    class="reward"
-    id="resultReward"
-  >
-    Rp0
-  </div>
-
-  <div
-    class="info"
-    id="resultInfo"
-  >
-    -
-  </div>
-
-</div>
-
-
-<!-- =========================
-     SUMMARY
-========================= -->
-
-<div
-  class="summary"
-  id="summary"
->
-
-  <h3>
-    📊 HASIL SEMUA SPIN
-  </h3>
-
-  <div class="row">
-
-    <span>
-      Jumlah Spin
-    </span>
-
-    <strong id="sumSpins">
-      0×
-    </strong>
+    </div>
 
   </div>
 
-  <div class="row">
 
-    <span>
-      Total Bet
-    </span>
+  <!-- SPEED -->
 
-    <strong id="sumCost">
+  <div class="box">
+
+    <div class="label">
+      KECEPATAN SPIN
+    </div>
+
+    <div class="speed">
+
+      <button
+        id="normalSpeed"
+        class="selected"
+        onclick="setSpeed('normal')">
+        🐢 NORMAL
+      </button>
+
+      <button
+        id="fastSpeed"
+        onclick="setSpeed('fast')">
+        ⚡ CEPAT
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- SPIN -->
+
+  <button
+    class="spin"
+    id="spinButton"
+    onclick="startSpin()">
+
+    🎰 SPIN 1×
+
+  </button>
+
+
+  <!-- RESULT -->
+
+  <div class="result" id="result">
+
+    <h3 id="resultTitle">-</h3>
+
+    <div class="reward" id="resultReward">
       Rp0
-    </strong>
+    </div>
+
+    <div class="info" id="resultInfo">
+      -
+    </div>
 
   </div>
 
-  <div class="row">
 
-    <span>
-      Total Reward
-    </span>
+  <!-- SUMMARY -->
 
-    <strong id="sumReward">
-      Rp0
-    </strong>
+  <div class="summary" id="summary">
+
+    <h3>
+      📊 HASIL SEMUA SPIN
+    </h3>
+
+    <div class="row">
+      <span>Jumlah Spin</span>
+      <strong id="sumSpins">0×</strong>
+    </div>
+
+    <div class="row">
+      <span>Total Bet</span>
+      <strong id="sumCost">Rp0</strong>
+    </div>
+
+    <div class="row">
+      <span>Total Reward</span>
+      <strong id="sumReward">Rp0</strong>
+    </div>
 
   </div>
-
-</div>
-
 
 </section>
 
 
-<!-- =========================
-     STATS
-========================= -->
+<!-- STATS -->
 
 <div class="stats">
 
   <div class="stat">
-
-    <strong id="totalSpins">
-      0
-    </strong>
-
-    <span>
-      TOTAL SPIN
-    </span>
-
+    <strong id="totalSpins">0</strong>
+    <span>TOTAL SPIN</span>
   </div>
 
   <div class="stat">
-
-    <strong id="today">
-      Rp0
-    </strong>
-
-    <span>
-      REWARD
-    </span>
-
+    <strong id="today">Rp0</strong>
+    <span>REWARD</span>
   </div>
 
   <div class="stat">
-
-    <strong id="level">
-      1
-    </strong>
-
-    <span>
-      LEVEL
-    </span>
-
+    <strong id="level">1</strong>
+    <span>LEVEL</span>
   </div>
 
 </div>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer class="footer">
 
@@ -1043,33 +879,30 @@ body{
 
 </footer>
 
-
 </div>
 
 
-<!-- =========================
-     AUDIO
-========================= -->
+<!-- AUDIO -->
 
 <audio
   id="bgMusic"
   src="https://files.catbox.moe/470eq8.mp3"
   loop
-  preload="auto"
-></audio>
+  preload="auto">
+</audio>
 
 <audio
   id="spinMusic"
   src="https://files.catbox.moe/zsp80l.mp3"
-  preload="auto"
-></audio>
+  preload="auto">
+</audio>
 
 
 <script>
 
-/* ==================================================
-   CONFIG
-================================================== */
+/* ==========================================
+   KONFIGURASI
+========================================== */
 
 const START_BALANCE = 500000;
 
@@ -1078,9 +911,11 @@ const MIN_BET = 1000;
 const MAX_SPIN = 100;
 
 
-/* ==================================================
+/* ==========================================
    STATE
-================================================== */
+========================================== */
+
+let balance = START_BALANCE;
 
 let bet = 20000;
 
@@ -1094,10 +929,14 @@ let batchReward = 0;
 
 let batchSpins = 0;
 
+let totalSpins = 0;
 
-/* ==================================================
+let totalReward = 0;
+
+
+/* ==========================================
    SYMBOL
-================================================== */
+========================================== */
 
 const symbols = [
 
@@ -1205,134 +1044,640 @@ const symbols = [
 ];
 
 
-/* ==================================================
+/* ==========================================
    ELEMENT
-================================================== */
+========================================== */
 
 const cells =
   document.querySelectorAll(".cell");
 
 
-/* ==================================================
-   SALDO VIRTUAL
-================================================== */
-
-let balance =
-  Number(
-    localStorage.getItem(
-      "yann_virtual_balance"
-    )
-  );
+const bgMusic =
+  document.getElementById("bgMusic");
 
 
-if(
-  !Number.isFinite(balance) ||
-  balance < 0
-){
-
-  balance =
-    START_BALANCE;
-
-}
+const spinMusic =
+  document.getElementById("spinMusic");
 
 
-let totalSpins =
-  Number(
-    localStorage.getItem(
-      "yann_total_spins"
-    )
-  ) || 0;
-
-
-let totalReward =
-  Number(
-    localStorage.getItem(
-      "yann_total_reward"
-    )
-  ) || 0;
-
-
-/* ==================================================
-   RUPIAH FORMAT
-================================================== */
+/* ==========================================
+   FORMAT RUPIAH
+========================================== */
 
 function formatRupiah(value){
 
   return "Rp" +
-    Number(value).toLocaleString(
-      "id-ID"
+    Math.max(0,Number(value))
+      .toLocaleString("id-ID");
+
+}
+
+
+/* ==========================================
+   HOKI
+========================================== */
+
+function getHokiChance(){
+
+  /*
+    DI BAWAH Rp100.000
+    = 1,5%
+
+    Rp100.000 s/d Rp1.000.000
+    = 3%
+
+    DI ATAS Rp1.000.000
+    = 25%
+  */
+
+  if(bet < 100000){
+
+    return 0.015;
+
+  }
+
+  if(bet <= 1000000){
+
+    return 0.03;
+
+  }
+
+  return 0.25;
+
+}
+
+
+function isHoki(){
+
+  return Math.random() <
+    getHokiChance();
+
+}
+
+
+function updateHokiText(){
+
+  const chance =
+    getHokiChance() * 100;
+
+  document
+    .getElementById("hokiChance")
+    .textContent =
+      chance.toLocaleString(
+        "id-ID",
+        {
+          maximumFractionDigits:1
+        }
+      ) + "%";
+
+}
+
+
+/* ==========================================
+   BET
+========================================== */
+
+function changeBet(amount){
+
+  if(spinning) return;
+
+  let newBet =
+    bet + amount;
+
+
+  /*
+    Setiap tombol
+    naik/turun Rp1.000.
+  */
+
+  newBet =
+    Math.floor(
+      newBet / 1000
+    ) * 1000;
+
+
+  if(newBet < MIN_BET){
+
+    newBet = MIN_BET;
+
+  }
+
+
+  if(newBet > balance){
+
+    newBet =
+      Math.floor(
+        balance / 1000
+      ) * 1000;
+
+  }
+
+
+  if(newBet < MIN_BET){
+
+    newBet = MIN_BET;
+
+  }
+
+
+  bet = newBet;
+
+
+  document
+    .getElementById("betInput")
+    .value = bet;
+
+
+  updateUI();
+
+}
+
+
+function manualBet(){
+
+  if(spinning) return;
+
+  let value =
+    Number(
+      document
+        .getElementById("betInput")
+        .value
+    );
+
+
+  if(!Number.isFinite(value)){
+
+    value = MIN_BET;
+
+  }
+
+
+  /*
+    Selalu kelipatan Rp1.000
+  */
+
+  value =
+    Math.floor(
+      value / 1000
+    ) * 1000;
+
+
+  if(value < MIN_BET){
+
+    value = MIN_BET;
+
+  }
+
+
+  if(value > balance){
+
+    value =
+      Math.floor(
+        balance / 1000
+      ) * 1000;
+
+  }
+
+
+  if(value < MIN_BET){
+
+    value = MIN_BET;
+
+  }
+
+
+  bet = value;
+
+
+  document
+    .getElementById("betInput")
+    .value = bet;
+
+
+  updateUI();
+
+}
+
+
+/* ==========================================
+   SELECT SPIN
+========================================== */
+
+function selectSpin(
+  amount,
+  button
+){
+
+  if(spinning) return;
+
+
+  selectedSpins =
+    Math.min(
+      MAX_SPIN,
+      amount
+    );
+
+
+  document
+    .querySelectorAll(
+      ".options button"
+    )
+    .forEach(
+      b =>
+        b.classList
+          .remove("selected")
+    );
+
+
+  button
+    .classList
+    .add("selected");
+
+
+  updateUI();
+
+}
+
+
+/* ==========================================
+   SPEED
+========================================== */
+
+function setSpeed(mode){
+
+  if(spinning) return;
+
+
+  speedMode = mode;
+
+
+  document
+    .getElementById(
+      "normalSpeed"
+    )
+    .classList
+    .toggle(
+      "selected",
+      mode === "normal"
+    );
+
+
+  document
+    .getElementById(
+      "fastSpeed"
+    )
+    .classList
+    .toggle(
+      "selected",
+      mode === "fast"
     );
 
 }
 
 
-/* ==================================================
-   SAVE
-================================================== */
+/* ==========================================
+   UI
+========================================== */
 
-function save(){
-
-  localStorage.setItem(
-    "yann_virtual_balance",
-    balance
-  );
-
-  localStorage.setItem(
-    "yann_total_spins",
-    totalSpins
-  );
-
-  localStorage.setItem(
-    "yann_total_reward",
-    totalReward
-  );
-
-}
-
-
-/* ==================================================
-   WARNING
-================================================== */
-
-function closeWarning(){
+function updateUI(){
 
   document
-    .getElementById(
-      "warningPopup"
-    )
-    .classList
-    .add("hidden");
+    .getElementById("balance")
+    .textContent =
+      formatRupiah(balance);
+
+
+  document
+    .getElementById("betInput")
+    .value = bet;
+
+
+  document
+    .getElementById("betDisplay")
+    .textContent =
+      formatRupiah(bet);
+
+
+  document
+    .getElementById("spinButton")
+    .textContent =
+      "🎰 SPIN " +
+      selectedSpins +
+      "×";
+
+
+  document
+    .getElementById("totalSpins")
+    .textContent =
+      totalSpins;
+
+
+  document
+    .getElementById("today")
+    .textContent =
+      formatRupiah(totalReward);
+
+
+  updateHokiText();
 
 }
 
 
-/* ==================================================
+/* ==========================================
+   RANDOM SYMBOL
+========================================== */
+
+function randomSymbol(){
+
+  /*
+    Scatter dasar dibuat sekitar 8%
+    agar tetap terasa seperti arcade.
+
+    Hoki digunakan untuk memberi
+    sedikit dorongan terhadap hasil
+    kemenangan virtual.
+  */
+
+  let scatterChance = 0.08;
+
+
+  if(isHoki()){
+
+    scatterChance += 0.08;
+
+  }
+
+
+  if(
+    Math.random() <
+    scatterChance
+  ){
+
+    return symbols[19];
+
+  }
+
+
+  return symbols[
+    Math.floor(
+      Math.random() * 19
+    )
+  ];
+
+}
+
+
+/* ==========================================
+   HASIL SPIN
+========================================== */
+
+function createResult(){
+
+  const arr = [];
+
+  for(
+    let i=0;
+    i<18;
+    i++
+  ){
+
+    arr.push(
+      randomSymbol()
+    );
+
+  }
+
+  return arr;
+
+}
+
+
+/* ==========================================
+   REWARD KEMBAR
+========================================== */
+
+function rewardForCount(count){
+
+  if(count < 2){
+
+    return 0;
+
+  }
+
+
+  if(count === 2){
+
+    return 2000;
+
+  }
+
+
+  if(count <= 10){
+
+    return count * 1000;
+
+  }
+
+
+  if(count <= 14){
+
+    return 100000;
+
+  }
+
+
+  if(
+    count === 15 ||
+    count === 16
+  ){
+
+    return 400000;
+
+  }
+
+
+  if(count === 17){
+
+    return 650000;
+
+  }
+
+
+  if(count >= 18){
+
+    return 1500000;
+
+  }
+
+
+  return 0;
+
+}
+
+
+/* ==========================================
+   HITUNG REWARD
+========================================== */
+
+function calculateReward(arr){
+
+  const counts = {};
+
+  let scatter = 0;
+
+
+  arr.forEach(
+    symbol => {
+
+      if(symbol.scatter){
+
+        scatter++;
+
+        return;
+
+      }
+
+
+      counts[symbol.name] =
+        (
+          counts[symbol.name] ||
+          0
+        ) + 1;
+
+    }
+  );
+
+
+  let reward = 0;
+
+  let biggest = 0;
+
+
+  Object
+    .values(counts)
+    .forEach(
+      count => {
+
+        biggest =
+          Math.max(
+            biggest,
+            count
+          );
+
+
+        reward +=
+          rewardForCount(
+            count
+          );
+
+      }
+    );
+
+
+  /*
+    Scatter juga dihitung.
+    Scatter 2x atau lebih
+    mendapat bonus virtual.
+  */
+
+  if(scatter >= 2){
+
+    reward +=
+      scatter * 5000;
+
+  }
+
+
+  return {
+    reward,
+    scatter,
+    biggest
+  };
+
+}
+
+
+/* ==========================================
+   HIGHLIGHT
+========================================== */
+
+function highlight(arr){
+
+  cells.forEach(
+    cell =>
+      cell.classList
+        .remove(
+          "win",
+          "scatter"
+        )
+  );
+
+
+  const counts = {};
+
+
+  arr.forEach(
+    (symbol,index) => {
+
+      if(symbol.scatter){
+
+        cells[index]
+          .classList
+          .add("scatter");
+
+        return;
+
+      }
+
+
+      if(!counts[symbol.name]){
+
+        counts[symbol.name] = [];
+
+      }
+
+
+      counts[symbol.name]
+        .push(index);
+
+    }
+  );
+
+
+  Object
+    .values(counts)
+    .forEach(
+      indexes => {
+
+        if(
+          indexes.length >= 2
+        ){
+
+          indexes.forEach(
+            index => {
+
+              cells[index]
+                .classList
+                .add("win");
+
+            }
+          );
+
+        }
+
+      }
+    );
+
+}
+
+
+/* ==========================================
    AUDIO
-================================================== */
-
-const bgMusic =
-  document.getElementById(
-    "bgMusic"
-  );
-
-
-const spinMusic =
-  document.getElementById(
-    "spinMusic"
-  );
-
+========================================== */
 
 bgMusic.volume = 0.35;
 
-
 let musicReady = false;
-
-
-/*
-  Browser biasanya melarang
-  autoplay sebelum pengguna
-  melakukan interaksi.
-*/
 
 
 document.addEventListener(
@@ -1411,593 +1756,25 @@ function stopSpinSound(){
 }
 
 
-/* ==================================================
-   BET
-================================================== */
-
-function changeBet(amount){
-
-  if(spinning){
-
-    return;
-
-  }
-
-
-  bet += amount;
-
-
-  if(
-    bet < MIN_BET
-  ){
-
-    bet = MIN_BET;
-
-  }
-
-
-  if(
-    bet > balance
-  ){
-
-    bet =
-      Math.floor(
-        balance / 1000
-      ) * 1000;
-
-  }
-
-
-  if(
-    bet < MIN_BET
-  ){
-
-    bet = MIN_BET;
-
-  }
-
-
-  document
-    .getElementById(
-      "betInput"
-    )
-    .value = bet;
-
-
-  updateUI();
-
-}
-
-
-function manualBet(){
-
-  if(spinning){
-
-    return;
-
-  }
-
-
-  let value =
-    Number(
-      document
-        .getElementById(
-          "betInput"
-        )
-        .value
-    );
-
-
-  if(
-    !Number.isFinite(value)
-  ){
-
-    value = MIN_BET;
-
-  }
-
-
-  value =
-    Math.floor(
-      value / 1000
-    ) * 1000;
-
-
-  if(
-    value < MIN_BET
-  ){
-
-    value = MIN_BET;
-
-  }
-
-
-  if(
-    value > balance
-  ){
-
-    value =
-      Math.floor(
-        balance / 1000
-      ) * 1000;
-
-  }
-
-
-  if(
-    value < MIN_BET
-  ){
-
-    value = MIN_BET;
-
-  }
-
-
-  bet = value;
-
-
-  updateUI();
-
-}
-
-
-/* ==================================================
-   SELECT SPIN
-================================================== */
-
-function selectSpin(
-  amount,
-  button
-){
-
-  if(spinning){
-
-    return;
-
-  }
-
-
-  selectedSpins =
-    Math.min(
-      MAX_SPIN,
-      amount
-    );
-
-
-  document
-    .querySelectorAll(
-      ".options button"
-    )
-    .forEach(
-      b =>
-        b.classList
-          .remove("selected")
-    );
-
-
-  button
-    .classList
-    .add("selected");
-
-
-  updateUI();
-
-}
-
-
-/* ==================================================
-   SPEED
-================================================== */
-
-function setSpeed(mode){
-
-  if(spinning){
-
-    return;
-
-  }
-
-
-  speedMode = mode;
-
-
-  document
-    .getElementById(
-      "normalSpeed"
-    )
-    .classList
-    .toggle(
-      "selected",
-      mode === "normal"
-    );
-
-
-  document
-    .getElementById(
-      "fastSpeed"
-    )
-    .classList
-    .toggle(
-      "selected",
-      mode === "fast"
-    );
-
-}
-
-
-/* ==================================================
-   UPDATE UI
-================================================== */
-
-function updateUI(){
-
-  document
-    .getElementById(
-      "balance"
-    )
-    .textContent =
-      formatRupiah(
-        balance
-      );
-
-
-  document
-    .getElementById(
-      "betInput"
-    )
-    .value = bet;
-
-
-  document
-    .getElementById(
-      "betDisplay"
-    )
-    .textContent =
-      formatRupiah(
-        bet
-      );
-
-
-  document
-    .getElementById(
-      "spinButton"
-    )
-    .textContent =
-      "🎰 SPIN " +
-      selectedSpins +
-      "×";
-
-
-  document
-    .getElementById(
-      "totalSpins"
-    )
-    .textContent =
-      totalSpins
-        .toLocaleString(
-          "id-ID"
-        );
-
-
-  document
-    .getElementById(
-      "today"
-    )
-    .textContent =
-      formatRupiah(
-        totalReward
-      );
-
-}
-
-
-/* ==================================================
-   RANDOM SYMBOL
-================================================== */
-
-function randomSymbol(){
-
-  /*
-    Scatter dibuat lebih sering
-    sebagai elemen arcade.
-
-    Ini hanya game virtual.
-  */
-
-
-  if(
-    Math.random() < 0.08
-  ){
-
-    return symbols[19];
-
-  }
-
-
-  return symbols[
-    Math.floor(
-      Math.random() * 19
-    )
-  ];
-
-}
-
-
-/* ==================================================
-   CREATE RESULT
-================================================== */
-
-function createResult(){
-
-  const arr = [];
-
-
-  for(
-    let i = 0;
-    i < 18;
-    i++
-  ){
-
-    arr.push(
-      randomSymbol()
-    );
-
-  }
-
-
-  return arr;
-
-}
-
-
-/* ==================================================
-   REWARD KEMBAR
-================================================== */
-
-function rewardForCount(count){
-
-  if(count < 2){
-
-    return 0;
-
-  }
-
-
-  if(count === 2){
-
-    return 2000;
-
-  }
-
-
-  if(count <= 10){
-
-    return count * 1000;
-
-  }
-
-
-  if(count <= 14){
-
-    return 100000;
-
-  }
-
-
-  if(
-    count === 15 ||
-    count === 16
-  ){
-
-    return 400000;
-
-  }
-
-
-  if(count === 17){
-
-    return 650000;
-
-  }
-
-
-  if(count >= 18){
-
-    return 1500000;
-
-  }
-
-
-  return 0;
-
-}
-
-
-/* ==================================================
-   CALCULATE REWARD
-================================================== */
-
-function calculateReward(arr){
-
-  const counts = {};
-
-  let scatter = 0;
-
-
-  arr.forEach(
-    symbol => {
-
-      if(symbol.scatter){
-
-        scatter++;
-
-        return;
-
-      }
-
-
-      counts[symbol.name] =
-        (
-          counts[symbol.name] ||
-          0
-        ) + 1;
-
-    }
-  );
-
-
-  let reward = 0;
-
-  let biggest = 0;
-
-
-  Object
-    .values(counts)
-    .forEach(
-      count => {
-
-        if(
-          count > biggest
-        ){
-
-          biggest = count;
-
-        }
-
-
-        reward +=
-          rewardForCount(
-            count
-          );
-
-      }
-    );
-
-
-  /*
-    Bonus scatter virtual.
-  */
-
-  if(
-    scatter >= 2
-  ){
-
-    reward +=
-      scatter * 5000;
-
-  }
-
-
-  return {
-
-    reward,
-
-    scatter,
-
-    biggest
-
-  };
-
-}
-
-
-/* ==================================================
-   HIGHLIGHT
-================================================== */
-
-function highlight(arr){
-
-  cells.forEach(
-    c =>
-      c.classList
-        .remove(
-          "win",
-          "scatter"
-        )
-  );
-
-
-  const counts = {};
-
-
-  arr.forEach(
-    (symbol,index) => {
-
-      if(symbol.scatter){
-
-        cells[index]
-          .classList
-          .add("scatter");
-
-        return;
-
-      }
-
-
-      if(
-        !counts[symbol.name]
-      ){
-
-        counts[symbol.name] = [];
-
-      }
-
-
-      counts[symbol.name]
-        .push(index);
-
-    }
-  );
-
-
-  Object
-    .values(counts)
-    .forEach(
-      indexes => {
-
-        if(
-          indexes.length >= 2
-        ){
-
-          indexes.forEach(
-            index => {
-
-              cells[index]
-                .classList
-                .add("win");
-
-            }
-          );
-
-        }
-
-      }
-    );
-
-}
-
-
-/* ==================================================
+/* ==========================================
    START SPIN
-================================================== */
+========================================== */
 
 function startSpin(){
 
-  if(spinning){
+  if(spinning) return;
 
-    return;
 
-  }
-
+  /*
+    Total biaya virtual.
+  */
 
   const totalCost =
     bet *
     selectedSpins;
 
 
-  if(
-    balance < totalCost
-  ){
+  if(balance < totalCost){
 
     alert(
       "SALDO VIRTUAL TIDAK CUKUP.\n\n" +
@@ -2008,7 +1785,6 @@ function startSpin(){
       ) +
 
       "\nSaldo: " +
-
       formatRupiah(
         balance
       )
@@ -2023,9 +1799,9 @@ function startSpin(){
     totalCost;
 
 
-  save();
+  batchReward = 0;
 
-  updateUI();
+  batchSpins = 0;
 
 
   spinning = true;
@@ -2038,11 +1814,6 @@ function startSpin(){
     .disabled = true;
 
 
-  batchReward = 0;
-
-  batchSpins = 0;
-
-
   playSpinSound();
 
 
@@ -2051,9 +1822,9 @@ function startSpin(){
 }
 
 
-/* ==================================================
+/* ==========================================
    RUN SPIN
-================================================== */
+========================================== */
 
 function runSpin(index){
 
@@ -2099,12 +1870,8 @@ function runSpin(index){
       highlight(arr);
 
 
-      showResult(
-        data
-      );
+      showResult(data);
 
-
-      save();
 
       updateUI();
 
@@ -2128,14 +1895,11 @@ function runSpin(index){
 }
 
 
-/* ==================================================
-   SPIN ANIMATION
-   KOLOM 1 → 2 → 3 → 4 → 5 → 6
-================================================== */
+/* ==========================================
+   ANIMASI
+========================================== */
 
-function spinAnimation(
-  callback
-){
+function spinAnimation(callback){
 
   const finalResult =
     createResult();
@@ -2199,22 +1963,13 @@ function spinAnimation(
 
 
   /*
-    BARISAN:
-    
-    1 2 3 4 5 6
-    1 2 3 4 5 6
-    1 2 3 4 5 6
-
-    Kolom nomor 1 berhenti dulu.
-    Setelah itu nomor 2.
-    Kemudian nomor 3.
-    Sampai nomor 6.
+    Kolom 1 berhenti dulu,
+    kemudian 2, 3, 4, 5, 6.
   */
 
-
   for(
-    let col = 0;
-    col < 6;
+    let col=0;
+    col<6;
     col++
   ){
 
@@ -2222,8 +1977,8 @@ function spinAnimation(
       () => {
 
         for(
-          let row = 0;
-          row < 3;
+          let row=0;
+          row<3;
           row++
         ){
 
@@ -2288,9 +2043,9 @@ function spinAnimation(
 }
 
 
-/* ==================================================
+/* ==========================================
    RESULT
-================================================== */
+========================================== */
 
 function showResult(data){
 
@@ -2315,10 +2070,12 @@ function showResult(data){
       "resultReward"
     )
     .textContent =
-      "+" +
-      formatRupiah(
-        data.reward
-      );
+      data.reward > 0
+        ? "+" +
+          formatRupiah(
+            data.reward
+          )
+        : "Rp0";
 
 
   document
@@ -2333,14 +2090,10 @@ function showResult(data){
       "×";
 
 
-  box
-    .classList
-    .add("show");
+  box.classList.add("show");
 
 
-  if(
-    data.reward > 0
-  ){
+  if(data.reward > 0){
 
     showNotification(
       data.reward,
@@ -2353,9 +2106,9 @@ function showResult(data){
 }
 
 
-/* ==================================================
+/* ==========================================
    NOTIFICATION
-================================================== */
+========================================== */
 
 function showNotification(
   reward,
@@ -2377,12 +2130,7 @@ function showNotification(
     `
 
     <div class="notification-icon">
-
-      ${scatter >= 3
-        ? "🟡"
-        : "🎉"
-      }
-
+      ${scatter >= 3 ? "🟡" : "🎉"}
     </div>
 
     <div class="notification-title">
@@ -2394,17 +2142,13 @@ function showNotification(
     </div>
 
     <div class="notification-reward">
-
       +${formatRupiah(reward)}
-
     </div>
 
     <div class="notification-detail">
-
       Kembar ${biggest}×
       •
       Scatter ${scatter}×
-
     </div>
 
     `;
@@ -2429,9 +2173,9 @@ function showNotification(
 }
 
 
-/* ==================================================
-   FINISH BATCH
-================================================== */
+/* ==========================================
+   SELESAI
+========================================== */
 
 function finishBatch(){
 
@@ -2453,8 +2197,7 @@ function finishBatch(){
       "sumSpins"
     )
     .textContent =
-      batchSpins +
-      "×";
+      batchSpins + "×";
 
 
   document
@@ -2463,8 +2206,7 @@ function finishBatch(){
     )
     .textContent =
       formatRupiah(
-        batchSpins *
-        bet
+        batchSpins * bet
       );
 
 
@@ -2487,18 +2229,46 @@ function finishBatch(){
     .add("show");
 
 
-  save();
-
   updateUI();
 
 }
 
 
-/* ==================================================
+/* ==========================================
+   WARNING
+========================================== */
+
+function closeWarning(){
+
+  document
+    .getElementById(
+      "warningPopup"
+    )
+    .classList
+    .add("hidden");
+
+}
+
+
+/* ==========================================
    INIT
-================================================== */
+========================================== */
 
 function init(){
+
+  /*
+    Pastikan saldo selalu dimulai
+    dari Rp500.000 ketika halaman
+    pertama kali dibuka.
+  */
+
+  balance = START_BALANCE;
+
+
+  totalSpins = 0;
+
+  totalReward = 0;
+
 
   const first =
     createResult();
