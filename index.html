@@ -71,9 +71,8 @@ body{
   font-weight:bold;
 }
 
-.tiktok-icon{
-  width:30px;
-  height:30px;
+.tiktok-icon,
+.footer-icon{
   display:flex;
   align-items:center;
   justify-content:center;
@@ -82,6 +81,11 @@ body{
   box-shadow:
     2px 2px #25f4ee,
     -2px -2px #fe2c55;
+}
+
+.tiktok-icon{
+  width:30px;
+  height:30px;
 }
 
 .warning-box button{
@@ -294,7 +298,7 @@ body{
   color:#00f5ff;
 }
 
-/* SPIN OPTIONS */
+/* OPTIONS */
 .options{
   display:grid;
   grid-template-columns:repeat(5,1fr);
@@ -520,14 +524,6 @@ body{
 .footer-icon{
   width:27px;
   height:27px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:7px;
-  background:#000;
-  box-shadow:
-    2px 2px #25f4ee,
-    -2px -2px #fe2c55;
 }
 
 .footer small{
@@ -538,6 +534,7 @@ body{
 }
 
 @media(max-width:430px){
+
   .cell{
     height:52px;
   }
@@ -612,6 +609,7 @@ body{
     ✦ 20 SYMBOL • 6 × 3 ✦
   </div>
 
+
   <div class="slot" id="slot">
 
     <div class="cell"></div>
@@ -677,17 +675,11 @@ body{
 
     <div class="hoki-info">
 
-      Peluang hoki berdasarkan bet:<br>
+      Peluang hasil berdasarkan bet:<br>
 
       <strong id="hokiChance">
         1,5%
       </strong>
-
-      <br>
-
-      <span id="scatterMode">
-        Scatter normal
-      </span>
 
     </div>
 
@@ -884,45 +876,20 @@ body{
 
 <script>
 
-/* ==========================================
-   KONFIGURASI
-========================================== */
-
 const START_BALANCE = 500000;
-
 const MIN_BET = 1000;
-
 const MAX_SPIN = 100;
 
-
-/* ==========================================
-   STATE
-========================================== */
-
 let balance = START_BALANCE;
-
 let bet = 20000;
-
 let selectedSpins = 1;
-
 let speedMode = "normal";
-
 let spinning = false;
 
 let batchReward = 0;
-
 let batchSpins = 0;
-
 let totalSpins = 0;
-
 let totalReward = 0;
-
-let zonkPlan = [];
-
-
-/* ==========================================
-   SYMBOL
-========================================== */
 
 const symbols = [
 
@@ -1030,10 +997,6 @@ const symbols = [
 ];
 
 
-/* ==========================================
-   ELEMENT
-========================================== */
-
 const cells =
   document.querySelectorAll(".cell");
 
@@ -1044,39 +1007,30 @@ const spinMusic =
   document.getElementById("spinMusic");
 
 
-/* ==========================================
-   FORMAT RUPIAH
-========================================== */
+/* FORMAT */
 
 function formatRupiah(value){
 
   return "Rp" +
     Math.max(0,Number(value))
-      .toLocaleString("id-ID");
+    .toLocaleString("id-ID");
 
 }
 
 
-/* ==========================================
-   HOKI
-========================================== */
+/* HOKI */
 
 function getHokiChance(){
 
   if(bet < 100000){
-
     return 0.015;
-
   }
 
   if(bet <= 1000000){
-
     return 0.03;
-
   }
 
   return 0.25;
-
 }
 
 
@@ -1096,38 +1050,17 @@ function updateHokiText(){
   document
     .getElementById("hokiChance")
     .textContent =
-      chance.toLocaleString(
-        "id-ID",
-        {
-          maximumFractionDigits:1
-        }
-      ) + "%";
-
-
-  const mode =
-    document.getElementById(
-      "scatterMode"
-    );
-
-
-  if(bet === 1500000){
-
-    mode.textContent =
-      "🔥 BET Rp1.500.000 = SCATTER 50%";
-
-  }else{
-
-    mode.textContent =
-      "Scatter normal";
-
-  }
+    chance.toLocaleString(
+      "id-ID",
+      {
+        maximumFractionDigits:1
+      }
+    ) + "%";
 
 }
 
 
-/* ==========================================
-   BET
-========================================== */
+/* BET */
 
 function changeBet(amount){
 
@@ -1136,19 +1069,14 @@ function changeBet(amount){
   let newBet =
     bet + amount;
 
-
   newBet =
     Math.floor(
       newBet / 1000
     ) * 1000;
 
-
   if(newBet < MIN_BET){
-
     newBet = MIN_BET;
-
   }
-
 
   if(newBet > balance){
 
@@ -1159,21 +1087,15 @@ function changeBet(amount){
 
   }
 
-
   if(newBet < MIN_BET){
-
     newBet = MIN_BET;
-
   }
 
-
   bet = newBet;
-
 
   document
     .getElementById("betInput")
     .value = bet;
-
 
   updateUI();
 
@@ -1187,30 +1109,22 @@ function manualBet(){
   let value =
     Number(
       document
-        .getElementById("betInput")
-        .value
+      .getElementById("betInput")
+      .value
     );
 
-
   if(!Number.isFinite(value)){
-
     value = MIN_BET;
-
   }
-
 
   value =
     Math.floor(
       value / 1000
     ) * 1000;
 
-
   if(value < MIN_BET){
-
     value = MIN_BET;
-
   }
-
 
   if(value > balance){
 
@@ -1221,69 +1135,45 @@ function manualBet(){
 
   }
 
-
   if(value < MIN_BET){
-
     value = MIN_BET;
-
   }
 
-
   bet = value;
-
 
   document
     .getElementById("betInput")
     .value = bet;
 
-
   updateUI();
 
 }
 
 
-/* ==========================================
-   SELECT SPIN
-========================================== */
+/* SPIN OPTION */
 
-function selectSpin(
-  amount,
-  button
-){
+function selectSpin(amount,button){
 
   if(spinning) return;
 
   selectedSpins =
-    Math.min(
-      MAX_SPIN,
-      amount
-    );
-
+    Math.min(MAX_SPIN,amount);
 
   document
-    .querySelectorAll(
-      ".options button"
-    )
+    .querySelectorAll(".options button")
     .forEach(
       b =>
-        b.classList
-          .remove("selected")
+        b.classList.remove("selected")
     );
 
-
-  button
-    .classList
-    .add("selected");
-
+  button.classList.add("selected");
 
   updateUI();
 
 }
 
 
-/* ==========================================
-   SPEED
-========================================== */
+/* SPEED */
 
 function setSpeed(mode){
 
@@ -1291,22 +1181,16 @@ function setSpeed(mode){
 
   speedMode = mode;
 
-
   document
-    .getElementById(
-      "normalSpeed"
-    )
+    .getElementById("normalSpeed")
     .classList
     .toggle(
       "selected",
       mode === "normal"
     );
 
-
   document
-    .getElementById(
-      "fastSpeed"
-    )
+    .getElementById("fastSpeed")
     .classList
     .toggle(
       "selected",
@@ -1316,110 +1200,75 @@ function setSpeed(mode){
 }
 
 
-/* ==========================================
-   UI
-========================================== */
+/* UI */
 
 function updateUI(){
 
   document
     .getElementById("balance")
     .textContent =
-      formatRupiah(balance);
-
+    formatRupiah(balance);
 
   document
     .getElementById("betInput")
     .value = bet;
 
-
   document
     .getElementById("betDisplay")
     .textContent =
-      formatRupiah(bet);
-
+    formatRupiah(bet);
 
   document
     .getElementById("spinButton")
     .textContent =
-      "🎰 SPIN " +
-      selectedSpins +
-      "×";
-
+    "🎰 SPIN " +
+    selectedSpins +
+    "×";
 
   document
     .getElementById("totalSpins")
     .textContent =
-      totalSpins;
-
+    totalSpins;
 
   document
     .getElementById("today")
     .textContent =
-      formatRupiah(totalReward);
-
+    formatRupiah(totalReward);
 
   updateHokiText();
 
 }
 
 
-/* ==========================================
-   RANDOM SYMBOL
-========================================== */
+/* RANDOM */
 
 function randomSymbol(){
 
-  /*
-    Bet Rp1.500.000:
-    Scatter 50% pada setiap posisi.
-  */
-
-  if(bet === 1500000){
-
-    if(Math.random() < 0.50){
-
-      return symbols[19];
-
-    }
-
-    return symbols[
-      Math.floor(
-        Math.random() * 19
-      )
-    ];
-
-  }
-
-
-  /*
-    Mode normal.
-  */
-
   let scatterChance = 0.08;
 
-
   /*
-    Hoki aktif:
-    Scatter dibuat jauh lebih sering.
+    Untuk mode arcade demo:
+    bet Rp1.500.000 atau lebih
+    membuat Scatter lebih sering.
   */
 
-  if(isHoki()){
+  if(bet >= 1500000){
 
-    scatterChance = 0.80;
+    scatterChance = 0.50;
 
   }
 
+  else if(isHoki()){
 
-  if(
-    Math.random() <
-    scatterChance
-  ){
+    scatterChance += 0.08;
+
+  }
+
+  if(Math.random() < scatterChance){
 
     return symbols[19];
 
   }
-
 
   return symbols[
     Math.floor(
@@ -1430,19 +1279,13 @@ function randomSymbol(){
 }
 
 
-/* ==========================================
-   CREATE RESULT
-========================================== */
+/* HASIL */
 
 function createResult(){
 
   const arr = [];
 
-  for(
-    let i=0;
-    i<18;
-    i++
-  ){
+  for(let i=0;i<18;i++){
 
     arr.push(
       randomSymbol()
@@ -1455,104 +1298,25 @@ function createResult(){
 }
 
 
-/* ==========================================
-   REWARD KEMBAR
-========================================== */
+/* REWARD KEMBAR */
 
-function rewardForCount(count){
+function getDuplicateReward(count){
 
   if(count < 2){
-
     return 0;
+  }
+
+  if(count >= 2 && count <= 10){
+
+    return count * 100000;
 
   }
 
-
-  /*
-    Kembar 2 = Rp2.000
-    Kembar 3 = Rp3.000
-    dst sampai kembar 10.
-  */
-
-  if(count <= 10){
-
-    return count * 1000;
-
-  }
-
-
-  /*
-    Kembar 11-14
-  */
-
-  if(count <= 14){
-
-    return 100000;
-
-  }
-
-
-  /*
-    Kembar 15-16
-  */
-
-  if(count === 15 ||
-     count === 16){
-
-    return 400000;
-
-  }
-
-
-  /*
-    Kembar 17
-  */
-
-  if(count === 17){
-
-    return 650000;
-
-  }
-
-
-  /*
-    Kembar 18
-  */
-
-  if(count >= 18){
-
-    return 1500000;
-
-  }
-
-
-  return 0;
-
-}
-
-
-/* ==========================================
-   REWARD SCATTER
-========================================== */
-
-function scatterReward(count){
-
-  if(count < 10){
-
-    return 0;
-
-  }
-
-
-  if(
-    count >= 10 &&
-    count <= 16
-  ){
+  if(count >= 11 && count <= 16){
 
     return 1200000;
 
   }
-
 
   if(count === 17){
 
@@ -1560,982 +1324,700 @@ function scatterReward(count){
 
   }
 
-
   if(count >= 18){
 
     return 2000000;
 
   }
 
-
   return 0;
 
 }
 
 
-/* ==========================================
-   ZONK PLAN
-========================================== */
+/* HITUNG KEMBAR */
 
-function createZonkPlan(totalSpin){
-
-  const plan =
-    new Array(totalSpin)
-      .fill(false);
-
-
-  if(totalSpin <= 50){
-
-    return plan;
-
-  }
-
-
-  /*
-    10-30 ZONK.
-
-    Tidak dibuat berturut-turut.
-  */
-
-  const minZonk = 10;
-
-  const maxPossible =
-    Math.ceil(totalSpin / 2);
-
-  const maxZonk =
-    Math.min(
-      30,
-      maxPossible
-    );
-
-
-  const zonkCount =
-    Math.floor(
-      Math.random() *
-      (maxZonk - minZonk + 1)
-    ) + minZonk;
-
-
-  /*
-    Ambil posisi yang tersedia
-    lalu acak.
-  */
-
-  const positions =
-    Array.from(
-      {
-        length:totalSpin
-      },
-      (_,i) => i
-    );
-
-
-  for(
-    let i=positions.length-1;
-    i>0;
-    i--
-  ){
-
-    const j =
-      Math.floor(
-        Math.random() * (i+1)
-      );
-
-
-    [
-      positions[i],
-      positions[j]
-    ] =
-    [
-      positions[j],
-      positions[i]
-    ];
-
-  }
-
-
-  let placed = 0;
-
-
-  for(
-    const index of positions
-  ){
-
-    if(
-      plan[index-1] ||
-      plan[index+1]
-    ){
-
-      continue;
-
-    }
-
-
-    plan[index] = true;
-
-    placed++;
-
-
-    if(
-      placed >= zonkCount
-    ){
-
-      break;
-
-    }
-
-  }
-
-
-  return plan;
-
-}
-
-
-/* ==========================================
-   HITUNG REWARD
-========================================== */
-
-function calculateReward(arr){
+function calculateDuplicates(results){
 
   const counts = {};
 
-  let scatter = 0;
+  results.forEach(symbol => {
 
+    if(!counts[symbol.name]){
+      counts[symbol.name] = 0;
+    }
 
-  arr.forEach(
-    symbol => {
+    counts[symbol.name]++;
 
-      if(symbol.scatter){
+  });
 
-        scatter++;
+  let totalReward = 0;
 
-      }else{
+  const winners = [];
 
-        counts[symbol.name] =
-          (
-            counts[symbol.name] || 0
-          ) + 1;
+  Object.keys(counts).forEach(name => {
 
-      }
+    const count = counts[name];
+
+    if(count >= 2){
+
+      const reward =
+        getDuplicateReward(count);
+
+      totalReward += reward;
+
+      winners.push({
+        name:name,
+        count:count,
+        reward:reward
+      });
 
     }
-  );
 
-
-  let reward = 0;
-
-  let biggest = 0;
-
-
-  /*
-    SEMUA gambar kembar dihitung.
-  */
-
-  Object
-    .values(counts)
-    .forEach(
-      count => {
-
-        biggest =
-          Math.max(
-            biggest,
-            count
-          );
-
-
-        reward +=
-          rewardForCount(
-            count
-          );
-
-      }
-    );
-
-
-  /*
-    Scatter dihitung terpisah.
-  */
-
-  if(scatter >= 10){
-
-    reward +=
-      scatterReward(
-        scatter
-      );
-
-  }
-
+  });
 
   return {
-    reward:reward,
-    scatter:scatter,
-    biggest:biggest
+    counts:counts,
+    totalReward:totalReward,
+    winners:winners
   };
 
 }
 
 
-/* ==========================================
-   HIGHLIGHT
-========================================== */
+/* SCATTER */
 
-function highlight(arr){
+function calculateScatter(results){
 
-  cells.forEach(
-    cell => {
+  const scatterCount =
+    results.filter(
+      symbol =>
+        symbol.scatter === true
+    ).length;
 
-      cell.classList.remove(
-        "win",
-        "scatter"
-      );
+  let reward = 0;
+
+  if(
+    scatterCount >= 10 &&
+    scatterCount <= 16
+  ){
+
+    reward = 1200000;
+
+  }
+
+  else if(scatterCount === 17){
+
+    reward = 1600000;
+
+  }
+
+  else if(scatterCount >= 18){
+
+    reward = 2000000;
+
+  }
+
+  return {
+    count:scatterCount,
+    reward:reward
+  };
+
+}
+
+
+/* TOTAL REWARD */
+
+function calculateReward(results){
+
+  const duplicate =
+    calculateDuplicates(results);
+
+  const scatter =
+    calculateScatter(results);
+
+  const reward =
+    Math.max(
+      duplicate.totalReward,
+      scatter.reward
+    );
+
+  return {
+
+    reward:reward,
+
+    duplicateReward:
+      duplicate.totalReward,
+
+    scatterReward:
+      scatter.reward,
+
+    scatterCount:
+      scatter.count,
+
+    winners:
+      duplicate.winners,
+
+    counts:
+      duplicate.counts
+
+  };
+
+}
+
+
+/* DISPLAY */
+
+function displayResult(results){
+
+  cells.forEach((cell,index)=>{
+
+    const symbol =
+      results[index];
+
+    cell.innerHTML = "";
+
+    const img =
+      document.createElement("img");
+
+    img.src = symbol.img;
+    img.alt = symbol.name;
+
+    cell.appendChild(img);
+
+    cell.classList.remove(
+      "rolling",
+      "win",
+      "scatter"
+    );
+
+    if(symbol.scatter){
+
+      cell.classList.add("scatter");
 
     }
-  );
+
+  });
+
+}
 
 
-  const counts = {};
+/* WIN HIGHLIGHT */
 
+function highlightWinners(
+  results,
+  data
+){
 
-  arr.forEach(
-    (symbol,index) => {
+  cells.forEach(cell => {
 
-      if(symbol.scatter){
+    cell.classList.remove("win");
+
+  });
+
+  results.forEach((symbol,index)=>{
+
+    if(symbol.scatter){
+
+      cells[index]
+        .classList
+        .add("scatter");
+
+    }
+
+  });
+
+  data.winners.forEach(winner=>{
+
+    results.forEach((symbol,index)=>{
+
+      if(
+        symbol.name === winner.name &&
+        !symbol.scatter
+      ){
 
         cells[index]
           .classList
-          .add("scatter");
-
-        return;
+          .add("win");
 
       }
 
+    });
 
-      if(
-        !counts[symbol.name]
-      ){
+  });
 
-        counts[symbol.name] = [];
-
-      }
+}
 
 
-      counts[symbol.name]
-        .push(index);
+/* ZONK */
 
-    }
+function shouldZonk(){
+
+  /*
+    Setelah 50 spin,
+    ZONK dibuat acak.
+    Tidak dijamin berturut-turut.
+  */
+
+  if(totalSpins < 50){
+
+    return Math.random() < 0.20;
+
+  }
+
+  return Math.random() < 0.35;
+
+}
+
+
+/* NOTIFICATION */
+
+function showNotification(
+  title,
+  reward,
+  detail
+){
+
+  const old =
+    document.querySelector(
+      ".notification"
+    );
+
+  if(old){
+    old.remove();
+  }
+
+  const notification =
+    document.createElement("div");
+
+  notification.className =
+    "notification";
+
+  notification.innerHTML = `
+
+    <div class="notification-icon">
+      🎉
+    </div>
+
+    <div class="notification-title">
+      ${title}
+    </div>
+
+    <div class="notification-reward">
+      ${formatRupiah(reward)}
+    </div>
+
+    <div class="notification-detail">
+      ${detail}
+    </div>
+
+  `;
+
+  document.body.appendChild(
+    notification
   );
 
-
-  Object
-    .values(counts)
-    .forEach(
-      indexes => {
-
-        if(indexes.length >= 2){
-
-          indexes.forEach(
-            index => {
-
-              cells[index]
-                .classList
-                .add("win");
-
-            }
-          );
-
-        }
-
-      }
-    );
+  setTimeout(
+    () => notification.remove(),
+    3000
+  );
 
 }
 
 
-/* ==========================================
-   AUDIO
-========================================== */
+/* RESULT TEXT */
 
-bgMusic.volume = 0.35;
+function showResult(
+  data,
+  zonk
+){
 
-let musicReady = false;
+  const result =
+    document.getElementById("result");
 
+  const title =
+    document.getElementById("resultTitle");
 
-document.addEventListener(
-  "pointerdown",
-  function(e){
+  const reward =
+    document.getElementById("resultReward");
 
-    /*
-      Jangan jalankan background
-      ketika tombol SPIN ditekan.
-    */
+  const info =
+    document.getElementById("resultInfo");
 
-    if(
-      e.target.closest(
-        "#spinButton"
-      )
-    ){
+  result.classList.add("show");
 
-      return;
+  if(zonk){
 
-    }
-
-
-    if(!musicReady){
-
-      bgMusic
-        .play()
-        .then(
-          () => {
-
-            musicReady = true;
-
-          }
-        )
-        .catch(
-          () => {}
-
-        );
-
-    }
-
-  },
-  {
-    passive:true
-  }
-);
-
-
-/* ==========================================
-   SPIN SOUND
-========================================== */
-
-function playSpinSound(){
-
-  bgMusic.pause();
-
-  spinMusic.pause();
-
-  spinMusic.currentTime = 0;
-
-
-  spinMusic
-    .play()
-    .catch(
-      () => {}
-    );
-
-}
-
-
-/* ==========================================
-   STOP SPIN SOUND
-========================================== */
-
-function stopSpinSound(){
-
-  spinMusic.pause();
-
-  spinMusic.currentTime = 0;
-
-
-  if(musicReady){
-
-    bgMusic
-      .play()
-      .catch(
-        () => {}
-      );
-
-  }
-
-}
-
-
-/* ==========================================
-   START SPIN
-========================================== */
-
-function startSpin(){
-
-  if(spinning){
+    title.textContent = "💥 ZONK";
+    reward.textContent = "Rp0";
+    info.textContent =
+      "Belum mendapatkan reward virtual.";
 
     return;
 
   }
 
+  if(data.reward > 0){
+
+    title.textContent = "🎉 MENANG";
+
+  }else{
+
+    title.textContent =
+      "😅 BELUM BERUNTUNG";
+
+  }
+
+  reward.textContent =
+    formatRupiah(data.reward);
+
+  const details = [];
+
+  if(data.scatterCount > 0){
+
+    details.push(
+      "Scatter: " +
+      data.scatterCount
+    );
+
+  }
+
+  data.winners.forEach(winner=>{
+
+    details.push(
+      winner.name +
+      " ×" +
+      winner.count
+    );
+
+  });
+
+  if(details.length === 0){
+
+    details.push(
+      "Tidak ada kombinasi reward."
+    );
+
+  }
+
+  info.textContent =
+    details.join(" • ");
+
+}
+
+
+/* SUMMARY */
+
+function updateSummary(){
+
+  document
+    .getElementById("sumSpins")
+    .textContent =
+    batchSpins + "×";
+
+  document
+    .getElementById("sumCost")
+    .textContent =
+    formatRupiah(
+      batchSpins * bet
+    );
+
+  document
+    .getElementById("sumReward")
+    .textContent =
+    formatRupiah(
+      batchReward
+    );
+
+  document
+    .getElementById("summary")
+    .classList
+    .add("show");
+
+}
+
+
+/* LEVEL */
+
+function updateLevel(){
+
+  const level =
+    Math.floor(
+      totalSpins / 10
+    ) + 1;
+
+  document
+    .getElementById("level")
+    .textContent =
+    level;
+
+}
+
+
+/* SINGLE SPIN */
+
+function singleSpin(){
+
+  return new Promise(resolve=>{
+
+    const spinTime =
+      speedMode === "fast"
+      ? 450
+      : 900;
+
+    cells.forEach(cell=>{
+
+      cell.classList.add("rolling");
+
+    });
+
+    setTimeout(()=>{
+
+      const results =
+        createResult();
+
+      displayResult(results);
+
+      cells.forEach(cell=>{
+
+        cell.classList.remove("rolling");
+
+      });
+
+      resolve(results);
+
+    },spinTime);
+
+  });
+
+}
+
+
+/* START */
+
+async function startSpin(){
+
+  if(spinning) return;
+
+  if(bet < MIN_BET){
+
+    bet = MIN_BET;
+
+  }
 
   const totalCost =
     bet * selectedSpins;
 
-
-  if(balance < totalCost){
+  if(totalCost > balance){
 
     alert(
-      "SALDO VIRTUAL TIDAK CUKUP.\n\n" +
-      "Dibutuhkan: " +
-      formatRupiah(totalCost) +
-      "\nSaldo: " +
-      formatRupiah(balance)
+      "Saldo virtual tidak cukup.\n\n" +
+      "Saldo: " +
+      formatRupiah(balance) +
+      "\nTotal bet: " +
+      formatRupiah(totalCost)
     );
 
     return;
 
   }
-
-
-  /*
-    Kurangi total bet
-    sebelum batch dimulai.
-  */
-
-  balance -= totalCost;
-
-
-  batchReward = 0;
-
-  batchSpins = 0;
-
-
-  /*
-    Buat daftar ZONK.
-  */
-
-  zonkPlan =
-    createZonkPlan(
-      selectedSpins
-    );
-
 
   spinning = true;
 
-
-  document
-    .getElementById(
+  const spinButton =
+    document.getElementById(
       "spinButton"
-    )
-    .disabled = true;
-
-
-  playSpinSound();
-
-
-  runSpin(0);
-
-}
-
-
-/* ==========================================
-   RUN SPIN
-========================================== */
-
-function runSpin(index){
-
-  if(
-    index >= selectedSpins
-  ){
-
-    finishBatch();
-
-    return;
-
-  }
-
-
-  batchSpins++;
-
-
-  spinAnimation(
-    function(arr){
-
-      let data;
-
-
-      /*
-        ZONK hanya aktif pada
-        posisi yang telah dipilih.
-      */
-
-      if(zonkPlan[index]){
-
-        data = {
-
-          reward:0,
-
-          scatter:0,
-
-          biggest:0
-
-        };
-
-      }else{
-
-        data =
-          calculateReward(arr);
-
-      }
-
-
-      batchReward +=
-        data.reward;
-
-
-      balance +=
-        data.reward;
-
-
-      totalReward +=
-        data.reward;
-
-
-      totalSpins++;
-
-
-      if(zonkPlan[index]){
-
-        highlight([]);
-
-      }else{
-
-        highlight(arr);
-
-      }
-
-
-      showResult(data);
-
-
-      updateUI();
-
-
-      setTimeout(
-        () => {
-
-          runSpin(
-            index+1
-          );
-
-        },
-
-        speedMode === "fast"
-          ? 500
-          : 1100
-      );
-
-    }
-  );
-
-}
-
-
-/* ==========================================
-   ANIMASI
-========================================== */
-
-function spinAnimation(callback){
-
-  const finalResult =
-    createResult();
-
-
-  cells.forEach(
-    cell => {
-
-      cell.classList.remove(
-        "win",
-        "scatter"
-      );
-
-      cell.classList.add(
-        "rolling"
-      );
-
-    }
-  );
-
-
-  const interval =
-    setInterval(
-      () => {
-
-        cells.forEach(
-          cell => {
-
-            const symbol =
-              randomSymbol();
-
-
-            cell.innerHTML =
-              `
-              <img
-                src="${symbol.img}"
-                alt=""
-              >
-              `;
-
-          }
-        );
-
-      },
-      speedMode === "fast"
-        ? 65
-        : 100
     );
 
+  spinButton.disabled = true;
 
-  const start =
-    speedMode === "fast"
-      ? 450
-      : 850;
+  /*
+    Musik background berhenti
+    ketika spin dimulai.
+  */
 
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
 
-  const column =
-    speedMode === "fast"
-      ? 180
-      : 400;
+  spinMusic.currentTime = 0;
+
+  spinMusic.play()
+    .catch(()=>{});
+
+  batchReward = 0;
+  batchSpins = 0;
+
+  document
+    .getElementById("result")
+    .classList
+    .remove("show");
 
 
   for(
-    let col=0;
-    col<6;
-    col++
+    let i=0;
+    i<selectedSpins;
+    i++
   ){
 
-    setTimeout(
-      () => {
+    balance -= bet;
 
-        for(
-          let row=0;
-          row<3;
-          row++
-        ){
+    totalSpins++;
+    batchSpins++;
 
-          const index =
-            row*6+col;
+    const results =
+      await singleSpin();
 
+    const zonk =
+      shouldZonk();
 
-          cells[index]
-            .classList
-            .remove(
-              "rolling"
-            );
+    let data =
+      calculateReward(results);
 
+    if(zonk){
 
-          cells[index]
-            .innerHTML =
-              `
-              <img
-                src="${finalResult[index].img}"
-                alt=""
-              >
-              `;
+      data.reward = 0;
 
-        }
+    }
 
-      },
-      start +
-      col*column
+    balance += data.reward;
+
+    batchReward += data.reward;
+
+    totalReward += data.reward;
+
+    highlightWinners(
+      results,
+      data
     );
 
-  }
-
-
-  setTimeout(
-    () => {
-
-      clearInterval(
-        interval
-      );
-
-
-      cells.forEach(
-        cell => {
-
-          cell.classList
-            .remove(
-              "rolling"
-            );
-
-        }
-      );
-
-
-      callback(
-        finalResult
-      );
-
-    },
-    start +
-    5*column +
-    350
-  );
-
-}
-
-
-/* ==========================================
-   RESULT
-========================================== */
-
-function showResult(data){
-
-  const box =
-    document.getElementById(
-      "result"
+    showResult(
+      data,
+      zonk
     );
 
+    updateUI();
+    updateLevel();
 
-  if(data.reward === 0){
+    if(
+      data.reward > 0 &&
+      !zonk
+    ){
 
-    document
-      .getElementById(
-        "resultTitle"
-      )
-      .textContent =
-        "😅 ZONK";
+      showNotification(
+        "REWARD VIRTUAL",
+        data.reward,
+        "Hasil dari kombinasi simbol."
+      );
 
-  }else{
+    }
 
-    document
-      .getElementById(
-        "resultTitle"
-      )
-      .textContent =
-        "🎉 SELAMAT!";
+    if(
+      i <
+      selectedSpins - 1
+    ){
 
-  }
-
-
-  document
-    .getElementById(
-      "resultReward"
-    )
-    .textContent =
-      data.reward > 0
-        ? "+" +
-          formatRupiah(
-            data.reward
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            speedMode === "fast"
+            ? 100
+            : 250
           )
-        : "Rp0";
+      );
 
-
-  document
-    .getElementById(
-      "resultInfo"
-    )
-    .textContent =
-      "Kembar terbesar: " +
-      data.biggest +
-      "× • Scatter: " +
-      data.scatter +
-      "×";
-
-
-  box.classList.add(
-    "show"
-  );
-
-
-  if(data.reward > 0){
-
-    showNotification(
-      data.reward,
-      data.biggest,
-      data.scatter
-    );
+    }
 
   }
 
-}
 
+  spinMusic.pause();
+  spinMusic.currentTime = 0;
 
-/* ==========================================
-   NOTIFICATION
-========================================== */
+  /*
+    Kembali ke musik background.
+  */
 
-function showNotification(
-  reward,
-  biggest,
-  scatter
-){
+  bgMusic.play()
+    .catch(()=>{});
 
-  const n =
-    document.createElement(
-      "div"
-    );
+  updateSummary();
 
-
-  n.className =
-    "notification";
-
-
-  n.innerHTML =
-    `
-
-    <div class="notification-icon">
-      ${scatter >= 10
-        ? "🟡"
-        : "🎉"}
-    </div>
-
-    <div class="notification-title">
-      SELAMAT!
-    </div>
-
-    <div>
-      ANDA MENDAPATKAN
-    </div>
-
-    <div class="notification-reward">
-      +${formatRupiah(reward)}
-    </div>
-
-    <div class="notification-detail">
-      Kembar ${biggest}×
-      •
-      Scatter ${scatter}×
-    </div>
-
-    `;
-
-
-  document
-    .body
-    .appendChild(n);
-
-
-  setTimeout(
-    () => {
-
-      n.remove();
-
-    },
-    speedMode === "fast"
-      ? 1100
-      : 1700
-  );
-
-}
-
-
-/* ==========================================
-   FINISH BATCH
-========================================== */
-
-function finishBatch(){
+  spinButton.disabled = false;
 
   spinning = false;
-
-
-  stopSpinSound();
-
-
-  document
-    .getElementById(
-      "spinButton"
-    )
-    .disabled = false;
-
-
-  document
-    .getElementById(
-      "sumSpins"
-    )
-    .textContent =
-      batchSpins + "×";
-
-
-  document
-    .getElementById(
-      "sumCost"
-    )
-    .textContent =
-      formatRupiah(
-        batchSpins * bet
-      );
-
-
-  document
-    .getElementById(
-      "sumReward"
-    )
-    .textContent =
-      "+" +
-      formatRupiah(
-        batchReward
-      );
-
-
-  document
-    .getElementById(
-      "summary"
-    )
-    .classList
-    .add("show");
-
 
   updateUI();
 
 }
 
 
-/* ==========================================
-   WARNING
-========================================== */
+/* WARNING */
 
 function closeWarning(){
 
   document
-    .getElementById(
-      "warningPopup"
-    )
+    .getElementById("warningPopup")
     .classList
     .add("hidden");
 
+  /*
+    Browser biasanya membutuhkan
+    interaksi pengguna sebelum
+    audio boleh dimainkan.
+  */
+
+  bgMusic.currentTime = 0;
+
+  bgMusic.play()
+    .catch(()=>{});
+
 }
 
 
-/* ==========================================
-   INIT
-========================================== */
+/* TAP UNTUK MUSIK */
 
-function init(){
+document.addEventListener(
+  "click",
+  function(){
 
-  balance =
-    START_BALANCE;
+    const warning =
+      document.getElementById(
+        "warningPopup"
+      );
 
-  totalSpins = 0;
+    if(
+      warning.classList.contains("hidden") &&
+      !spinning
+    ){
 
-  totalReward = 0;
-
-  zonkPlan = [];
-
-
-  const first =
-    createResult();
-
-
-  cells.forEach(
-    (cell,index) => {
-
-      cell.innerHTML =
-        `
-        <img
-          src="${first[index].img}"
-          alt=""
-        >
-        `;
+      bgMusic.play()
+        .catch(()=>{});
 
     }
-  );
+
+  }
+);
 
 
-  updateUI();
+/* INIT */
 
-}
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
 
+    updateUI();
+    updateLevel();
 
-init();
+    const initialResult =
+      createResult();
+
+    displayResult(
+      initialResult
+    );
+
+  }
+);
 
 </script>
 
