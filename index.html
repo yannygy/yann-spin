@@ -6,17 +6,25 @@
 <title>YANN SPIN ARCADE</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
   min-height:100vh;
-  padding:14px 12px 100px;
+  padding:15px 12px 100px;
   font-family:Arial,sans-serif;
   color:#fff;
-  background:radial-gradient(circle at 50% -10%,#71008b,#17051d 38%,#030308 80%);
+  background:
+    radial-gradient(circle at 50% -10%,#71008b,#17051d 40%,#030308 80%);
 }
 
-button{font-family:inherit;cursor:pointer}
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
 
 .app{
   width:min(720px,100%);
@@ -47,15 +55,29 @@ button{font-family:inherit;cursor:pointer}
   font-weight:bold;
 }
 
-.title{text-align:center;margin-bottom:15px}
-.title small{color:#00f5ff;font-size:8px;letter-spacing:4px}
+.title{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.title small{
+  color:#00f5ff;
+  font-size:8px;
+  letter-spacing:4px;
+}
+
 .title h1{
   margin-top:5px;
   color:#ff24d8;
   font-size:38px;
   text-shadow:0 0 10px #ff24d8,0 0 35px #ff24d8;
 }
-.title p{margin-top:5px;color:#777;font-size:10px}
+
+.title p{
+  margin-top:5px;
+  color:#777;
+  font-size:10px;
+}
 
 .jackpot{
   padding:14px;
@@ -65,12 +87,14 @@ button{font-family:inherit;cursor:pointer}
   background:#090910;
   text-align:center;
 }
+
 .jackpot span{
   display:block;
   color:#888;
   font-size:8px;
   letter-spacing:3px;
 }
+
 .jackpot strong{
   display:block;
   margin-top:4px;
@@ -78,6 +102,7 @@ button{font-family:inherit;cursor:pointer}
   font-size:28px;
   text-shadow:0 0 25px #ffd83d;
 }
+
 .scatter-max{
   margin-top:5px;
   color:#fff000;
@@ -144,25 +169,43 @@ button{font-family:inherit;cursor:pointer}
 .cell.win{
   z-index:5;
   border:3px solid #ffd83d;
-  box-shadow:0 0 10px #ffd83d,0 0 25px #ffd83d,0 0 45px #ff24d8;
+  box-shadow:
+    0 0 10px #ffd83d,
+    0 0 25px #ffd83d,
+    0 0 45px #ff24d8;
   animation:winGlow .35s infinite alternate;
 }
 
 @keyframes winGlow{
-  from{transform:scale(1);filter:brightness(1)}
-  to{transform:scale(1.1);filter:brightness(1.5)}
+  from{
+    transform:scale(1);
+    filter:brightness(1);
+  }
+  to{
+    transform:scale(1.1);
+    filter:brightness(1.5);
+  }
 }
 
 .cell.scatter{
   z-index:6;
   border:3px solid #fff000;
-  box-shadow:0 0 10px #fff000,0 0 25px #ffd000,0 0 50px #ff9d00;
+  box-shadow:
+    0 0 10px #fff000,
+    0 0 25px #ffd000,
+    0 0 50px #ff9d00;
   animation:scatterGlow .3s infinite alternate;
 }
 
 @keyframes scatterGlow{
-  from{transform:scale(1);filter:brightness(1)}
-  to{transform:scale(1.13);filter:brightness(1.8)}
+  from{
+    transform:scale(1);
+    filter:brightness(1);
+  }
+  to{
+    transform:scale(1.13);
+    filter:brightness(1.8);
+  }
 }
 
 .spin-status{
@@ -174,9 +217,21 @@ button{font-family:inherit;cursor:pointer}
   background:#05050b;
   text-align:center;
 }
-.spin-status.show{display:block}
-.spin-status .main{color:#00f5ff;font-weight:bold}
-.spin-status .sub{margin-top:4px;color:#777;font-size:9px}
+
+.spin-status.show{
+  display:block;
+}
+
+.spin-status .main{
+  color:#00f5ff;
+  font-weight:bold;
+}
+
+.spin-status .sub{
+  margin-top:4px;
+  color:#777;
+  font-size:9px;
+}
 
 .selector{
   padding:13px;
@@ -218,7 +273,12 @@ button{font-family:inherit;cursor:pointer}
 
 .options button:last-child{
   color:#fff;
-  background:linear-gradient(135deg,#ff008c,#ff9d00,#ffe600);
+  background:linear-gradient(
+    135deg,
+    #ff008c,
+    #ff9d00,
+    #ffe600
+  );
 }
 
 .cost{
@@ -231,7 +291,9 @@ button{font-family:inherit;cursor:pointer}
   font-size:9px;
 }
 
-.cost strong{color:#ffd83d}
+.cost strong{
+  color:#ffd83d;
+}
 
 .speed-box{
   padding:12px;
@@ -283,7 +345,9 @@ button{font-family:inherit;cursor:pointer}
   box-shadow:0 8px 30px #ff19a955;
 }
 
-.spin:disabled{opacity:.4}
+.spin:disabled{
+  opacity:.4;
+}
 
 .result{
   display:none;
@@ -294,7 +358,9 @@ button{font-family:inherit;cursor:pointer}
   text-align:center;
 }
 
-.result.show{display:block}
+.result.show{
+  display:block;
+}
 
 .reward{
   margin-top:6px;
@@ -318,7 +384,9 @@ button{font-family:inherit;cursor:pointer}
   background:#080810;
 }
 
-.summary.show{display:block}
+.summary.show{
+  display:block;
+}
 
 .summary h3{
   margin-bottom:10px;
@@ -335,8 +403,13 @@ button{font-family:inherit;cursor:pointer}
   font-size:9px;
 }
 
-.summary-row strong{color:#fff}
-.summary-row.total strong{color:#35ff86}
+.summary-row strong{
+  color:#fff;
+}
+
+.summary-row.total strong{
+  color:#35ff86;
+}
 
 .stats{
   display:grid;
@@ -358,7 +431,10 @@ button{font-family:inherit;cursor:pointer}
   font-size:14px;
 }
 
-.stat span{color:#777;font-size:7px}
+.stat span{
+  color:#777;
+  font-size:7px;
+}
 
 .scatter-info{
   padding:15px;
@@ -368,7 +444,10 @@ button{font-family:inherit;cursor:pointer}
   background:#fff00008;
 }
 
-.scatter-info h3{color:#fff000;font-size:12px}
+.scatter-info h3{
+  color:#fff000;
+  font-size:12px;
+}
 
 .scatter-info p{
   margin-top:7px;
@@ -377,8 +456,14 @@ button{font-family:inherit;cursor:pointer}
   line-height:1.7;
 }
 
-.section{margin-top:18px}
-.section h2{margin-bottom:10px;font-size:15px}
+.section{
+  margin-top:18px;
+}
+
+.section h2{
+  margin-bottom:10px;
+  font-size:15px;
+}
 
 .collect{
   padding:20px;
@@ -393,8 +478,16 @@ button{font-family:inherit;cursor:pointer}
   margin:5px auto 17px;
   border:7px solid #fff09b;
   border-radius:50%;
-  background:radial-gradient(circle at 30% 25%,#fff9ae,#ffd32d 45%,#a66c00);
-  box-shadow:0 0 30px #ffd32d77,inset -15px -15px 20px #7b4b0033;
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      #fff9ae,
+      #ffd32d 45%,
+      #a66c00
+    );
+  box-shadow:
+    0 0 30px #ffd32d77,
+    inset -15px -15px 20px #7b4b0033;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -417,7 +510,11 @@ button{font-family:inherit;cursor:pointer}
   font-weight:bold;
 }
 
-.collect p{margin-top:8px;color:#777;font-size:9px}
+.collect p{
+  margin-top:8px;
+  color:#777;
+  font-size:9px;
+}
 
 .history{
   overflow:hidden;
@@ -449,9 +546,20 @@ button{font-family:inherit;cursor:pointer}
   background:#00f5ff12;
 }
 
-.history-item strong{font-size:9px}
-.history-item small{color:#777;font-size:7px}
-.plus{color:#35ff86;font-size:9px;font-weight:bold}
+.history-item strong{
+  font-size:9px;
+}
+
+.history-item small{
+  color:#777;
+  font-size:7px;
+}
+
+.plus{
+  color:#35ff86;
+  font-size:9px;
+  font-weight:bold;
+}
 
 .nav{
   position:fixed;
@@ -491,15 +599,25 @@ button{font-family:inherit;cursor:pointer}
   padding:25px 18px;
   border:2px solid #ffd83d;
   border-radius:24px;
-  background:radial-gradient(circle,#3a153e,#090811 70%);
+  background:
+    radial-gradient(
+      circle,
+      #3a153e,
+      #090811 70%
+    );
   text-align:center;
-  box-shadow:0 0 15px #ffd83d,0 0 35px #ff24d8,0 0 70px #00f5ff;
+  box-shadow:
+    0 0 15px #ffd83d,
+    0 0 35px #ff24d8,
+    0 0 70px #00f5ff;
   transform:translate(-50%,-50%) scale(.3);
   opacity:0;
   animation:notificationIn .45s forwards;
 }
 
-.notification.hide{animation:notificationOut .4s forwards}
+.notification.hide{
+  animation:notificationOut .4s forwards;
+}
 
 .notification-icon{
   font-size:55px;
@@ -534,13 +652,25 @@ button{font-family:inherit;cursor:pointer}
 }
 
 @keyframes notificationIn{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
-  60%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
-  100%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.3);
+  }
+  60%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.08);
+  }
+  100%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
 }
 
 @keyframes notificationOut{
-  to{opacity:0;transform:translate(-50%,-50%) scale(.8)}
+  to{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.8);
+  }
 }
 
 @keyframes iconPulse{
@@ -554,7 +684,14 @@ button{font-family:inherit;cursor:pointer}
   inset:0;
   pointer-events:none;
   overflow:hidden;
-  background:radial-gradient(circle,#fff 0,#fff9 4%,#ff00cc33 25%,transparent 70%);
+  background:
+    radial-gradient(
+      circle,
+      #fff 0,
+      #fff9 4%,
+      #ff00cc33 25%,
+      transparent 70%
+    );
   animation:jackpotFade 3.7s forwards;
 }
 
@@ -562,14 +699,37 @@ button{font-family:inherit;cursor:pointer}
   position:absolute;
   color:#fff;
   font-size:180px;
-  text-shadow:0 0 8px #fff,0 0 20px #00f5ff,0 0 45px #00f5ff,0 0 80px #ff24d8;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #00f5ff,
+    0 0 45px #00f5ff,
+    0 0 80px #ff24d8;
   animation:flash .15s infinite;
 }
 
-.l1{top:-50px;left:-30px;transform:rotate(-20deg)}
-.l2{top:-50px;right:-30px;transform:rotate(20deg)}
-.l3{bottom:-50px;left:-30px;transform:rotate(20deg)}
-.l4{right:-30px;bottom:-50px;transform:rotate(-20deg)}
+.l1{
+  top:-50px;
+  left:-30px;
+  transform:rotate(-20deg);
+}
+
+.l2{
+  top:-50px;
+  right:-30px;
+  transform:rotate(20deg);
+}
+
+.l3{
+  bottom:-50px;
+  left:-30px;
+  transform:rotate(20deg);
+}
+
+.l4{
+  right:-30px;
+  bottom:-50px;
+  transform:rotate(-20deg);
+}
 
 @keyframes flash{
   0%,100%{opacity:.15}
@@ -585,13 +745,20 @@ button{font-family:inherit;cursor:pointer}
   transform:translate(-50%,-50%);
 }
 
-.jackpot-text small{color:#00f5ff;letter-spacing:4px}
+.jackpot-text small{
+  color:#00f5ff;
+  letter-spacing:4px;
+}
 
 .jackpot-text h2{
   margin:8px 0;
   color:#ff24d8;
-  font-size:70px;
-  text-shadow:0 0 8px #fff,0 0 20px #ffd83d,0 0 45px #ff24d8,0 0 90px #00f5ff;
+  font-size:65px;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #ffd83d,
+    0 0 45px #ff24d8,
+    0 0 90px #00f5ff;
 }
 
 .jackpot-text strong{
@@ -604,7 +771,9 @@ button{font-family:inherit;cursor:pointer}
   100%{opacity:0}
 }
 
-.shake{animation:shake .04s infinite}
+.shake{
+  animation:shake .04s infinite;
+}
 
 @keyframes shake{
   0%{transform:translate(0)}
@@ -615,11 +784,26 @@ button{font-family:inherit;cursor:pointer}
 }
 
 @media(max-width:430px){
-  .cell{height:52px}
-  .options{grid-template-columns:repeat(4,1fr)}
-  .title h1{font-size:32px}
-  .jackpot-text h2{font-size:50px}
-  .jackpot-text strong{font-size:27px}
+
+  .cell{
+    height:52px;
+  }
+
+  .options{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .title h1{
+    font-size:32px;
+  }
+
+  .jackpot-text h2{
+    font-size:50px;
+  }
+
+  .jackpot-text strong{
+    font-size:27px;
+  }
 }
 </style>
 </head>
@@ -629,50 +813,109 @@ button{font-family:inherit;cursor:pointer}
 <div class="app">
 
 <header class="header">
-  <div class="logo">YANN SPIN</div>
-  <div class="balance">🪙 <span id="balance">10.000</span></div>
+
+  <div class="logo">
+    YANN SPIN
+  </div>
+
+  <div class="balance">
+    🪙 <span id="balance">10.000</span>
+  </div>
+
 </header>
 
+
 <div class="title">
-  <small>VIRTUAL ARCADE GAME</small>
-  <h1>LUCKY SLOT</h1>
-  <p>Game hiburan dengan koin virtual</p>
+
+  <small>
+    VIRTUAL ARCADE GAME
+  </small>
+
+  <h1>
+    LUCKY SLOT
+  </h1>
+
+  <p>
+    Game hiburan dengan koin virtual
+  </p>
+
 </div>
 
+
 <div class="jackpot">
-  <span>JACKPOT NORMAL 18 KEMBAR</span>
-  <strong>1.000.000 🪙</strong>
-  <div class="scatter-max">⚡ 18 SCATTER = 2.000.000 🪙</div>
+
+  <span>
+    JACKPOT NORMAL 18 KEMBAR
+  </span>
+
+  <strong>
+    1.000.000 🪙
+  </strong>
+
+  <div class="scatter-max">
+    ⚡ 18 SCATTER = 2.000.000 🪙
+  </div>
+
 </div>
+
 
 <section class="machine">
 
-<div class="machine-title">✦ 20 SYMBOL • 6 × 3 ✦</div>
+<div class="machine-title">
+  ✦ 20 SYMBOL • 6 × 3 ✦
+</div>
+
 
 <div class="slot" id="slot">
 
-  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
 
-  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
 
-  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
 
 </div>
+
 
 <div class="spin-status" id="spinStatus">
-  <div class="main" id="spinStatusMain">SPIN KE-1 / 1</div>
-  <div class="sub" id="spinStatusSub">0× SPIN TERSISA</div>
+
+  <div class="main" id="spinStatusMain">
+    SPIN KE-1 / 1
+  </div>
+
+  <div class="sub" id="spinStatusSub">
+    0× SPIN TERSISA
+  </div>
+
 </div>
+
 
 <div class="selector">
 
-  <div class="selector-title">PILIH JUMLAH SPIN</div>
+  <div class="selector-title">
+    PILIH JUMLAH SPIN
+  </div>
 
   <div class="options">
-    <button class="selected" onclick="selectSpin(1,this)">1×</button>
+
+    <button class="selected"
+      onclick="selectSpin(1,this)">1×</button>
+
     <button onclick="selectSpin(5,this)">5×</button>
     <button onclick="selectSpin(10,this)">10×</button>
     <button onclick="selectSpin(15,this)">15×</button>
@@ -693,44 +936,91 @@ button{font-family:inherit;cursor:pointer}
     <button onclick="selectSpin(90,this)">90×</button>
     <button onclick="selectSpin(95,this)">95×</button>
     <button onclick="selectSpin(100,this)">⚡100×</button>
+
   </div>
 
+
   <div class="cost">
-    <span id="spinCount">1× SPIN</span>
-    <span>BIAYA: <strong id="spinCost">20</strong> 🪙</span>
+
+    <span id="spinCount">
+      1× SPIN
+    </span>
+
+    <span>
+      BIAYA:
+      <strong id="spinCost">
+        20
+      </strong>
+      🪙
+    </span>
+
   </div>
 
 </div>
+
 
 <div class="speed-box">
 
-  <div class="speed-title">⚙️ KECEPATAN SPIN</div>
+  <div class="speed-title">
+    ⚙️ KECEPATAN SPIN
+  </div>
 
   <div class="speed-options">
-    <button id="normalSpeed" class="selected" onclick="setSpeed('normal')">
+
+    <button
+      id="normalSpeed"
+      class="selected"
+      onclick="setSpeed('normal')">
       🐢 NORMAL
     </button>
 
-    <button id="fastSpeed" onclick="setSpeed('fast')">
+    <button
+      id="fastSpeed"
+      onclick="setSpeed('fast')">
       ⚡ CEPAT
     </button>
+
   </div>
 
 </div>
 
-<button class="spin" id="spinButton" onclick="startSpin()">
+
+<button
+  class="spin"
+  id="spinButton"
+  onclick="startSpin()">
+
   🎰 SPIN 1×
+
 </button>
 
+
 <div class="result" id="result">
-  <h3 id="resultTitle">-</h3>
-  <div class="reward" id="resultReward">+0 KOIN</div>
-  <div class="info" id="resultInfo">-</div>
+
+  <h3 id="resultTitle">
+    -
+  </h3>
+
+  <div
+    class="reward"
+    id="resultReward">
+    +0 KOIN
+  </div>
+
+  <div
+    class="info"
+    id="resultInfo">
+    -
+  </div>
+
 </div>
+
 
 <div class="summary" id="summary">
 
-  <h3>📊 RINGKASAN SPIN</h3>
+  <h3>
+    📊 RINGKASAN SPIN
+  </h3>
 
   <div class="summary-row">
     <span>Total Spin</span>
@@ -761,6 +1051,7 @@ button{font-family:inherit;cursor:pointer}
 
 </section>
 
+
 <div class="stats">
 
   <div class="stat">
@@ -780,25 +1071,35 @@ button{font-family:inherit;cursor:pointer}
 
 </div>
 
+
 <section class="scatter-info">
 
-  <h3>🟡 SISTEM SCATTER 80%</h3>
+  <h3>
+    🟡 SISTEM SCATTER 80%
+  </h3>
 
   <p>
-    Setiap baris memiliki peluang 80% menjadi Scatter.
-    Jika seluruh 3 baris Scatter, totalnya menjadi
-    18 Scatter dan mendapatkan 2.000.000 koin virtual.
+    Setiap baris memiliki peluang 80% menjadi
+    Scatter. Jika seluruh 3 baris Scatter,
+    totalnya menjadi 18 Scatter dan mendapatkan
+    2.000.000 koin virtual.
   </p>
 
 </section>
 
+
 <section class="section" id="collectSection">
 
-  <h2>🪙 Mulung Koin</h2>
+  <h2>
+    🪙 Mulung Koin
+  </h2>
 
   <div class="collect">
 
-    <div class="coin" onclick="collectCoin()"></div>
+    <div
+      class="coin"
+      onclick="collectCoin()">
+    </div>
 
     <button onclick="collectCoin()">
       🪙 TAP UNTUK MULUNG
@@ -812,27 +1113,38 @@ button{font-family:inherit;cursor:pointer}
 
 </section>
 
+
 <section class="section">
 
-  <h2>📜 Riwayat Aktivitas</h2>
+  <h2>
+    📜 Riwayat Aktivitas
+  </h2>
 
-  <div class="history" id="history"></div>
+  <div
+    class="history"
+    id="history">
+  </div>
 
 </section>
 
 </div>
 
+
 <nav class="nav">
 
-  <button class="active" onclick="scrollToTop()">
+  <button
+    class="active"
+    onclick="scrollToTop()">
     🏠<br>Home
   </button>
 
-  <button onclick="scrollToSlot()">
+  <button
+    onclick="scrollToSlot()">
     🎰<br>Slot
   </button>
 
-  <button onclick="scrollToCollect()">
+  <button
+    onclick="scrollToCollect()">
     🪙<br>Mulung
   </button>
 
@@ -844,7 +1156,7 @@ button{font-family:inherit;cursor:pointer}
 ================================================= -->
 
 <audio
-  id="bgSound"
+  id="bgMusic"
   src="https://files.catbox.moe/470eq8.mp3"
   loop
   preload="auto"
@@ -852,7 +1164,7 @@ button{font-family:inherit;cursor:pointer}
 </audio>
 
 <audio
-  id="spinSound"
+  id="spinMusic"
   src="https://files.catbox.moe/zsp80l.mp3"
   preload="auto"
   playsinline>
@@ -870,13 +1182,21 @@ const SPIN_PRICE = 20;
 const SCATTER_ROW_CHANCE = 0.80;
 
 let speedMode = "normal";
+
 let selectedSpins = 1;
+
 let spinning = false;
+
 let spinsRemaining = 0;
+
 let activeBatch = 0;
+
 let currentBatchSpin = 0;
+
 let batchReward = 0;
+
 let batchBefore = 0;
+
 let result = [];
 
 
@@ -884,175 +1204,121 @@ let result = [];
    AUDIO
 ================================================= */
 
-const bgSound =
-  document.getElementById("bgSound");
+const bgMusic =
+  document.getElementById(
+    "bgMusic"
+  );
 
-const spinSound =
-  document.getElementById("spinSound");
+const spinMusic =
+  document.getElementById(
+    "spinMusic"
+  );
 
-bgSound.volume = 0.35;
-spinSound.volume = 1;
+bgMusic.volume = 0.35;
+
+spinMusic.volume = 1;
+
+let musicActivated = false;
 
 
 /*
-  Fungsi musik background.
+   TAP PERTAMA DI MANA SAJA
 */
 
-function playBackground(){
+function activateMusic(){
 
-  bgSound.volume = 0.35;
-
-  const promise =
-    bgSound.play();
-
-  if(promise !== undefined){
-
-    promise
-      .then(() => {
-        console.log(
-          "🎵 Background music ON"
-        );
-      })
-      .catch(() => {
-        console.log(
-          "Browser memblokir autoplay."
-        );
-      });
-
+  if(musicActivated){
+    return;
   }
+
+  musicActivated = true;
+
+  bgMusic.currentTime = 0;
+
+  bgMusic.play()
+    .catch(() => {
+
+      musicActivated = false;
+
+    });
 
 }
 
 
 /*
-  Coba play SECEPAT halaman dibuat.
+   Interaksi pertama.
 */
-
-playBackground();
-
-
-/*
-  Coba lagi setelah DOM siap.
-*/
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-    playBackground();
-  }
-);
-
-
-/*
-  Coba lagi setelah halaman selesai.
-*/
-
-window.addEventListener(
-  "load",
-  () => {
-    playBackground();
-  }
-);
-
-
-/*
-  Kalau browser memblokir autoplay,
-  interaksi pertama akan mengaktifkan musik.
-*/
-
-function firstInteraction(){
-
-  if(
-    bgSound.paused &&
-    !spinning
-  ){
-
-    playBackground();
-
-  }
-
-}
-
 
 document.addEventListener(
   "pointerdown",
-  firstInteraction,
+  activateMusic,
   {
     once:true,
     passive:true
   }
 );
 
-document.addEventListener(
-  "touchstart",
-  firstInteraction,
-  {
-    once:true,
-    passive:true
-  }
-);
-
-document.addEventListener(
-  "click",
-  firstInteraction,
-  {
-    once:true
-  }
-);
-
 
 /*
-  Sound setiap 1× spin.
+   Musik background dimatikan ketika spin.
 */
 
-function playSpinSound(){
+function startSpinMusic(){
 
-  spinSound.pause();
+  bgMusic.pause();
 
-  spinSound.currentTime = 0;
+  bgMusic.currentTime = 0;
 
-  spinSound.volume = 1;
+  spinMusic.pause();
 
-  const promise =
-    spinSound.play();
+  spinMusic.currentTime = 0;
 
-  if(promise !== undefined){
-
-    promise.catch(
-      () => {}
-    );
-
-  }
+  spinMusic.play()
+    .catch(() => {});
 
 }
 
 
 /*
-  Matikan background saat spin.
+   Ulang sound setiap spin.
 */
 
-function stopBackgroundMusic(){
+function replaySpinMusic(){
 
-  bgSound.pause();
+  spinMusic.pause();
 
-  bgSound.currentTime = 0;
+  spinMusic.currentTime = 0;
+
+  spinMusic.play()
+    .catch(() => {});
 
 }
 
 
 /*
-  Nyalakan kembali setelah semua spin.
+   Setelah semua spin selesai.
 */
 
-function resumeBackgroundMusic(){
+function finishSpinMusic(){
 
-  playBackground();
+  spinMusic.pause();
+
+  spinMusic.currentTime = 0;
+
+  if(musicActivated){
+
+    bgMusic.currentTime = 0;
+
+    bgMusic.play()
+      .catch(() => {});
+
+  }
 
 }
 
 
 /* =================================================
-   SYMBOL
+   SYMBOL 1-20
 ================================================= */
 
 const symbols = [
@@ -1172,20 +1438,29 @@ let game =
     )
   );
 
+
 if(!game){
 
   game = {
+
     balance:10000,
+
     today:0,
+
     spins:0,
+
     level:1,
+
     xp:0,
+
     history:[]
+
   };
 
   save();
 
 }
+
 
 const cells =
   document.querySelectorAll(
@@ -1222,75 +1497,93 @@ function setSpeed(mode){
   speedMode = mode;
 
   document
-    .getElementById("normalSpeed")
+    .getElementById(
+      "normalSpeed"
+    )
     .classList
     .toggle(
       "selected",
-      mode === "normal"
+      mode==="normal"
     );
 
   document
-    .getElementById("fastSpeed")
+    .getElementById(
+      "fastSpeed"
+    )
     .classList
     .toggle(
       "selected",
-      mode === "fast"
+      mode==="fast"
     );
 
 }
 
 
 /* =================================================
-   UI
+   UPDATE UI
 ================================================= */
 
 function updateUI(){
 
   document
-    .getElementById("balance")
+    .getElementById(
+      "balance"
+    )
     .textContent =
       formatNumber(
         game.balance
       );
 
   document
-    .getElementById("today")
+    .getElementById(
+      "today"
+    )
     .textContent =
       formatNumber(
         game.today
       );
 
   document
-    .getElementById("totalSpins")
+    .getElementById(
+      "totalSpins"
+    )
     .textContent =
       formatNumber(
         game.spins
       );
 
   document
-    .getElementById("level")
+    .getElementById(
+      "level"
+    )
     .textContent =
       game.level;
 
   document
-    .getElementById("spinCount")
+    .getElementById(
+      "spinCount"
+    )
     .textContent =
-      selectedSpins +
+      selectedSpins+
       "× SPIN";
 
   document
-    .getElementById("spinCost")
+    .getElementById(
+      "spinCost"
+    )
     .textContent =
       formatNumber(
-        selectedSpins *
+        selectedSpins*
         SPIN_PRICE
       );
 
   document
-    .getElementById("spinButton")
+    .getElementById(
+      "spinButton"
+    )
     .textContent =
-      "🎰 SPIN " +
-      selectedSpins +
+      "🎰 SPIN "+
+      selectedSpins+
       "×";
 
   renderHistory();
@@ -1309,7 +1602,7 @@ function selectSpin(
 
   if(spinning)return;
 
-  selectedSpins = amount;
+  selectedSpins=amount;
 
   document
     .querySelectorAll(
@@ -1330,7 +1623,7 @@ function selectSpin(
 
 
 /* =================================================
-   COLLECT
+   MULUNG
 ================================================= */
 
 function collectCoin(){
@@ -1340,24 +1633,26 @@ function collectCoin(){
   const reward =
     Math.floor(
       Math.random()*10
-    ) + 1;
+    )+1;
 
   game.balance += reward;
+
   game.today += reward;
 
   addHistory(
     "🪙",
     "Mulung Koin",
-    "+" +
+    "+"+
     formatNumber(
       reward
-    ) +
+    )+
     " koin"
   );
 
   addXP(2);
 
   save();
+
   updateUI();
 
 }
@@ -1367,10 +1662,14 @@ function collectCoin(){
    ZONK
 ================================================= */
 
-function createZonkPlan(amount){
+function createZonkPlan(
+  amount
+){
 
   let min=0;
+
   let max=0;
+
 
   if(
     amount>=1 &&
@@ -1381,17 +1680,31 @@ function createZonkPlan(amount){
     max=40;
 
   }
-  else if(amount>=51){
+  else if(
+    amount>=51
+  ){
 
     min=10;
     max=30;
 
   }
 
-  if(max===0)return 0;
 
-  min=Math.min(min,amount);
-  max=Math.min(max,amount);
+  if(max===0){
+    return 0;
+  }
+
+
+  min=Math.min(
+    min,
+    amount
+  );
+
+  max=Math.min(
+    max,
+    amount
+  );
+
 
   return Math.floor(
     Math.random()*
@@ -1402,29 +1715,35 @@ function createZonkPlan(amount){
 
 
 /* =================================================
-   START
+   START SPIN
 ================================================= */
 
 function startSpin(){
 
   if(spinning)return;
 
+
   const totalCost =
-    selectedSpins *
+    selectedSpins*
     SPIN_PRICE;
 
+
   if(
-    game.balance <
+    game.balance<
     totalCost
   ){
 
     alert(
       "KOIN TIDAK CUKUP!\n\n"+
       "Dibutuhkan: "+
-      formatNumber(totalCost)+
+      formatNumber(
+        totalCost
+      )+
       " koin\n"+
       "Saldo: "+
-      formatNumber(game.balance)+
+      formatNumber(
+        game.balance
+      )+
       " koin"
     );
 
@@ -1433,22 +1752,34 @@ function startSpin(){
   }
 
 
-  stopBackgroundMusic();
+  /*
+    Sound spin langsung
+    menggantikan musik background.
+  */
+
+  startSpinMusic();
+
 
   batchBefore =
     game.balance;
 
+
   game.balance -=
     totalCost;
+
 
   activeBatch =
     selectedSpins;
 
+
   spinsRemaining =
     selectedSpins;
 
+
   currentBatchSpin=0;
+
   batchReward=0;
+
 
   window.zonkTotal =
     createZonkPlan(
@@ -1457,13 +1788,16 @@ function startSpin(){
 
   window.zonkUsed=0;
 
+
   spinning=true;
+
 
   document
     .getElementById(
       "spinButton"
     )
     .disabled=true;
+
 
   document
     .getElementById(
@@ -1472,12 +1806,14 @@ function startSpin(){
     .classList
     .remove("show");
 
+
   document
     .getElementById(
       "summary"
     )
     .classList
     .remove("show");
+
 
   document
     .getElementById(
@@ -1486,8 +1822,11 @@ function startSpin(){
     .classList
     .add("show");
 
+
   save();
+
   updateUI();
+
 
   runNextSpin();
 
@@ -1511,29 +1850,38 @@ function runNextSpin(){
   }
 
 
-  playSpinSound();
+  /*
+    Sound diulang setiap 1× spin.
+  */
+
+  replaySpinMusic();
+
 
   currentBatchSpin++;
+
   spinsRemaining--;
+
 
   updateSpinStatus();
 
 
   let isZonk=false;
 
+
   if(
-    window.zonkUsed <
+    window.zonkUsed<
     window.zonkTotal
   ){
 
     const remainingSpins =
-      activeBatch -
-      currentBatchSpin +
+      activeBatch-
+      currentBatchSpin+
       1;
 
     const remainingZonk =
-      window.zonkTotal -
+      window.zonkTotal-
       window.zonkUsed;
+
 
     if(
       remainingZonk>=
@@ -1544,8 +1892,8 @@ function runNextSpin(){
 
     }
     else if(
-      Math.random() <
-      remainingZonk /
+      Math.random()<
+      remainingZonk/
       remainingSpins
     ){
 
@@ -1566,7 +1914,9 @@ function runNextSpin(){
       result =
         finalResult;
 
+
       let reward=0;
+
 
       if(zonk){
 
@@ -1582,17 +1932,26 @@ function runNextSpin(){
 
       }
 
-      batchReward += reward;
 
-      game.balance += reward;
-      game.today += reward;
+      batchReward +=
+        reward;
+
+
+      game.balance +=
+        reward;
+
+      game.today +=
+        reward;
+
       game.spins++;
+
 
       addXP(
         reward>0
           ?4
           :1
       );
+
 
       if(zonk){
 
@@ -1618,12 +1977,15 @@ function runNextSpin(){
 
       }
 
+
       showSpinResult(
         reward,
         zonk
       );
 
+
       save();
+
       updateUI();
 
 
@@ -1632,14 +1994,19 @@ function runNextSpin(){
           result
         );
 
+
       const groups =
-        getGroups(result);
+        getGroups(
+          result
+        );
+
 
       const normalJackpot =
         groups.some(
           group =>
             group.count===18
         );
+
 
       if(
         scatter===18 ||
@@ -1682,6 +2049,7 @@ function updateSpinStatus(){
       currentBatchSpin+
       " / "+
       activeBatch;
+
 
   document
     .getElementById(
@@ -1738,10 +2106,14 @@ function spinOnce(
             if(
               cell.dataset.stopped===
               "true"
-            )return;
+            ){
+              return;
+            }
+
 
             const symbol =
               randomNormalSymbol();
+
 
             cell.innerHTML =
               `<img src="${symbol.img}"
@@ -1762,6 +2134,7 @@ function spinOnce(
       ?650
       :1200;
 
+
   const columnDelay =
     speedMode==="fast"
       ?240
@@ -1773,7 +2146,7 @@ function spinOnce(
     123456
     123456
 
-    Kolom 1 berhenti dahulu,
+    Kolom 1 berhenti dulu,
     lalu 2,3,4,5,6.
   */
 
@@ -1811,6 +2184,7 @@ function spinOnce(
 
       clearInterval(timer);
 
+
       cells.forEach(
         cell => {
 
@@ -1822,6 +2196,7 @@ function spinOnce(
 
         }
       );
+
 
       setTimeout(
         () => {
@@ -1835,6 +2210,7 @@ function spinOnce(
         180
       );
 
+
     },
     finishTime
   );
@@ -1843,13 +2219,14 @@ function spinOnce(
 
 
 /* =================================================
-   RESULT
+   CREATE RESULT
 ================================================= */
 
 function createNormalResult(){
 
   const arr =
     new Array(18);
+
 
   for(
     let row=0;
@@ -1858,8 +2235,9 @@ function createNormalResult(){
   ){
 
     const scatterRow =
-      Math.random() <
+      Math.random()<
       SCATTER_ROW_CHANCE;
+
 
     for(
       let column=0;
@@ -1871,6 +2249,7 @@ function createNormalResult(){
         row*6+
         column;
 
+
       arr[index] =
         scatterRow
           ?symbols[19]
@@ -1879,6 +2258,7 @@ function createNormalResult(){
     }
 
   }
+
 
   return arr;
 
@@ -1890,15 +2270,18 @@ function createZonkResult(){
   const arr =
     new Array(18);
 
+
   for(
     let i=0;
     i<18;
     i++
   ){
 
-    arr[i]=symbols[i];
+    arr[i]=
+      symbols[i];
 
   }
+
 
   return arr;
 
@@ -1935,18 +2318,23 @@ function stopColumn(
       row*6+
       column;
 
+
     const cell =
       cells[index];
 
+
     cell.dataset.stopped=
       "true";
+
 
     cell.innerHTML =
       `<img src="${finalResult[index].img}"
       alt="${finalResult[index].name}">`;
 
+
     cell.classList
       .remove("rolling");
+
 
     cell.animate(
       [
@@ -1984,10 +2372,14 @@ function getGroups(arr){
 
   const map={};
 
+
   arr.forEach(
     (symbol,index) => {
 
-      if(symbol.scatter)return;
+      if(symbol.scatter){
+        return;
+      }
+
 
       if(!map[symbol.name]){
 
@@ -1999,7 +2391,10 @@ function getGroups(arr){
 
       }
 
-      map[symbol.name].count++;
+
+      map[symbol.name]
+        .count++;
+
 
       map[symbol.name]
         .indexes
@@ -2007,6 +2402,7 @@ function getGroups(arr){
 
     }
   );
+
 
   return Object.values(map);
 
@@ -2024,15 +2420,27 @@ function getScatterCount(arr){
 
 
 /* =================================================
-   NORMAL REWARD
+   REWARD KEMBAR NORMAL
 ================================================= */
 
 function normalReward(count){
 
-  if(count<=1)return 0;
-  if(count===2)return 30;
-  if(count===3)return 70;
-  if(count===4)return 100;
+  if(count<=1){
+    return 0;
+  }
+
+  if(count===2){
+    return 30;
+  }
+
+  if(count===3){
+    return 70;
+  }
+
+  if(count===4){
+    return 100;
+  }
+
 
   if(
     count>=5 &&
@@ -2044,10 +2452,23 @@ function normalReward(count){
 
   }
 
-  if(count===15)return 30000;
-  if(count===16)return 60000;
-  if(count===17)return 100000;
-  if(count===18)return 1000000;
+
+  if(count===15){
+    return 30000;
+  }
+
+  if(count===16){
+    return 60000;
+  }
+
+  if(count===17){
+    return 100000;
+  }
+
+  if(count===18){
+    return 1000000;
+  }
+
 
   return 0;
 
@@ -2055,12 +2476,15 @@ function normalReward(count){
 
 
 /* =================================================
-   SCATTER REWARD
+   REWARD SCATTER
 ================================================= */
 
 function scatterReward(count){
 
-  if(count<=1)return 0;
+  if(count<=1){
+    return 0;
+  }
+
 
   if(
     count>=2 &&
@@ -2071,6 +2495,7 @@ function scatterReward(count){
 
   }
 
+
   if(
     count>=11 &&
     count<=14
@@ -2079,6 +2504,7 @@ function scatterReward(count){
     return 100000;
 
   }
+
 
   if(
     count===15 ||
@@ -2089,9 +2515,16 @@ function scatterReward(count){
 
   }
 
-  if(count===17)return 650000;
 
-  if(count===18)return 2000000;
+  if(count===17){
+    return 650000;
+  }
+
+
+  if(count===18){
+    return 2000000;
+  }
+
 
   return 0;
 
@@ -2110,8 +2543,13 @@ function calculateAllRewards(arr){
   const scatter =
     getScatterCount(arr);
 
+
   let total=0;
 
+
+  /*
+    Semua kembar dihitung.
+  */
 
   groups.forEach(
     group => {
@@ -2130,6 +2568,10 @@ function calculateAllRewards(arr){
     }
   );
 
+
+  /*
+    Scatter juga dihitung.
+  */
 
   if(scatter>=2){
 
@@ -2207,7 +2649,7 @@ function highlightResult(){
 
 
 /* =================================================
-   RESULT DISPLAY
+   SHOW RESULT
 ================================================= */
 
 function showSpinResult(
@@ -2220,15 +2662,18 @@ function showSpinResult(
       "result"
     );
 
+
   const title =
     document.getElementById(
       "resultTitle"
     );
 
+
   const rewardBox =
     document.getElementById(
       "resultReward"
     );
+
 
   const info =
     document.getElementById(
@@ -2242,6 +2687,7 @@ function showSpinResult(
   const groups =
     getGroups(result);
 
+
   const scatter =
     getScatterCount(result);
 
@@ -2251,8 +2697,10 @@ function showSpinResult(
     title.textContent=
       "💀 ZONK";
 
+
     rewardBox.textContent=
       "+0 KOIN";
+
 
     info.textContent=
       "Spin ke "+
@@ -2260,6 +2708,7 @@ function showSpinResult(
       " • ZONK • "+
       spinsRemaining+
       "× tersisa";
+
 
     showNotification(
       0,
@@ -2397,6 +2846,7 @@ function showNotification(
       "div"
     );
 
+
   notification.className=
     "notification";
 
@@ -2405,7 +2855,9 @@ function showNotification(
 
     notification.innerHTML=`
 
-      <div class="notification-icon">💀</div>
+      <div class="notification-icon">
+        💀
+      </div>
 
       <div class="notification-title">
         ZONK
@@ -2431,6 +2883,7 @@ function showNotification(
     const scatter =
       getScatterCount(result);
 
+
     const normal =
       getGroups(result)
         .some(
@@ -2440,24 +2893,29 @@ function showNotification(
 
 
     let icon="🎉";
+
     let title="SELAMAT!";
 
 
     if(scatter===18){
 
       icon="⚡";
-      title="SCATTER JACKPOT!";
+
+      title=
+        "SCATTER JACKPOT!";
 
     }
     else if(normal){
 
       icon="⚡";
+
       title="JACKPOT!";
 
     }
     else if(scatter>=2){
 
       icon="🟡";
+
       title="SCATTER!";
 
     }
@@ -2497,8 +2955,10 @@ function showNotification(
 
   setTimeout(
     () => {
+
       notification.classList
         .add("hide");
+
     },
     speedMode==="fast"
       ?1000
@@ -2508,7 +2968,9 @@ function showNotification(
 
   setTimeout(
     () => {
+
       notification.remove();
+
     },
     speedMode==="fast"
       ?1500
@@ -2519,7 +2981,7 @@ function showNotification(
 
 
 /* =================================================
-   JACKPOT EFFECT
+   JACKPOT EFFECT PETIR
 ================================================= */
 
 function showJackpotEffect(
@@ -2536,16 +2998,28 @@ function showJackpotEffect(
       "div"
     );
 
+
   effect.className=
     "jackpot-effect";
 
 
   effect.innerHTML=`
 
-    <div class="lightning l1">⚡</div>
-    <div class="lightning l2">⚡</div>
-    <div class="lightning l3">⚡</div>
-    <div class="lightning l4">⚡</div>
+    <div class="lightning l1">
+      ⚡
+    </div>
+
+    <div class="lightning l2">
+      ⚡
+    </div>
+
+    <div class="lightning l3">
+      ⚡
+    </div>
+
+    <div class="lightning l4">
+      ⚡
+    </div>
 
     <div class="jackpot-text">
 
@@ -2596,10 +3070,21 @@ function finishBatch(){
 
   spinning=false;
 
-  spinSound.pause();
-  spinSound.currentTime=0;
 
-  resumeBackgroundMusic();
+  /*
+    Matikan sound spin.
+  */
+
+  spinMusic.pause();
+
+  spinMusic.currentTime=0;
+
+
+  /*
+    Nyalakan musik background.
+  */
+
+  finishSpinMusic();
 
 
   document
@@ -2607,6 +3092,7 @@ function finishBatch(){
       "spinButton"
     )
     .disabled=false;
+
 
   document
     .getElementById(
@@ -2623,6 +3109,7 @@ function finishBatch(){
       activeBatch+
       "×";
 
+
   document
     .getElementById(
       "sumCost"
@@ -2632,6 +3119,7 @@ function finishBatch(){
         SPIN_PRICE
       )+
       " 🪙";
+
 
   document
     .getElementById(
@@ -2643,6 +3131,7 @@ function finishBatch(){
       )+
       " 🪙";
 
+
   document
     .getElementById(
       "sumBefore"
@@ -2651,6 +3140,7 @@ function finishBatch(){
         batchBefore
       )+
       " 🪙";
+
 
   document
     .getElementById(
@@ -2661,6 +3151,7 @@ function finishBatch(){
       )+
       " 🪙";
 
+
   document
     .getElementById(
       "summary"
@@ -2668,7 +3159,9 @@ function finishBatch(){
     .classList
     .add("show");
 
+
   save();
+
   updateUI();
 
 }
@@ -2682,14 +3175,19 @@ function addXP(amount){
 
   game.xp += amount;
 
+
   const required =
-    game.level*100;
+    game.level*
+    100;
+
 
   if(
     game.xp>=required
   ){
 
-    game.xp-=required;
+    game.xp -=
+      required;
+
     game.level++;
 
   }
@@ -2720,10 +3218,13 @@ function addHistory(
 
   game.history.unshift({
 
-    icon,
-    title,
-    amount,
-    time
+    icon:icon,
+
+    title:title,
+
+    amount:amount,
+
+    time:time
 
   });
 
@@ -2880,9 +3381,11 @@ function initializeSlot(){
       const symbol =
         initial[index];
 
+
       cell.innerHTML=
         `<img src="${symbol.img}"
         alt="${symbol.name}">`;
+
 
       if(symbol.scatter){
 
