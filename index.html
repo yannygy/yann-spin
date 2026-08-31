@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>YANN SPIN ARCADE</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  min-height:100vh;
+  padding:14px 12px 100px;
+  font-family:Arial,sans-serif;
+  color:#fff;
+  background:radial-gradient(circle at 50% -10%,#71008b,#17051d 38%,#030308 80%);
+}
+
+button{font-family:inherit;cursor:pointer}
+
+.app{
+  width:min(720px,100%);
+  margin:auto;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.logo{
+  color:#00f5ff;
+  font-size:15px;
+  font-weight:1000;
+  letter-spacing:2px;
+  text-shadow:0 0 15px #00f5ff;
+}
+
+.balance{
+  padding:9px 14px;
+  border:1px solid #ffd83d;
+  border-radius:30px;
+  color:#ffd83d;
+  background:#ffd83d12;
+  font-weight:bold;
+}
+
+.title{text-align:center;margin-bottom:15px}
+.title small{color:#00f5ff;font-size:8px;letter-spacing:4px}
+.title h1{
+  margin-top:5px;
+  color:#ff24d8;
+  font-size:38px;
+  text-shadow:0 0 10px #ff24d8,0 0 35px #ff24d8;
+}
+.title p{margin-top:5px;color:#777;font-size:10px}
+
+.jackpot{
+  padding:14px;
+  margin-bottom:14px;
+  border:1px solid #ffd83d55;
+  border-radius:18px;
+  background:#090910;
+  text-align:center;
+}
+.jackpot span{
+  display:block;
+  color:#888;
+  font-size:8px;
+  letter-spacing:3px;
+}
+.jackpot strong{
+  display:block;
+  margin-top:4px;
+  color:#ffd83d;
+  font-size:28px;
+  text-shadow:0 0 25px #ffd83d;
+}
+.scatter-max{
+  margin-top:5px;
+  color:#fff000;
+  font-size:9px;
+}
+
+.machine{
+  padding:14px;
+  border:2px solid #505064;
+  border-radius:25px;
+  background:linear-gradient(145deg,#29283a,#07070d);
+  box-shadow:0 0 0 4px #020205,0 20px 60px #000;
+}
+
+.machine-title{
+  margin-bottom:10px;
+  color:#ff24d8;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:3px;
+  text-align:center;
+}
+
+.slot{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-template-rows:repeat(3,1fr);
+  gap:6px;
+  padding:8px;
+  border:3px solid #55556a;
+  border-radius:18px;
+  background:#010104;
+  box-shadow:inset 0 0 40px #000;
+}
+
+.cell{
+  height:65px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:#fff;
+  box-shadow:inset 0 -5px 8px #999,0 0 5px #000;
+}
+
+.cell img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+.cell.rolling{
+  animation:rolling .12s linear infinite;
+}
+
+@keyframes rolling{
+  0%{transform:translateY(-12px)}
+  50%{transform:translateY(12px)}
+  100%{transform:translateY(-12px)}
+}
+
+.cell.win{
+  z-index:5;
+  border:3px solid #ffd83d;
+  box-shadow:0 0 10px #ffd83d,0 0 25px #ffd83d,0 0 45px #ff24d8;
+  animation:winGlow .35s infinite alternate;
+}
+
+@keyframes winGlow{
+  from{transform:scale(1);filter:brightness(1)}
+  to{transform:scale(1.1);filter:brightness(1.5)}
+}
+
+.cell.scatter{
+  z-index:6;
+  border:3px solid #fff000;
+  box-shadow:0 0 10px #fff000,0 0 25px #ffd000,0 0 50px #ff9d00;
+  animation:scatterGlow .3s infinite alternate;
+}
+
+@keyframes scatterGlow{
+  from{transform:scale(1);filter:brightness(1)}
+  to{transform:scale(1.13);filter:brightness(1.8)}
+}
+
+.spin-status{
+  display:none;
+  padding:11px;
+  margin-top:10px;
+  border:1px solid #00f5ff33;
+  border-radius:15px;
+  background:#05050b;
+  text-align:center;
+}
+.spin-status.show{display:block}
+.spin-status .main{color:#00f5ff;font-weight:bold}
+.spin-status .sub{margin-top:4px;color:#777;font-size:9px}
+
+.selector{
+  padding:13px;
+  margin-top:12px;
+  border-radius:17px;
+  background:#07070e;
+}
+
+.selector-title{
+  margin-bottom:10px;
+  color:#888;
+  font-size:9px;
+  letter-spacing:2px;
+  text-align:center;
+}
+
+.options{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+  max-height:220px;
+  overflow-y:auto;
+}
+
+.options button{
+  padding:10px 2px;
+  border:1px solid #ffffff10;
+  border-radius:10px;
+  color:#aaa;
+  background:#191827;
+  font-weight:bold;
+}
+
+.options button.selected{
+  color:#001015;
+  background:linear-gradient(135deg,#00f5ff,#668bff);
+  box-shadow:0 0 18px #00f5ff55;
+}
+
+.options button:last-child{
+  color:#fff;
+  background:linear-gradient(135deg,#ff008c,#ff9d00,#ffe600);
+}
+
+.cost{
+  display:flex;
+  justify-content:space-between;
+  padding-top:9px;
+  margin-top:10px;
+  border-top:1px solid #ffffff10;
+  color:#888;
+  font-size:9px;
+}
+
+.cost strong{color:#ffd83d}
+
+.speed-box{
+  padding:12px;
+  margin-top:10px;
+  border:1px solid #ffffff0c;
+  border-radius:15px;
+  background:#0b0b14;
+}
+
+.speed-title{
+  margin-bottom:8px;
+  color:#888;
+  font-size:8px;
+  letter-spacing:2px;
+  text-align:center;
+}
+
+.speed-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.speed-options button{
+  padding:11px;
+  border:1px solid #ffffff10;
+  border-radius:11px;
+  color:#999;
+  background:#171622;
+  font-weight:bold;
+}
+
+.speed-options button.selected{
+  color:#fff;
+  background:linear-gradient(135deg,#ff19a9,#773cff);
+  box-shadow:0 0 18px #ff19a955;
+}
+
+.spin{
+  width:100%;
+  padding:16px;
+  margin-top:11px;
+  border:0;
+  border-radius:16px;
+  color:#fff;
+  background:linear-gradient(135deg,#ff19a9,#773cff);
+  font-size:14px;
+  font-weight:1000;
+  box-shadow:0 8px 30px #ff19a955;
+}
+
+.spin:disabled{opacity:.4}
+
+.result{
+  display:none;
+  padding:15px;
+  margin-top:12px;
+  border-radius:17px;
+  background:#080810;
+  text-align:center;
+}
+
+.result.show{display:block}
+
+.reward{
+  margin-top:6px;
+  color:#ffd83d;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.info{
+  margin-top:6px;
+  color:#888;
+  font-size:9px;
+  line-height:1.7;
+}
+
+.summary{
+  display:none;
+  padding:14px;
+  margin-top:12px;
+  border-radius:17px;
+  background:#080810;
+}
+
+.summary.show{display:block}
+
+.summary h3{
+  margin-bottom:10px;
+  color:#00f5ff;
+  font-size:12px;
+  text-align:center;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  padding:5px 0;
+  color:#888;
+  font-size:9px;
+}
+
+.summary-row strong{color:#fff}
+.summary-row.total strong{color:#35ff86}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:13px;
+}
+
+.stat{
+  padding:13px 4px;
+  border-radius:15px;
+  background:#11101b;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  color:#00f5ff;
+  font-size:14px;
+}
+
+.stat span{color:#777;font-size:7px}
+
+.scatter-info{
+  padding:15px;
+  margin-top:18px;
+  border:1px solid #fff00033;
+  border-radius:18px;
+  background:#fff00008;
+}
+
+.scatter-info h3{color:#fff000;font-size:12px}
+
+.scatter-info p{
+  margin-top:7px;
+  color:#999;
+  font-size:9px;
+  line-height:1.7;
+}
+
+.section{margin-top:18px}
+.section h2{margin-bottom:10px;font-size:15px}
+
+.collect{
+  padding:20px;
+  border-radius:22px;
+  background:#11101b;
+  text-align:center;
+}
+
+.coin{
+  width:120px;
+  height:120px;
+  margin:5px auto 17px;
+  border:7px solid #fff09b;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,#fff9ae,#ffd32d 45%,#a66c00);
+  box-shadow:0 0 30px #ffd32d77,inset -15px -15px 20px #7b4b0033;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.coin::after{
+  content:"C";
+  color:#a66c00;
+  font-size:55px;
+  font-weight:1000;
+}
+
+.collect button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  color:#001014;
+  background:#00f5ff;
+  font-weight:bold;
+}
+
+.collect p{margin-top:8px;color:#777;font-size:9px}
+
+.history{
+  overflow:hidden;
+  border-radius:17px;
+  background:#11101b;
+}
+
+.history-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px;
+  border-bottom:1px solid #ffffff08;
+}
+
+.history-left{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.history-icon{
+  width:35px;
+  height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:#00f5ff12;
+}
+
+.history-item strong{font-size:9px}
+.history-item small{color:#777;font-size:7px}
+.plus{color:#35ff86;font-size:9px;font-weight:bold}
+
+.nav{
+  position:fixed;
+  z-index:50;
+  left:50%;
+  bottom:10px;
+  width:min(650px,calc(100% - 20px));
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+  padding:7px;
+  border-radius:20px;
+  background:#0c0b15ee;
+  backdrop-filter:blur(15px);
+  transform:translateX(-50%);
+}
+
+.nav button{
+  padding:8px;
+  border:0;
+  border-radius:13px;
+  color:#777;
+  background:transparent;
+}
+
+.nav button.active{
+  color:#00f5ff;
+  background:#00f5ff0c;
+}
+
+.notification{
+  position:fixed;
+  z-index:9999;
+  left:50%;
+  top:50%;
+  width:min(360px,calc(100% - 30px));
+  padding:25px 18px;
+  border:2px solid #ffd83d;
+  border-radius:24px;
+  background:radial-gradient(circle,#3a153e,#090811 70%);
+  text-align:center;
+  box-shadow:0 0 15px #ffd83d,0 0 35px #ff24d8,0 0 70px #00f5ff;
+  transform:translate(-50%,-50%) scale(.3);
+  opacity:0;
+  animation:notificationIn .45s forwards;
+}
+
+.notification.hide{animation:notificationOut .4s forwards}
+
+.notification-icon{
+  font-size:55px;
+  animation:iconPulse .35s infinite alternate;
+}
+
+.notification-title{
+  margin-top:5px;
+  color:#ff24d8;
+  font-size:24px;
+  font-weight:1000;
+}
+
+.notification-text{
+  margin-top:10px;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.notification-reward{
+  margin-top:6px;
+  color:#ffd83d;
+  font-size:30px;
+  font-weight:1000;
+  text-shadow:0 0 25px #ffd83d;
+}
+
+.notification-detail{
+  margin-top:8px;
+  color:#00f5ff;
+  font-size:10px;
+}
+
+@keyframes notificationIn{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
+  60%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
+
+@keyframes notificationOut{
+  to{opacity:0;transform:translate(-50%,-50%) scale(.8)}
+}
+
+@keyframes iconPulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.2) rotate(5deg)}
+}
+
+.jackpot-effect{
+  position:fixed;
+  z-index:9000;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  background:radial-gradient(circle,#fff 0,#fff9 4%,#ff00cc33 25%,transparent 70%);
+  animation:jackpotFade 3.7s forwards;
+}
+
+.lightning{
+  position:absolute;
+  color:#fff;
+  font-size:180px;
+  text-shadow:0 0 8px #fff,0 0 20px #00f5ff,0 0 45px #00f5ff,0 0 80px #ff24d8;
+  animation:flash .15s infinite;
+}
+
+.l1{top:-50px;left:-30px;transform:rotate(-20deg)}
+.l2{top:-50px;right:-30px;transform:rotate(20deg)}
+.l3{bottom:-50px;left:-30px;transform:rotate(20deg)}
+.l4{right:-30px;bottom:-50px;transform:rotate(-20deg)}
+
+@keyframes flash{
+  0%,100%{opacity:.15}
+  50%{opacity:1}
+}
+
+.jackpot-text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:100%;
+  text-align:center;
+  transform:translate(-50%,-50%);
+}
+
+.jackpot-text small{color:#00f5ff;letter-spacing:4px}
+
+.jackpot-text h2{
+  margin:8px 0;
+  color:#ff24d8;
+  font-size:70px;
+  text-shadow:0 0 8px #fff,0 0 20px #ffd83d,0 0 45px #ff24d8,0 0 90px #00f5ff;
+}
+
+.jackpot-text strong{
+  color:#ffd83d;
+  font-size:38px;
+}
+
+@keyframes jackpotFade{
+  0%,80%{opacity:1}
+  100%{opacity:0}
+}
+
+.shake{animation:shake .04s infinite}
+
+@keyframes shake{
+  0%{transform:translate(0)}
+  25%{transform:translate(5px,-4px)}
+  50%{transform:translate(-5px,5px)}
+  75%{transform:translate(4px,4px)}
+  100%{transform:translate(0)}
+}
+
+@media(max-width:430px){
+  .cell{height:52px}
+  .options{grid-template-columns:repeat(4,1fr)}
+  .title h1{font-size:32px}
+  .jackpot-text h2{font-size:50px}
+  .jackpot-text strong{font-size:27px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+  <div class="logo">YANN SPIN</div>
+  <div class="balance">🪙 <span id="balance">10.000</span></div>
+</header>
+
+<div class="title">
+  <small>VIRTUAL ARCADE GAME</small>
+  <h1>LUCKY SLOT</h1>
+  <p>Game hiburan dengan koin virtual</p>
+</div>
+
+<div class="jackpot">
+  <span>JACKPOT NORMAL 18 KEMBAR</span>
+  <strong>1.000.000 🪙</strong>
+  <div class="scatter-max">⚡ 18 SCATTER = 2.000.000 🪙</div>
+</div>
+
+<section class="machine">
+
+<div class="machine-title">✦ 20 SYMBOL • 6 × 3 ✦</div>
+
+<div class="slot" id="slot">
+
+  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+</div>
+
+<div class="spin-status" id="spinStatus">
+  <div class="main" id="spinStatusMain">SPIN KE-1 / 1</div>
+  <div class="sub" id="spinStatusSub">0× SPIN TERSISA</div>
+</div>
+
+<div class="selector">
+
+  <div class="selector-title">PILIH JUMLAH SPIN</div>
+
+  <div class="options">
+    <button class="selected" onclick="selectSpin(1,this)">1×</button>
+    <button onclick="selectSpin(5,this)">5×</button>
+    <button onclick="selectSpin(10,this)">10×</button>
+    <button onclick="selectSpin(15,this)">15×</button>
+    <button onclick="selectSpin(20,this)">20×</button>
+    <button onclick="selectSpin(25,this)">25×</button>
+    <button onclick="selectSpin(30,this)">30×</button>
+    <button onclick="selectSpin(35,this)">35×</button>
+    <button onclick="selectSpin(40,this)">40×</button>
+    <button onclick="selectSpin(45,this)">45×</button>
+    <button onclick="selectSpin(50,this)">50×</button>
+    <button onclick="selectSpin(55,this)">55×</button>
+    <button onclick="selectSpin(60,this)">60×</button>
+    <button onclick="selectSpin(65,this)">65×</button>
+    <button onclick="selectSpin(70,this)">70×</button>
+    <button onclick="selectSpin(75,this)">75×</button>
+    <button onclick="selectSpin(80,this)">80×</button>
+    <button onclick="selectSpin(85,this)">85×</button>
+    <button onclick="selectSpin(90,this)">90×</button>
+    <button onclick="selectSpin(95,this)">95×</button>
+    <button onclick="selectSpin(100,this)">⚡100×</button>
+  </div>
+
+  <div class="cost">
+    <span id="spinCount">1× SPIN</span>
+    <span>BIAYA: <strong id="spinCost">20</strong> 🪙</span>
+  </div>
+
+</div>
+
+<div class="speed-box">
+
+  <div class="speed-title">⚙️ KECEPATAN SPIN</div>
+
+  <div class="speed-options">
+    <button id="normalSpeed" class="selected" onclick="setSpeed('normal')">
+      🐢 NORMAL
+    </button>
+
+    <button id="fastSpeed" onclick="setSpeed('fast')">
+      ⚡ CEPAT
+    </button>
+  </div>
+
+</div>
+
+<button class="spin" id="spinButton" onclick="startSpin()">
+  🎰 SPIN 1×
+</button>
+
+<div class="result" id="result">
+  <h3 id="resultTitle">-</h3>
+  <div class="reward" id="resultReward">+0 KOIN</div>
+  <div class="info" id="resultInfo">-</div>
+</div>
+
+<div class="summary" id="summary">
+
+  <h3>📊 RINGKASAN SPIN</h3>
+
+  <div class="summary-row">
+    <span>Total Spin</span>
+    <strong id="sumSpins">0×</strong>
+  </div>
+
+  <div class="summary-row">
+    <span>Total Biaya</span>
+    <strong id="sumCost">0 🪙</strong>
+  </div>
+
+  <div class="summary-row">
+    <span>Total Hadiah</span>
+    <strong id="sumReward">0 🪙</strong>
+  </div>
+
+  <div class="summary-row">
+    <span>Saldo Sebelum</span>
+    <strong id="sumBefore">0 🪙</strong>
+  </div>
+
+  <div class="summary-row total">
+    <span>Saldo Sekarang</span>
+    <strong id="sumAfter">0 🪙</strong>
+  </div>
+
+</div>
+
+</section>
+
+<div class="stats">
+
+  <div class="stat">
+    <strong id="today">0</strong>
+    <span>KOIN DIDAPAT</span>
+  </div>
+
+  <div class="stat">
+    <strong id="totalSpins">0</strong>
+    <span>TOTAL SPIN</span>
+  </div>
+
+  <div class="stat">
+    <strong id="level">1</strong>
+    <span>LEVEL</span>
+  </div>
+
+</div>
+
+<section class="scatter-info">
+
+  <h3>🟡 SISTEM SCATTER 80%</h3>
+
+  <p>
+    Setiap baris memiliki peluang 80% menjadi Scatter.
+    Jika seluruh 3 baris Scatter, totalnya menjadi
+    18 Scatter dan mendapatkan 2.000.000 koin virtual.
+  </p>
+
+</section>
+
+<section class="section" id="collectSection">
+
+  <h2>🪙 Mulung Koin</h2>
+
+  <div class="collect">
+
+    <div class="coin" onclick="collectCoin()"></div>
+
+    <button onclick="collectCoin()">
+      🪙 TAP UNTUK MULUNG
+    </button>
+
+    <p>
+      Setiap tap mendapatkan 1–10 koin virtual.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>📜 Riwayat Aktivitas</h2>
+
+  <div class="history" id="history"></div>
+
+</section>
+
+</div>
+
+<nav class="nav">
+
+  <button class="active" onclick="scrollToTop()">
+    🏠<br>Home
+  </button>
+
+  <button onclick="scrollToSlot()">
+    🎰<br>Slot
+  </button>
+
+  <button onclick="scrollToCollect()">
+    🪙<br>Mulung
+  </button>
+
+</nav>
+
+
+<!-- =================================================
+     AUDIO
+================================================= -->
+
+<audio
+  id="bgSound"
+  src="https://files.catbox.moe/470eq8.mp3"
+  loop
+  preload="auto"
+  playsinline>
+</audio>
+
+<audio
+  id="spinSound"
+  src="https://files.catbox.moe/zsp80l.mp3"
+  preload="auto"
+  playsinline>
+</audio>
+
+
+<script>
+
+/* =================================================
+   CONFIG
+================================================= */
+
+const SPIN_PRICE = 20;
+
+const SCATTER_ROW_CHANCE = 0.80;
+
+let speedMode = "normal";
+let selectedSpins = 1;
+let spinning = false;
+let spinsRemaining = 0;
+let activeBatch = 0;
+let currentBatchSpin = 0;
+let batchReward = 0;
+let batchBefore = 0;
+let result = [];
+
+
+/* =================================================
+   AUDIO
+================================================= */
+
+const bgSound =
+  document.getElementById("bgSound");
+
+const spinSound =
+  document.getElementById("spinSound");
+
+bgSound.volume = 0.35;
+spinSound.volume = 1;
+
+
+/*
+  Fungsi musik background.
+*/
+
+function playBackground(){
+
+  bgSound.volume = 0.35;
+
+  const promise =
+    bgSound.play();
+
+  if(promise !== undefined){
+
+    promise
+      .then(() => {
+        console.log(
+          "🎵 Background music ON"
+        );
+      })
+      .catch(() => {
+        console.log(
+          "Browser memblokir autoplay."
+        );
+      });
+
+  }
+
+}
+
+
+/*
+  Coba play SECEPAT halaman dibuat.
+*/
+
+playBackground();
+
+
+/*
+  Coba lagi setelah DOM siap.
+*/
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    playBackground();
+  }
+);
+
+
+/*
+  Coba lagi setelah halaman selesai.
+*/
+
+window.addEventListener(
+  "load",
+  () => {
+    playBackground();
+  }
+);
+
+
+/*
+  Kalau browser memblokir autoplay,
+  interaksi pertama akan mengaktifkan musik.
+*/
+
+function firstInteraction(){
+
+  if(
+    bgSound.paused &&
+    !spinning
+  ){
+
+    playBackground();
+
+  }
+
+}
+
+
+document.addEventListener(
+  "pointerdown",
+  firstInteraction,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+document.addEventListener(
+  "touchstart",
+  firstInteraction,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+document.addEventListener(
+  "click",
+  firstInteraction,
+  {
+    once:true
+  }
+);
+
+
+/*
+  Sound setiap 1× spin.
+*/
+
+function playSpinSound(){
+
+  spinSound.pause();
+
+  spinSound.currentTime = 0;
+
+  spinSound.volume = 1;
+
+  const promise =
+    spinSound.play();
+
+  if(promise !== undefined){
+
+    promise.catch(
+      () => {}
+    );
+
+  }
+
+}
+
+
+/*
+  Matikan background saat spin.
+*/
+
+function stopBackgroundMusic(){
+
+  bgSound.pause();
+
+  bgSound.currentTime = 0;
+
+}
+
+
+/*
+  Nyalakan kembali setelah semua spin.
+*/
+
+function resumeBackgroundMusic(){
+
+  playBackground();
+
+}
+
+
+/* =================================================
+   SYMBOL
+================================================= */
+
+const symbols = [
+
+  {
+    name:"Icon 1",
+    img:"https://files.catbox.moe/o7z2kk.jpg"
+  },
+
+  {
+    name:"Icon 2",
+    img:"https://files.catbox.moe/b8obbf.jpg"
+  },
+
+  {
+    name:"Icon 3",
+    img:"https://files.catbox.moe/xt8goq.jpg"
+  },
+
+  {
+    name:"Icon 4",
+    img:"https://files.catbox.moe/0thet4.jpg"
+  },
+
+  {
+    name:"Icon 5",
+    img:"https://files.catbox.moe/wett95.jpg"
+  },
+
+  {
+    name:"Icon 6",
+    img:"https://files.catbox.moe/vv7n51.jpg"
+  },
+
+  {
+    name:"Icon 7",
+    img:"https://files.catbox.moe/q4peq9.jpg"
+  },
+
+  {
+    name:"Icon 8",
+    img:"https://files.catbox.moe/wiq2m8.jpg"
+  },
+
+  {
+    name:"Icon 9",
+    img:"https://files.catbox.moe/ewa0m3.jpg"
+  },
+
+  {
+    name:"Icon 10",
+    img:"https://files.catbox.moe/x6x868.jpg"
+  },
+
+  {
+    name:"Icon 11",
+    img:"https://files.catbox.moe/i18snn.jpg"
+  },
+
+  {
+    name:"Icon 12",
+    img:"https://files.catbox.moe/v7o2ii.jpg"
+  },
+
+  {
+    name:"Icon 13",
+    img:"https://files.catbox.moe/2o14hm.jpg"
+  },
+
+  {
+    name:"Icon 14",
+    img:"https://files.catbox.moe/qez9aa.jpg"
+  },
+
+  {
+    name:"Icon 15",
+    img:"https://files.catbox.moe/khn71a.jpg"
+  },
+
+  {
+    name:"Icon 16",
+    img:"https://files.catbox.moe/e825w3.jpg"
+  },
+
+  {
+    name:"Icon 17",
+    img:"https://files.catbox.moe/s38w3p.jpg"
+  },
+
+  {
+    name:"Icon 18",
+    img:"https://files.catbox.moe/3jeyyl.jpg"
+  },
+
+  {
+    name:"Icon 19",
+    img:"https://files.catbox.moe/fth8e5.jpg"
+  },
+
+  {
+    name:"SCATTER",
+    img:"https://files.catbox.moe/ngmnt4.jpg",
+    scatter:true
+  }
+
+];
+
+
+/* =================================================
+   STORAGE
+================================================= */
+
+let game =
+  JSON.parse(
+    localStorage.getItem(
+      "yannSpinGame"
+    )
+  );
+
+if(!game){
+
+  game = {
+    balance:10000,
+    today:0,
+    spins:0,
+    level:1,
+    xp:0,
+    history:[]
+  };
+
+  save();
+
+}
+
+const cells =
+  document.querySelectorAll(
+    ".cell"
+  );
+
+
+function save(){
+
+  localStorage.setItem(
+    "yannSpinGame",
+    JSON.stringify(game)
+  );
+
+}
+
+
+function formatNumber(number){
+
+  return Number(number)
+    .toLocaleString("id-ID");
+
+}
+
+
+/* =================================================
+   SPEED
+================================================= */
+
+function setSpeed(mode){
+
+  if(spinning)return;
+
+  speedMode = mode;
+
+  document
+    .getElementById("normalSpeed")
+    .classList
+    .toggle(
+      "selected",
+      mode === "normal"
+    );
+
+  document
+    .getElementById("fastSpeed")
+    .classList
+    .toggle(
+      "selected",
+      mode === "fast"
+    );
+
+}
+
+
+/* =================================================
+   UI
+================================================= */
+
+function updateUI(){
+
+  document
+    .getElementById("balance")
+    .textContent =
+      formatNumber(
+        game.balance
+      );
+
+  document
+    .getElementById("today")
+    .textContent =
+      formatNumber(
+        game.today
+      );
+
+  document
+    .getElementById("totalSpins")
+    .textContent =
+      formatNumber(
+        game.spins
+      );
+
+  document
+    .getElementById("level")
+    .textContent =
+      game.level;
+
+  document
+    .getElementById("spinCount")
+    .textContent =
+      selectedSpins +
+      "× SPIN";
+
+  document
+    .getElementById("spinCost")
+    .textContent =
+      formatNumber(
+        selectedSpins *
+        SPIN_PRICE
+      );
+
+  document
+    .getElementById("spinButton")
+    .textContent =
+      "🎰 SPIN " +
+      selectedSpins +
+      "×";
+
+  renderHistory();
+
+}
+
+
+/* =================================================
+   SELECT SPIN
+================================================= */
+
+function selectSpin(
+  amount,
+  button
+){
+
+  if(spinning)return;
+
+  selectedSpins = amount;
+
+  document
+    .querySelectorAll(
+      ".options button"
+    )
+    .forEach(
+      btn =>
+        btn.classList
+          .remove("selected")
+    );
+
+  button.classList
+    .add("selected");
+
+  updateUI();
+
+}
+
+
+/* =================================================
+   COLLECT
+================================================= */
+
+function collectCoin(){
+
+  if(spinning)return;
+
+  const reward =
+    Math.floor(
+      Math.random()*10
+    ) + 1;
+
+  game.balance += reward;
+  game.today += reward;
+
+  addHistory(
+    "🪙",
+    "Mulung Koin",
+    "+" +
+    formatNumber(
+      reward
+    ) +
+    " koin"
+  );
+
+  addXP(2);
+
+  save();
+  updateUI();
+
+}
+
+
+/* =================================================
+   ZONK
+================================================= */
+
+function createZonkPlan(amount){
+
+  let min=0;
+  let max=0;
+
+  if(
+    amount>=1 &&
+    amount<=40
+  ){
+
+    min=10;
+    max=40;
+
+  }
+  else if(amount>=51){
+
+    min=10;
+    max=30;
+
+  }
+
+  if(max===0)return 0;
+
+  min=Math.min(min,amount);
+  max=Math.min(max,amount);
+
+  return Math.floor(
+    Math.random()*
+    (max-min+1)
+  )+min;
+
+}
+
+
+/* =================================================
+   START
+================================================= */
+
+function startSpin(){
+
+  if(spinning)return;
+
+  const totalCost =
+    selectedSpins *
+    SPIN_PRICE;
+
+  if(
+    game.balance <
+    totalCost
+  ){
+
+    alert(
+      "KOIN TIDAK CUKUP!\n\n"+
+      "Dibutuhkan: "+
+      formatNumber(totalCost)+
+      " koin\n"+
+      "Saldo: "+
+      formatNumber(game.balance)+
+      " koin"
+    );
+
+    return;
+
+  }
+
+
+  stopBackgroundMusic();
+
+  batchBefore =
+    game.balance;
+
+  game.balance -=
+    totalCost;
+
+  activeBatch =
+    selectedSpins;
+
+  spinsRemaining =
+    selectedSpins;
+
+  currentBatchSpin=0;
+  batchReward=0;
+
+  window.zonkTotal =
+    createZonkPlan(
+      selectedSpins
+    );
+
+  window.zonkUsed=0;
+
+  spinning=true;
+
+  document
+    .getElementById(
+      "spinButton"
+    )
+    .disabled=true;
+
+  document
+    .getElementById(
+      "result"
+    )
+    .classList
+    .remove("show");
+
+  document
+    .getElementById(
+      "summary"
+    )
+    .classList
+    .remove("show");
+
+  document
+    .getElementById(
+      "spinStatus"
+    )
+    .classList
+    .add("show");
+
+  save();
+  updateUI();
+
+  runNextSpin();
+
+}
+
+
+/* =================================================
+   NEXT SPIN
+================================================= */
+
+function runNextSpin(){
+
+  if(
+    spinsRemaining<=0
+  ){
+
+    finishBatch();
+
+    return;
+
+  }
+
+
+  playSpinSound();
+
+  currentBatchSpin++;
+  spinsRemaining--;
+
+  updateSpinStatus();
+
+
+  let isZonk=false;
+
+  if(
+    window.zonkUsed <
+    window.zonkTotal
+  ){
+
+    const remainingSpins =
+      activeBatch -
+      currentBatchSpin +
+      1;
+
+    const remainingZonk =
+      window.zonkTotal -
+      window.zonkUsed;
+
+    if(
+      remainingZonk>=
+      remainingSpins
+    ){
+
+      isZonk=true;
+
+    }
+    else if(
+      Math.random() <
+      remainingZonk /
+      remainingSpins
+    ){
+
+      isZonk=true;
+
+    }
+
+  }
+
+
+  spinOnce(
+    isZonk,
+    function(
+      finalResult,
+      zonk
+    ){
+
+      result =
+        finalResult;
+
+      let reward=0;
+
+      if(zonk){
+
+        window.zonkUsed++;
+
+      }
+      else{
+
+        reward =
+          calculateAllRewards(
+            result
+          );
+
+      }
+
+      batchReward += reward;
+
+      game.balance += reward;
+      game.today += reward;
+      game.spins++;
+
+      addXP(
+        reward>0
+          ?4
+          :1
+      );
+
+      if(zonk){
+
+        addHistory(
+          "💀",
+          "ZONK",
+          "+0 koin"
+        );
+
+      }
+      else{
+
+        addHistory(
+          "🎰",
+          "Spin "+
+          currentBatchSpin,
+          "+"+
+          formatNumber(
+            reward
+          )+
+          " koin"
+        );
+
+      }
+
+      showSpinResult(
+        reward,
+        zonk
+      );
+
+      save();
+      updateUI();
+
+
+      const scatter =
+        getScatterCount(
+          result
+        );
+
+      const groups =
+        getGroups(result);
+
+      const normalJackpot =
+        groups.some(
+          group =>
+            group.count===18
+        );
+
+      if(
+        scatter===18 ||
+        normalJackpot
+      ){
+
+        showJackpotEffect(
+          reward,
+          scatter===18
+        );
+
+      }
+
+
+      setTimeout(
+        runNextSpin,
+        speedMode==="fast"
+          ?650
+          :1400
+      );
+
+    }
+  );
+
+}
+
+
+/* =================================================
+   STATUS
+================================================= */
+
+function updateSpinStatus(){
+
+  document
+    .getElementById(
+      "spinStatusMain"
+    )
+    .textContent =
+      "SPIN KE-"+
+      currentBatchSpin+
+      " / "+
+      activeBatch;
+
+  document
+    .getElementById(
+      "spinStatusSub"
+    )
+    .textContent =
+      spinsRemaining+
+      "× SPIN TERSISA";
+
+}
+
+
+/* =================================================
+   SPIN ENGINE
+================================================= */
+
+function spinOnce(
+  isZonk,
+  callback
+){
+
+  const finalResult =
+    isZonk
+      ?createZonkResult()
+      :createNormalResult();
+
+
+  cells.forEach(
+    cell => {
+
+      cell.classList
+        .remove(
+          "win",
+          "scatter"
+        );
+
+      cell.classList
+        .add("rolling");
+
+      cell.dataset.stopped=
+        "false";
+
+    }
+  );
+
+
+  const timer =
+    setInterval(
+      () => {
+
+        cells.forEach(
+          cell => {
+
+            if(
+              cell.dataset.stopped===
+              "true"
+            )return;
+
+            const symbol =
+              randomNormalSymbol();
+
+            cell.innerHTML =
+              `<img src="${symbol.img}"
+              alt="${symbol.name}">`;
+
+          }
+        );
+
+      },
+      speedMode==="fast"
+        ?75
+        :110
+    );
+
+
+  const startDelay =
+    speedMode==="fast"
+      ?650
+      :1200;
+
+  const columnDelay =
+    speedMode==="fast"
+      ?240
+      :500;
+
+
+  /*
+    123456
+    123456
+    123456
+
+    Kolom 1 berhenti dahulu,
+    lalu 2,3,4,5,6.
+  */
+
+  for(
+    let column=0;
+    column<6;
+    column++
+  ){
+
+    setTimeout(
+      () => {
+
+        stopColumn(
+          column,
+          finalResult
+        );
+
+      },
+      startDelay+
+      column*
+      columnDelay
+    );
+
+  }
+
+
+  const finishTime =
+    startDelay+
+    5*columnDelay+
+    550;
+
+
+  setTimeout(
+    () => {
+
+      clearInterval(timer);
+
+      cells.forEach(
+        cell => {
+
+          cell.classList
+            .remove("rolling");
+
+          cell.dataset.stopped=
+            "true";
+
+        }
+      );
+
+      setTimeout(
+        () => {
+
+          callback(
+            finalResult,
+            isZonk
+          );
+
+        },
+        180
+      );
+
+    },
+    finishTime
+  );
+
+}
+
+
+/* =================================================
+   RESULT
+================================================= */
+
+function createNormalResult(){
+
+  const arr =
+    new Array(18);
+
+  for(
+    let row=0;
+    row<3;
+    row++
+  ){
+
+    const scatterRow =
+      Math.random() <
+      SCATTER_ROW_CHANCE;
+
+    for(
+      let column=0;
+      column<6;
+      column++
+    ){
+
+      const index =
+        row*6+
+        column;
+
+      arr[index] =
+        scatterRow
+          ?symbols[19]
+          :randomNormalSymbol();
+
+    }
+
+  }
+
+  return arr;
+
+}
+
+
+function createZonkResult(){
+
+  const arr =
+    new Array(18);
+
+  for(
+    let i=0;
+    i<18;
+    i++
+  ){
+
+    arr[i]=symbols[i];
+
+  }
+
+  return arr;
+
+}
+
+
+function randomNormalSymbol(){
+
+  return symbols[
+    Math.floor(
+      Math.random()*19
+    )
+  ];
+
+}
+
+
+/* =================================================
+   STOP COLUMN
+================================================= */
+
+function stopColumn(
+  column,
+  finalResult
+){
+
+  for(
+    let row=0;
+    row<3;
+    row++
+  ){
+
+    const index =
+      row*6+
+      column;
+
+    const cell =
+      cells[index];
+
+    cell.dataset.stopped=
+      "true";
+
+    cell.innerHTML =
+      `<img src="${finalResult[index].img}"
+      alt="${finalResult[index].name}">`;
+
+    cell.classList
+      .remove("rolling");
+
+    cell.animate(
+      [
+        {
+          transform:
+            "translateY(-12px)"
+        },
+        {
+          transform:
+            "translateY(7px)"
+        },
+        {
+          transform:
+            "translateY(0)"
+        }
+      ],
+      {
+        duration:
+          speedMode==="fast"
+            ?200
+            :350
+      }
+    );
+
+  }
+
+}
+
+
+/* =================================================
+   GROUPS
+================================================= */
+
+function getGroups(arr){
+
+  const map={};
+
+  arr.forEach(
+    (symbol,index) => {
+
+      if(symbol.scatter)return;
+
+      if(!map[symbol.name]){
+
+        map[symbol.name]={
+          symbol:symbol,
+          count:0,
+          indexes:[]
+        };
+
+      }
+
+      map[symbol.name].count++;
+
+      map[symbol.name]
+        .indexes
+        .push(index);
+
+    }
+  );
+
+  return Object.values(map);
+
+}
+
+
+function getScatterCount(arr){
+
+  return arr.filter(
+    symbol =>
+      symbol.scatter
+  ).length;
+
+}
+
+
+/* =================================================
+   NORMAL REWARD
+================================================= */
+
+function normalReward(count){
+
+  if(count<=1)return 0;
+  if(count===2)return 30;
+  if(count===3)return 70;
+  if(count===4)return 100;
+
+  if(
+    count>=5 &&
+    count<=14
+  ){
+
+    return 100+
+      (count-4)*30;
+
+  }
+
+  if(count===15)return 30000;
+  if(count===16)return 60000;
+  if(count===17)return 100000;
+  if(count===18)return 1000000;
+
+  return 0;
+
+}
+
+
+/* =================================================
+   SCATTER REWARD
+================================================= */
+
+function scatterReward(count){
+
+  if(count<=1)return 0;
+
+  if(
+    count>=2 &&
+    count<=10
+  ){
+
+    return count*100;
+
+  }
+
+  if(
+    count>=11 &&
+    count<=14
+  ){
+
+    return 100000;
+
+  }
+
+  if(
+    count===15 ||
+    count===16
+  ){
+
+    return 400000;
+
+  }
+
+  if(count===17)return 650000;
+
+  if(count===18)return 2000000;
+
+  return 0;
+
+}
+
+
+/* =================================================
+   TOTAL REWARD
+================================================= */
+
+function calculateAllRewards(arr){
+
+  const groups =
+    getGroups(arr);
+
+  const scatter =
+    getScatterCount(arr);
+
+  let total=0;
+
+
+  groups.forEach(
+    group => {
+
+      if(
+        group.count>=2
+      ){
+
+        total +=
+          normalReward(
+            group.count
+          );
+
+      }
+
+    }
+  );
+
+
+  if(scatter>=2){
+
+    total +=
+      scatterReward(
+        scatter
+      );
+
+  }
+
+
+  return total;
+
+}
+
+
+/* =================================================
+   HIGHLIGHT
+================================================= */
+
+function highlightResult(){
+
+  cells.forEach(
+    cell =>
+      cell.classList
+        .remove(
+          "win",
+          "scatter"
+        )
+  );
+
+
+  const groups =
+    getGroups(result);
+
+
+  groups.forEach(
+    group => {
+
+      if(
+        group.count>=2
+      ){
+
+        group.indexes.forEach(
+          index => {
+
+            cells[index]
+              .classList
+              .add("win");
+
+          }
+        );
+
+      }
+
+    }
+  );
+
+
+  result.forEach(
+    (symbol,index) => {
+
+      if(symbol.scatter){
+
+        cells[index]
+          .classList
+          .add("scatter");
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =================================================
+   RESULT DISPLAY
+================================================= */
+
+function showSpinResult(
+  reward,
+  isZonk
+){
+
+  const box =
+    document.getElementById(
+      "result"
+    );
+
+  const title =
+    document.getElementById(
+      "resultTitle"
+    );
+
+  const rewardBox =
+    document.getElementById(
+      "resultReward"
+    );
+
+  const info =
+    document.getElementById(
+      "resultInfo"
+    );
+
+
+  highlightResult();
+
+
+  const groups =
+    getGroups(result);
+
+  const scatter =
+    getScatterCount(result);
+
+
+  if(isZonk){
+
+    title.textContent=
+      "💀 ZONK";
+
+    rewardBox.textContent=
+      "+0 KOIN";
+
+    info.textContent=
+      "Spin ke "+
+      currentBatchSpin+
+      " • ZONK • "+
+      spinsRemaining+
+      "× tersisa";
+
+    showNotification(
+      0,
+      true
+    );
+
+  }
+  else{
+
+    if(scatter===18){
+
+      title.textContent=
+        "⚡ SCATTER JACKPOT!";
+
+    }
+    else if(
+      groups.some(
+        group =>
+          group.count===18
+      )
+    ){
+
+      title.textContent=
+        "⚡ JACKPOT!";
+
+    }
+    else if(reward>0){
+
+      title.textContent=
+        "🎉 SELAMAT!";
+
+    }
+    else{
+
+      title.textContent=
+        "💀 ZONK";
+
+    }
+
+
+    rewardBox.textContent=
+      "+"+
+      formatNumber(
+        reward
+      )+
+      " KOIN";
+
+
+    let detail=[];
+
+
+    groups.forEach(
+      group => {
+
+        if(
+          group.count>=2
+        ){
+
+          detail.push(
+            group.count+
+            "× "+
+            group.symbol.name+
+            " = "+
+            formatNumber(
+              normalReward(
+                group.count
+              )
+            )
+          );
+
+        }
+
+      }
+    );
+
+
+    if(scatter>=2){
+
+      detail.push(
+        scatter+
+        "× SCATTER = "+
+        formatNumber(
+          scatterReward(
+            scatter
+          )
+        )
+      );
+
+    }
+
+
+    info.textContent=
+      "Spin ke "+
+      currentBatchSpin+
+      " • "+
+      (
+        detail.length
+          ?detail.join(" • ")
+          :"Tidak ada kembar"
+      )+
+      " • "+
+      spinsRemaining+
+      "× tersisa";
+
+
+    if(reward>0){
+
+      showNotification(
+        reward,
+        false
+      );
+
+    }
+
+  }
+
+
+  box.classList
+    .add("show");
+
+}
+
+
+/* =================================================
+   NOTIFICATION
+================================================= */
+
+function showNotification(
+  reward,
+  zonk
+){
+
+  const notification =
+    document.createElement(
+      "div"
+    );
+
+  notification.className=
+    "notification";
+
+
+  if(zonk){
+
+    notification.innerHTML=`
+
+      <div class="notification-icon">💀</div>
+
+      <div class="notification-title">
+        ZONK
+      </div>
+
+      <div class="notification-text">
+        SPIN INI TIDAK MENDAPATKAN
+      </div>
+
+      <div class="notification-reward">
+        +0 KOIN
+      </div>
+
+      <div class="notification-detail">
+        Coba spin berikutnya
+      </div>
+
+    `;
+
+  }
+  else{
+
+    const scatter =
+      getScatterCount(result);
+
+    const normal =
+      getGroups(result)
+        .some(
+          g =>
+            g.count>=15
+        );
+
+
+    let icon="🎉";
+    let title="SELAMAT!";
+
+
+    if(scatter===18){
+
+      icon="⚡";
+      title="SCATTER JACKPOT!";
+
+    }
+    else if(normal){
+
+      icon="⚡";
+      title="JACKPOT!";
+
+    }
+    else if(scatter>=2){
+
+      icon="🟡";
+      title="SCATTER!";
+
+    }
+
+
+    notification.innerHTML=`
+
+      <div class="notification-icon">
+        ${icon}
+      </div>
+
+      <div class="notification-title">
+        ${title}
+      </div>
+
+      <div class="notification-text">
+        SELAMAT ANDA MENDAPATKAN KOIN
+      </div>
+
+      <div class="notification-reward">
+        +${formatNumber(reward)} KOIN
+      </div>
+
+      <div class="notification-detail">
+        Semua kembar dihitung dan dijumlahkan
+      </div>
+
+    `;
+
+  }
+
+
+  document.body.appendChild(
+    notification
+  );
+
+
+  setTimeout(
+    () => {
+      notification.classList
+        .add("hide");
+    },
+    speedMode==="fast"
+      ?1000
+      :1800
+  );
+
+
+  setTimeout(
+    () => {
+      notification.remove();
+    },
+    speedMode==="fast"
+      ?1500
+      :2300
+  );
+
+}
+
+
+/* =================================================
+   JACKPOT EFFECT
+================================================= */
+
+function showJackpotEffect(
+  reward,
+  scatter
+){
+
+  document.body.classList
+    .add("shake");
+
+
+  const effect =
+    document.createElement(
+      "div"
+    );
+
+  effect.className=
+    "jackpot-effect";
+
+
+  effect.innerHTML=`
+
+    <div class="lightning l1">⚡</div>
+    <div class="lightning l2">⚡</div>
+    <div class="lightning l3">⚡</div>
+    <div class="lightning l4">⚡</div>
+
+    <div class="jackpot-text">
+
+      <small>
+        ✦ 18 ${scatter?"SCATTER":"KEMBAR"} ✦
+      </small>
+
+      <h2>
+        ${scatter?"SCATTER!":"JACKPOT!"}
+      </h2>
+
+      <strong>
+        +${formatNumber(reward)} 🪙
+      </strong>
+
+    </div>
+
+  `;
+
+
+  document.body.appendChild(
+    effect
+  );
+
+
+  setTimeout(
+    () => {
+
+      effect.remove();
+
+      document.body.classList
+        .remove("shake");
+
+    },
+    speedMode==="fast"
+      ?1800
+      :3700
+  );
+
+}
+
+
+/* =================================================
+   FINISH BATCH
+================================================= */
+
+function finishBatch(){
+
+  spinning=false;
+
+  spinSound.pause();
+  spinSound.currentTime=0;
+
+  resumeBackgroundMusic();
+
+
+  document
+    .getElementById(
+      "spinButton"
+    )
+    .disabled=false;
+
+  document
+    .getElementById(
+      "spinStatus"
+    )
+    .classList
+    .remove("show");
+
+
+  document
+    .getElementById(
+      "sumSpins"
+    ).textContent=
+      activeBatch+
+      "×";
+
+  document
+    .getElementById(
+      "sumCost"
+    ).textContent=
+      formatNumber(
+        activeBatch*
+        SPIN_PRICE
+      )+
+      " 🪙";
+
+  document
+    .getElementById(
+      "sumReward"
+    ).textContent=
+      "+"+
+      formatNumber(
+        batchReward
+      )+
+      " 🪙";
+
+  document
+    .getElementById(
+      "sumBefore"
+    ).textContent=
+      formatNumber(
+        batchBefore
+      )+
+      " 🪙";
+
+  document
+    .getElementById(
+      "sumAfter"
+    ).textContent=
+      formatNumber(
+        game.balance
+      )+
+      " 🪙";
+
+  document
+    .getElementById(
+      "summary"
+    )
+    .classList
+    .add("show");
+
+  save();
+  updateUI();
+
+}
+
+
+/* =================================================
+   XP
+================================================= */
+
+function addXP(amount){
+
+  game.xp += amount;
+
+  const required =
+    game.level*100;
+
+  if(
+    game.xp>=required
+  ){
+
+    game.xp-=required;
+    game.level++;
+
+  }
+
+}
+
+
+/* =================================================
+   HISTORY
+================================================= */
+
+function addHistory(
+  icon,
+  title,
+  amount
+){
+
+  const time =
+    new Date()
+      .toLocaleTimeString(
+        "id-ID",
+        {
+          hour:"2-digit",
+          minute:"2-digit"
+        }
+      );
+
+
+  game.history.unshift({
+
+    icon,
+    title,
+    amount,
+    time
+
+  });
+
+
+  game.history =
+    game.history.slice(
+      0,
+      50
+    );
+
+}
+
+
+function renderHistory(){
+
+  const box =
+    document.getElementById(
+      "history"
+    );
+
+
+  if(
+    !game.history.length
+  ){
+
+    box.innerHTML=`
+
+      <div class="history-item">
+
+        <div class="history-left">
+
+          <div class="history-icon">
+            📭
+          </div>
+
+          <div>
+
+            <strong>
+              Belum ada aktivitas
+            </strong>
+
+            <br>
+
+            <small>
+              Mulung koin untuk mulai.
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    game.history
+      .map(
+        item => `
+
+          <div class="history-item">
+
+            <div class="history-left">
+
+              <div class="history-icon">
+                ${item.icon}
+              </div>
+
+              <div>
+
+                <strong>
+                  ${item.title}
+                </strong>
+
+                <br>
+
+                <small>
+                  ${item.time}
+                </small>
+
+              </div>
+
+            </div>
+
+            <div class="plus">
+              ${item.amount}
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+/* =================================================
+   NAVIGATION
+================================================= */
+
+function scrollToTop(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function scrollToSlot(){
+
+  document
+    .querySelector(".machine")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function scrollToCollect(){
+
+  document
+    .getElementById(
+      "collectSection"
+    )
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =================================================
+   INITIAL
+================================================= */
+
+function initializeSlot(){
+
+  const initial =
+    createNormalResult();
+
+
+  cells.forEach(
+    (cell,index) => {
+
+      const symbol =
+        initial[index];
+
+      cell.innerHTML=
+        `<img src="${symbol.img}"
+        alt="${symbol.name}">`;
+
+      if(symbol.scatter){
+
+        cell.classList
+          .add("scatter");
+
+      }
+
+    }
+  );
+
+}
+
+
+initializeSlot();
+
+updateUI();
+
+</script>
+
+</body>
+</html>
