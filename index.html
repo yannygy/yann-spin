@@ -279,7 +279,6 @@ body{
   color:#ffe000;
 }
 
-/* HOKI INFO */
 .hoki-info{
   margin-top:9px;
   padding:9px;
@@ -539,7 +538,6 @@ body{
 }
 
 @media(max-width:430px){
-
   .cell{
     height:52px;
   }
@@ -551,14 +549,12 @@ body{
   .title h1{
     font-size:30px;
   }
-
 }
 </style>
 </head>
 
 <body>
 
-<!-- WARNING -->
 <div class="warning-popup" id="warningPopup">
 
   <div class="warning-box">
@@ -616,7 +612,6 @@ body{
     ✦ 20 SYMBOL • 6 × 3 ✦
   </div>
 
-
   <div class="slot" id="slot">
 
     <div class="cell"></div>
@@ -642,8 +637,6 @@ body{
 
   </div>
 
-
-  <!-- BET -->
 
   <div class="box">
 
@@ -682,7 +675,6 @@ body{
 
     </div>
 
-
     <div class="hoki-info">
 
       Peluang hoki berdasarkan bet:<br>
@@ -691,12 +683,16 @@ body{
         1,5%
       </strong>
 
+      <br>
+
+      <span id="scatterMode">
+        Scatter normal
+      </span>
+
     </div>
 
   </div>
 
-
-  <!-- JUMLAH SPIN -->
 
   <div class="box">
 
@@ -752,8 +748,6 @@ body{
   </div>
 
 
-  <!-- SPEED -->
-
   <div class="box">
 
     <div class="label">
@@ -780,8 +774,6 @@ body{
   </div>
 
 
-  <!-- SPIN -->
-
   <button
     class="spin"
     id="spinButton"
@@ -791,8 +783,6 @@ body{
 
   </button>
 
-
-  <!-- RESULT -->
 
   <div class="result" id="result">
 
@@ -808,8 +798,6 @@ body{
 
   </div>
 
-
-  <!-- SUMMARY -->
 
   <div class="summary" id="summary">
 
@@ -836,8 +824,6 @@ body{
 
 </section>
 
-
-<!-- STATS -->
 
 <div class="stats">
 
@@ -881,8 +867,6 @@ body{
 
 </div>
 
-
-<!-- AUDIO -->
 
 <audio
   id="bgMusic"
@@ -932,6 +916,8 @@ let batchSpins = 0;
 let totalSpins = 0;
 
 let totalReward = 0;
+
+let zonkPlan = [];
 
 
 /* ==========================================
@@ -1051,10 +1037,8 @@ const symbols = [
 const cells =
   document.querySelectorAll(".cell");
 
-
 const bgMusic =
   document.getElementById("bgMusic");
-
 
 const spinMusic =
   document.getElementById("spinMusic");
@@ -1078,17 +1062,6 @@ function formatRupiah(value){
 ========================================== */
 
 function getHokiChance(){
-
-  /*
-    DI BAWAH Rp100.000
-    = 1,5%
-
-    Rp100.000 s/d Rp1.000.000
-    = 3%
-
-    DI ATAS Rp1.000.000
-    = 25%
-  */
 
   if(bet < 100000){
 
@@ -1130,6 +1103,25 @@ function updateHokiText(){
         }
       ) + "%";
 
+
+  const mode =
+    document.getElementById(
+      "scatterMode"
+    );
+
+
+  if(bet === 1500000){
+
+    mode.textContent =
+      "🔥 BET Rp1.500.000 = SCATTER 50%";
+
+  }else{
+
+    mode.textContent =
+      "Scatter normal";
+
+  }
+
 }
 
 
@@ -1144,11 +1136,6 @@ function changeBet(amount){
   let newBet =
     bet + amount;
 
-
-  /*
-    Setiap tombol
-    naik/turun Rp1.000.
-  */
 
   newBet =
     Math.floor(
@@ -1212,10 +1199,6 @@ function manualBet(){
   }
 
 
-  /*
-    Selalu kelipatan Rp1.000
-  */
-
   value =
     Math.floor(
       value / 1000
@@ -1270,7 +1253,6 @@ function selectSpin(
 
   if(spinning) return;
 
-
   selectedSpins =
     Math.min(
       MAX_SPIN,
@@ -1306,7 +1288,6 @@ function selectSpin(
 function setSpeed(mode){
 
   if(spinning) return;
-
 
   speedMode = mode;
 
@@ -1390,20 +1371,42 @@ function updateUI(){
 function randomSymbol(){
 
   /*
-    Scatter dasar dibuat sekitar 8%
-    agar tetap terasa seperti arcade.
+    Bet Rp1.500.000:
+    Scatter 50% pada setiap posisi.
+  */
 
-    Hoki digunakan untuk memberi
-    sedikit dorongan terhadap hasil
-    kemenangan virtual.
+  if(bet === 1500000){
+
+    if(Math.random() < 0.50){
+
+      return symbols[19];
+
+    }
+
+    return symbols[
+      Math.floor(
+        Math.random() * 19
+      )
+    ];
+
+  }
+
+
+  /*
+    Mode normal.
   */
 
   let scatterChance = 0.08;
 
 
+  /*
+    Hoki aktif:
+    Scatter dibuat jauh lebih sering.
+  */
+
   if(isHoki()){
 
-    scatterChance += 0.08;
+    scatterChance = 0.80;
 
   }
 
@@ -1428,7 +1431,7 @@ function randomSymbol(){
 
 
 /* ==========================================
-   HASIL SPIN
+   CREATE RESULT
 ========================================== */
 
 function createResult(){
@@ -1465,12 +1468,11 @@ function rewardForCount(count){
   }
 
 
-  if(count === 2){
-
-    return 2000;
-
-  }
-
+  /*
+    Kembar 2 = Rp2.000
+    Kembar 3 = Rp3.000
+    dst sampai kembar 10.
+  */
 
   if(count <= 10){
 
@@ -1479,6 +1481,10 @@ function rewardForCount(count){
   }
 
 
+  /*
+    Kembar 11-14
+  */
+
   if(count <= 14){
 
     return 100000;
@@ -1486,15 +1492,21 @@ function rewardForCount(count){
   }
 
 
-  if(
-    count === 15 ||
-    count === 16
-  ){
+  /*
+    Kembar 15-16
+  */
+
+  if(count === 15 ||
+     count === 16){
 
     return 400000;
 
   }
 
+
+  /*
+    Kembar 17
+  */
 
   if(count === 17){
 
@@ -1502,6 +1514,10 @@ function rewardForCount(count){
 
   }
 
+
+  /*
+    Kembar 18
+  */
 
   if(count >= 18){
 
@@ -1511,6 +1527,167 @@ function rewardForCount(count){
 
 
   return 0;
+
+}
+
+
+/* ==========================================
+   REWARD SCATTER
+========================================== */
+
+function scatterReward(count){
+
+  if(count < 10){
+
+    return 0;
+
+  }
+
+
+  if(
+    count >= 10 &&
+    count <= 16
+  ){
+
+    return 1200000;
+
+  }
+
+
+  if(count === 17){
+
+    return 1600000;
+
+  }
+
+
+  if(count >= 18){
+
+    return 2000000;
+
+  }
+
+
+  return 0;
+
+}
+
+
+/* ==========================================
+   ZONK PLAN
+========================================== */
+
+function createZonkPlan(totalSpin){
+
+  const plan =
+    new Array(totalSpin)
+      .fill(false);
+
+
+  if(totalSpin <= 50){
+
+    return plan;
+
+  }
+
+
+  /*
+    10-30 ZONK.
+
+    Tidak dibuat berturut-turut.
+  */
+
+  const minZonk = 10;
+
+  const maxPossible =
+    Math.ceil(totalSpin / 2);
+
+  const maxZonk =
+    Math.min(
+      30,
+      maxPossible
+    );
+
+
+  const zonkCount =
+    Math.floor(
+      Math.random() *
+      (maxZonk - minZonk + 1)
+    ) + minZonk;
+
+
+  /*
+    Ambil posisi yang tersedia
+    lalu acak.
+  */
+
+  const positions =
+    Array.from(
+      {
+        length:totalSpin
+      },
+      (_,i) => i
+    );
+
+
+  for(
+    let i=positions.length-1;
+    i>0;
+    i--
+  ){
+
+    const j =
+      Math.floor(
+        Math.random() * (i+1)
+      );
+
+
+    [
+      positions[i],
+      positions[j]
+    ] =
+    [
+      positions[j],
+      positions[i]
+    ];
+
+  }
+
+
+  let placed = 0;
+
+
+  for(
+    const index of positions
+  ){
+
+    if(
+      plan[index-1] ||
+      plan[index+1]
+    ){
+
+      continue;
+
+    }
+
+
+    plan[index] = true;
+
+    placed++;
+
+
+    if(
+      placed >= zonkCount
+    ){
+
+      break;
+
+    }
+
+  }
+
+
+  return plan;
 
 }
 
@@ -1533,16 +1710,14 @@ function calculateReward(arr){
 
         scatter++;
 
-        return;
+      }else{
+
+        counts[symbol.name] =
+          (
+            counts[symbol.name] || 0
+          ) + 1;
 
       }
-
-
-      counts[symbol.name] =
-        (
-          counts[symbol.name] ||
-          0
-        ) + 1;
 
     }
   );
@@ -1552,6 +1727,10 @@ function calculateReward(arr){
 
   let biggest = 0;
 
+
+  /*
+    SEMUA gambar kembar dihitung.
+  */
 
   Object
     .values(counts)
@@ -1575,23 +1754,23 @@ function calculateReward(arr){
 
 
   /*
-    Scatter juga dihitung.
-    Scatter 2x atau lebih
-    mendapat bonus virtual.
+    Scatter dihitung terpisah.
   */
 
-  if(scatter >= 2){
+  if(scatter >= 10){
 
     reward +=
-      scatter * 5000;
+      scatterReward(
+        scatter
+      );
 
   }
 
 
   return {
-    reward,
-    scatter,
-    biggest
+    reward:reward,
+    scatter:scatter,
+    biggest:biggest
   };
 
 }
@@ -1604,12 +1783,14 @@ function calculateReward(arr){
 function highlight(arr){
 
   cells.forEach(
-    cell =>
-      cell.classList
-        .remove(
-          "win",
-          "scatter"
-        )
+    cell => {
+
+      cell.classList.remove(
+        "win",
+        "scatter"
+      );
+
+    }
   );
 
 
@@ -1630,7 +1811,9 @@ function highlight(arr){
       }
 
 
-      if(!counts[symbol.name]){
+      if(
+        !counts[symbol.name]
+      ){
 
         counts[symbol.name] = [];
 
@@ -1649,9 +1832,7 @@ function highlight(arr){
     .forEach(
       indexes => {
 
-        if(
-          indexes.length >= 2
-        ){
+        if(indexes.length >= 2){
 
           indexes.forEach(
             index => {
@@ -1684,6 +1865,11 @@ document.addEventListener(
   "pointerdown",
   function(e){
 
+    /*
+      Jangan jalankan background
+      ketika tombol SPIN ditekan.
+    */
+
     if(
       e.target.closest(
         "#spinButton"
@@ -1708,6 +1894,7 @@ document.addEventListener(
         )
         .catch(
           () => {}
+
         );
 
     }
@@ -1719,6 +1906,10 @@ document.addEventListener(
 );
 
 
+/* ==========================================
+   SPIN SOUND
+========================================== */
+
 function playSpinSound(){
 
   bgMusic.pause();
@@ -1726,6 +1917,7 @@ function playSpinSound(){
   spinMusic.pause();
 
   spinMusic.currentTime = 0;
+
 
   spinMusic
     .play()
@@ -1735,6 +1927,10 @@ function playSpinSound(){
 
 }
 
+
+/* ==========================================
+   STOP SPIN SOUND
+========================================== */
 
 function stopSpinSound(){
 
@@ -1762,32 +1958,25 @@ function stopSpinSound(){
 
 function startSpin(){
 
-  if(spinning) return;
+  if(spinning){
 
+    return;
 
-  /*
-    Total biaya virtual.
-  */
+  }
+
 
   const totalCost =
-    bet *
-    selectedSpins;
+    bet * selectedSpins;
 
 
   if(balance < totalCost){
 
     alert(
       "SALDO VIRTUAL TIDAK CUKUP.\n\n" +
-
       "Dibutuhkan: " +
-      formatRupiah(
-        totalCost
-      ) +
-
+      formatRupiah(totalCost) +
       "\nSaldo: " +
-      formatRupiah(
-        balance
-      )
+      formatRupiah(balance)
     );
 
     return;
@@ -1795,13 +1984,27 @@ function startSpin(){
   }
 
 
-  balance -=
-    totalCost;
+  /*
+    Kurangi total bet
+    sebelum batch dimulai.
+  */
+
+  balance -= totalCost;
 
 
   batchReward = 0;
 
   batchSpins = 0;
+
+
+  /*
+    Buat daftar ZONK.
+  */
+
+  zonkPlan =
+    createZonkPlan(
+      selectedSpins
+    );
 
 
   spinning = true;
@@ -1829,8 +2032,7 @@ function startSpin(){
 function runSpin(index){
 
   if(
-    index >=
-    selectedSpins
+    index >= selectedSpins
   ){
 
     finishBatch();
@@ -1846,10 +2048,32 @@ function runSpin(index){
   spinAnimation(
     function(arr){
 
-      const data =
-        calculateReward(
-          arr
-        );
+      let data;
+
+
+      /*
+        ZONK hanya aktif pada
+        posisi yang telah dipilih.
+      */
+
+      if(zonkPlan[index]){
+
+        data = {
+
+          reward:0,
+
+          scatter:0,
+
+          biggest:0
+
+        };
+
+      }else{
+
+        data =
+          calculateReward(arr);
+
+      }
 
 
       batchReward +=
@@ -1867,7 +2091,15 @@ function runSpin(index){
       totalSpins++;
 
 
-      highlight(arr);
+      if(zonkPlan[index]){
+
+        highlight([]);
+
+      }else{
+
+        highlight(arr);
+
+      }
 
 
       showResult(data);
@@ -1880,10 +2112,11 @@ function runSpin(index){
         () => {
 
           runSpin(
-            index + 1
+            index+1
           );
 
         },
+
         speedMode === "fast"
           ? 500
           : 1100
@@ -1908,14 +2141,14 @@ function spinAnimation(callback){
   cells.forEach(
     cell => {
 
-      cell.classList
-        .remove(
-          "win",
-          "scatter"
-        );
+      cell.classList.remove(
+        "win",
+        "scatter"
+      );
 
-      cell.classList
-        .add("rolling");
+      cell.classList.add(
+        "rolling"
+      );
 
     }
   );
@@ -1962,11 +2195,6 @@ function spinAnimation(callback){
       : 400;
 
 
-  /*
-    Kolom 1 berhenti dulu,
-    kemudian 2, 3, 4, 5, 6.
-  */
-
   for(
     let col=0;
     col<6;
@@ -1983,8 +2211,7 @@ function spinAnimation(callback){
         ){
 
           const index =
-            row * 6 +
-            col;
+            row*6+col;
 
 
           cells[index]
@@ -2007,7 +2234,7 @@ function spinAnimation(callback){
 
       },
       start +
-      col * column
+      col*column
     );
 
   }
@@ -2022,11 +2249,14 @@ function spinAnimation(callback){
 
 
       cells.forEach(
-        cell =>
+        cell => {
+
           cell.classList
             .remove(
               "rolling"
-            )
+            );
+
+        }
       );
 
 
@@ -2036,7 +2266,7 @@ function spinAnimation(callback){
 
     },
     start +
-    5 * column +
+    5*column +
     350
   );
 
@@ -2055,14 +2285,25 @@ function showResult(data){
     );
 
 
-  document
-    .getElementById(
-      "resultTitle"
-    )
-    .textContent =
-      data.reward > 0
-        ? "🎉 SELAMAT!"
-        : "😅 ZONK";
+  if(data.reward === 0){
+
+    document
+      .getElementById(
+        "resultTitle"
+      )
+      .textContent =
+        "😅 ZONK";
+
+  }else{
+
+    document
+      .getElementById(
+        "resultTitle"
+      )
+      .textContent =
+        "🎉 SELAMAT!";
+
+  }
 
 
   document
@@ -2090,7 +2331,9 @@ function showResult(data){
       "×";
 
 
-  box.classList.add("show");
+  box.classList.add(
+    "show"
+  );
 
 
   if(data.reward > 0){
@@ -2130,7 +2373,9 @@ function showNotification(
     `
 
     <div class="notification-icon">
-      ${scatter >= 3 ? "🟡" : "🎉"}
+      ${scatter >= 10
+        ? "🟡"
+        : "🎉"}
     </div>
 
     <div class="notification-title">
@@ -2174,7 +2419,7 @@ function showNotification(
 
 
 /* ==========================================
-   SELESAI
+   FINISH BATCH
 ========================================== */
 
 function finishBatch(){
@@ -2256,18 +2501,14 @@ function closeWarning(){
 
 function init(){
 
-  /*
-    Pastikan saldo selalu dimulai
-    dari Rp500.000 ketika halaman
-    pertama kali dibuka.
-  */
-
-  balance = START_BALANCE;
-
+  balance =
+    START_BALANCE;
 
   totalSpins = 0;
 
   totalReward = 0;
+
+  zonkPlan = [];
 
 
   const first =
