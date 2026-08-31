@@ -15,11 +15,10 @@
 body{
   min-height:100vh;
   background:
-    radial-gradient(circle at 50% -10%,#35105c 0,#100914 40%,#050407 80%);
+    radial-gradient(circle at 50% -10%,#350052 0,#100914 38%,#050308 80%);
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
   padding:15px 10px 100px;
-  overflow-x:hidden;
 }
 
 button,
@@ -31,9 +30,15 @@ button{
   cursor:pointer;
 }
 
-/* ==========================================
+.app{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+}
+
+/* =========================
    WARNING
-========================================== */
+========================= */
 
 .warning-popup{
   position:fixed;
@@ -52,21 +57,18 @@ button{
 
 .warning-box{
   width:100%;
-  max-width:440px;
-  padding:27px 20px;
+  max-width:430px;
+  padding:25px 20px;
   border:2px solid #ffe000;
-  border-radius:25px;
+  border-radius:24px;
   background:#0b0911;
   text-align:center;
-  box-shadow:
-    0 0 25px #ffe00044,
-    0 0 70px #ff20d733;
-  animation:warningPop .45s ease;
+  box-shadow:0 0 40px #ffe00055;
 }
 
 .warning-icon{
   font-size:50px;
-  margin-bottom:13px;
+  margin-bottom:12px;
 }
 
 .warning-text{
@@ -92,6 +94,7 @@ button{
   align-items:center;
   justify-content:center;
   background:#000;
+  border-radius:8px;
   box-shadow:
     2px 2px #25f4ee,
     -2px -2px #fe2c55;
@@ -100,13 +103,12 @@ button{
 .tiktok-icon{
   width:30px;
   height:30px;
-  border-radius:8px;
 }
 
 .warning-box button{
   width:100%;
   margin-top:20px;
-  padding:14px;
+  padding:13px;
   border:0;
   border-radius:13px;
   background:#ffe000;
@@ -114,30 +116,9 @@ button{
   font-weight:900;
 }
 
-@keyframes warningPop{
-  from{
-    opacity:0;
-    transform:scale(.75);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-}
-
-/* ==========================================
-   APP
-========================================== */
-
-.app{
-  width:100%;
-  max-width:700px;
-  margin:auto;
-}
-
-/* ==========================================
+/* =========================
    HEADER
-========================================== */
+========================= */
 
 .header{
   display:flex;
@@ -151,12 +132,12 @@ button{
   font-size:17px;
   font-weight:1000;
   letter-spacing:2px;
-  text-shadow:0 0 15px #00f5ff55;
+  text-shadow:0 0 15px #00f5ff;
 }
 
 .balance{
   padding:9px 13px;
-  border:1px solid #ffe00044;
+  border:1px solid #ffe00055;
   border-radius:20px;
   background:#15121d;
   color:#ffe000;
@@ -164,13 +145,13 @@ button{
   font-weight:bold;
 }
 
-/* ==========================================
+/* =========================
    TITLE
-========================================== */
+========================= */
 
 .title{
   text-align:center;
-  margin-bottom:15px;
+  margin-bottom:16px;
 }
 
 .title small{
@@ -186,7 +167,7 @@ button{
   font-weight:1000;
   text-shadow:
     0 0 10px #ff20d7,
-    0 0 30px #ff20d766;
+    0 0 30px #ff20d7;
 }
 
 .title p{
@@ -195,15 +176,15 @@ button{
   font-size:9px;
 }
 
-/* ==========================================
+/* =========================
    MACHINE
-========================================== */
+========================= */
 
 .machine{
   padding:13px;
   border:2px solid #414152;
-  border-radius:24px;
-  background:linear-gradient(145deg,#171622,#0a0910);
+  border-radius:23px;
+  background:linear-gradient(145deg,#181724,#09080e);
   box-shadow:
     0 15px 50px #000;
 }
@@ -213,7 +194,7 @@ button{
   color:#ff20d7;
   text-align:center;
   font-size:9px;
-  font-weight:1000;
+  font-weight:bold;
   letter-spacing:3px;
 }
 
@@ -225,7 +206,7 @@ button{
   border:3px solid #555568;
   border-radius:18px;
   background:#020205;
-  box-shadow:inset 0 0 30px #000;
+  box-shadow:inset 0 0 35px #000;
 }
 
 .cell{
@@ -238,10 +219,10 @@ button{
 }
 
 .cell img{
+  display:block;
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
   user-select:none;
   pointer-events:none;
 }
@@ -250,7 +231,15 @@ button{
   animation:rolling .1s linear infinite;
 }
 
+@keyframes rolling{
+  0%{transform:translateY(-9px);}
+  50%{transform:translateY(9px);}
+  100%{transform:translateY(-9px);}
+}
+
 .cell.win{
+  position:relative;
+  z-index:5;
   border:3px solid #ffe000;
   box-shadow:
     0 0 12px #ffe000,
@@ -259,27 +248,23 @@ button{
 }
 
 .cell.scatter{
+  position:relative;
+  z-index:6;
   border:3px solid #fff000;
   box-shadow:
     0 0 15px #fff000,
-    0 0 35px #ff8c00;
+    0 0 40px #ff8c00;
   animation:win .25s infinite alternate;
 }
 
-@keyframes rolling{
-  0%{transform:translateY(-8px)}
-  50%{transform:translateY(8px)}
-  100%{transform:translateY(-8px)}
-}
-
 @keyframes win{
-  from{transform:scale(1)}
-  to{transform:scale(1.08)}
+  from{transform:scale(1);}
+  to{transform:scale(1.1);}
 }
 
-/* ==========================================
+/* =========================
    BOX
-========================================== */
+========================= */
 
 .box{
   margin-top:10px;
@@ -297,9 +282,9 @@ button{
   letter-spacing:2px;
 }
 
-/* ==========================================
+/* =========================
    BET
-========================================== */
+========================= */
 
 .bet-control{
   display:grid;
@@ -325,8 +310,8 @@ button{
   color:#00f5ff;
   text-align:center;
   outline:none;
-  font-weight:bold;
   font-size:15px;
+  font-weight:bold;
 }
 
 .bet-info{
@@ -341,24 +326,74 @@ button{
   color:#ffe000;
 }
 
-.hoki-info{
+/* =========================
+   TARGET
+========================= */
+
+.target-box{
+  margin-top:9px;
+  padding:10px;
+  border-radius:11px;
+  background:#11101a;
+  text-align:center;
+}
+
+.target-title{
+  color:#aaa;
+  font-size:8px;
+}
+
+.target-value{
+  margin-top:4px;
+  color:#00f5ff;
+  font-size:14px;
+  font-weight:900;
+}
+
+.progress{
+  height:8px;
+  margin-top:7px;
+  overflow:hidden;
+  border-radius:20px;
+  background:#252330;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,#00f5ff,#ff20d7,#ffe000);
+  transition:.4s;
+}
+
+.target-info{
+  margin-top:5px;
+  color:#777;
+  font-size:7px;
+}
+
+/* =========================
+   REWARD INFO
+========================= */
+
+.reward-info{
   margin-top:9px;
   padding:9px;
   border-radius:10px;
   background:#11101a;
-  text-align:center;
   color:#888;
+  text-align:center;
   font-size:8px;
   line-height:1.7;
 }
 
-.hoki-info strong{
-  color:#00f5ff;
+.reward-info strong{
+  color:#ffe000;
 }
 
-/* ==========================================
+/* =========================
    SPIN OPTIONS
-========================================== */
+========================= */
 
 .options{
   display:grid;
@@ -379,12 +414,12 @@ button{
 .options button.selected{
   background:#00f5ff;
   color:#001015;
-  box-shadow:0 0 12px #00f5ff55;
+  box-shadow:0 0 12px #00f5ff44;
 }
 
-/* ==========================================
-   SPEED
-========================================== */
+/* =========================
+   SPEED + AUTO
+========================= */
 
 .speed{
   display:grid;
@@ -407,18 +442,15 @@ button{
   color:#fff;
 }
 
-/* ==========================================
-   AUTO SPIN
-========================================== */
-
 .auto-control{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:7px;
+  margin-top:7px;
 }
 
 .auto-control button{
-  padding:11px;
+  padding:10px;
   border:0;
   border-radius:10px;
   background:#191724;
@@ -427,14 +459,14 @@ button{
   font-weight:bold;
 }
 
-.auto-control button.selected{
+.auto-control button.active{
   background:#ff20d7;
   color:#fff;
 }
 
-/* ==========================================
-   SPIN BUTTON
-========================================== */
+/* =========================
+   SPIN
+========================= */
 
 .spin{
   width:100%;
@@ -445,8 +477,8 @@ button{
   background:linear-gradient(135deg,#ff20a9,#713cff);
   color:#fff;
   font-size:14px;
-  font-weight:1000;
-  box-shadow:0 8px 25px #ff20a933;
+  font-weight:900;
+  box-shadow:0 8px 25px #ff20a944;
 }
 
 .spin:disabled{
@@ -454,17 +486,17 @@ button{
   cursor:not-allowed;
 }
 
-/* ==========================================
+/* =========================
    STATUS
-========================================== */
+========================= */
 
 .status{
   display:none;
   margin-top:10px;
-  padding:11px;
-  border-radius:13px;
-  background:#05050a;
+  padding:10px;
   border:1px solid #00f5ff22;
+  border-radius:12px;
+  background:#05050a;
   text-align:center;
 }
 
@@ -475,7 +507,7 @@ button{
 .status-main{
   color:#00f5ff;
   font-size:12px;
-  font-weight:1000;
+  font-weight:900;
 }
 
 .status-sub{
@@ -484,9 +516,9 @@ button{
   font-size:8px;
 }
 
-/* ==========================================
+/* =========================
    RESULT
-========================================== */
+========================= */
 
 .result{
   display:none;
@@ -495,22 +527,30 @@ button{
   border-radius:17px;
   background:#090810;
   text-align:center;
-  border:1px solid #ffffff0b;
 }
 
 .result.show{
   display:block;
 }
 
+.result.win{
+  border:1px solid #35ff8655;
+  box-shadow:0 0 20px #35ff8622;
+}
+
+.result.zonk{
+  border:1px solid #ff315555;
+}
+
 .result h3{
-  font-size:14px;
+  font-size:15px;
 }
 
 .reward{
   margin-top:5px;
   color:#ffe000;
   font-size:23px;
-  font-weight:1000;
+  font-weight:bold;
 }
 
 .info{
@@ -520,9 +560,9 @@ button{
   line-height:1.7;
 }
 
-/* ==========================================
+/* =========================
    SUMMARY
-========================================== */
+========================= */
 
 .summary{
   display:none;
@@ -530,7 +570,7 @@ button{
   padding:13px;
   border-radius:17px;
   background:#090810;
-  border:1px solid #00f5ff18;
+  border:1px solid #00f5ff20;
 }
 
 .summary.show{
@@ -556,9 +596,9 @@ button{
   color:#fff;
 }
 
-/* ==========================================
+/* =========================
    STATS
-========================================== */
+========================= */
 
 .stats{
   display:grid;
@@ -585,58 +625,9 @@ button{
   font-size:7px;
 }
 
-/* ==========================================
-   TARGET JACKPOT
-========================================== */
-
-.target{
-  margin-top:11px;
-  padding:14px;
-  border:1px solid #ffe00033;
-  border-radius:17px;
-  background:#0d0b13;
-  text-align:center;
-}
-
-.target-title{
-  color:#ffe000;
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-.target-value{
-  margin-top:5px;
-  color:#fff;
-  font-size:17px;
-  font-weight:1000;
-}
-
-.target-progress{
-  height:8px;
-  margin-top:9px;
-  overflow:hidden;
-  border-radius:20px;
-  background:#211d28;
-}
-
-.target-bar{
-  width:0%;
-  height:100%;
-  border-radius:20px;
-  background:linear-gradient(90deg,#00f5ff,#ff20d7,#ffe000);
-  transition:.4s;
-}
-
-.target-info{
-  margin-top:7px;
-  color:#777;
-  font-size:7px;
-}
-
-/* ==========================================
+/* =========================
    NOTIFICATION
-========================================== */
+========================= */
 
 .notification{
   position:fixed;
@@ -644,50 +635,14 @@ button{
   left:50%;
   top:50%;
   width:min(370px,calc(100% - 30px));
-  padding:23px;
+  padding:22px;
   border:2px solid #ffe000;
   border-radius:22px;
   background:#0d0a13;
   text-align:center;
-  box-shadow:0 0 45px #ffe00055;
+  box-shadow:0 0 40px #ffe00066;
   transform:translate(-50%,-50%);
   animation:notify .4s forwards;
-}
-
-.notification-icon{
-  font-size:45px;
-}
-
-.notification-title{
-  margin-top:6px;
-  color:#ff20d7;
-  font-size:20px;
-  font-weight:1000;
-}
-
-.notification-reward{
-  margin-top:7px;
-  color:#ffe000;
-  font-size:24px;
-  font-weight:1000;
-}
-
-.notification-detail{
-  margin-top:7px;
-  color:#00f5ff;
-  font-size:8px;
-  line-height:1.7;
-}
-
-.notification button{
-  width:100%;
-  margin-top:15px;
-  padding:11px;
-  border:0;
-  border-radius:10px;
-  background:#292536;
-  color:#fff;
-  font-weight:bold;
 }
 
 @keyframes notify{
@@ -701,14 +656,50 @@ button{
   }
 }
 
-/* ==========================================
+.notification-icon{
+  font-size:45px;
+}
+
+.notification-title{
+  margin-top:6px;
+  color:#ff20d7;
+  font-size:20px;
+  font-weight:900;
+}
+
+.notification-reward{
+  margin-top:7px;
+  color:#ffe000;
+  font-size:24px;
+  font-weight:900;
+}
+
+.notification-detail{
+  margin-top:7px;
+  color:#00f5ff;
+  font-size:8px;
+  line-height:1.6;
+}
+
+.notification button{
+  width:100%;
+  margin-top:15px;
+  padding:11px;
+  border:0;
+  border-radius:11px;
+  background:#252330;
+  color:#fff;
+  font-weight:bold;
+}
+
+/* =========================
    JACKPOT EFFECT
-========================================== */
+========================= */
 
 .jackpot-effect{
   position:fixed;
-  z-index:50000;
   inset:0;
+  z-index:50000;
   pointer-events:none;
   overflow:hidden;
   background:
@@ -717,10 +708,16 @@ button{
       #fff 0,
       #fff9 4%,
       #ff00cc44 20%,
-      #00f5ff22 45%,
-      transparent 75%
+      transparent 68%
     );
-  animation:jackpotFade 4s forwards;
+  animation:fadeJackpot 4s forwards;
+}
+
+@keyframes fadeJackpot{
+  0%{opacity:0;}
+  8%{opacity:1;}
+  75%{opacity:1;}
+  100%{opacity:0;}
 }
 
 .lightning{
@@ -729,34 +726,39 @@ button{
   font-size:150px;
   text-shadow:
     0 0 8px #fff,
-    0 0 25px #00f5ff,
-    0 0 55px #ff20d7,
-    0 0 90px #ffe000;
-  animation:lightningFlash .15s infinite;
+    0 0 20px #00f5ff,
+    0 0 50px #00f5ff,
+    0 0 90px #ff00d4;
+  animation:flash .13s infinite;
 }
 
 .l1{
-  top:-30px;
-  left:-20px;
+  top:-35px;
+  left:-25px;
   transform:rotate(-20deg);
 }
 
 .l2{
-  top:-30px;
-  right:-20px;
+  top:-35px;
+  right:-25px;
   transform:rotate(20deg);
 }
 
 .l3{
-  bottom:-30px;
+  bottom:-35px;
   left:-25px;
   transform:rotate(20deg);
 }
 
 .l4{
   right:-25px;
-  bottom:-30px;
+  bottom:-35px;
   transform:rotate(-20deg);
+}
+
+@keyframes flash{
+  0%,100%{opacity:.2;}
+  50%{opacity:1;}
 }
 
 .jackpot-text{
@@ -778,14 +780,14 @@ button{
 
 .jackpot-text h2{
   margin:7px 0;
-  color:#ff20d7;
-  font-size:clamp(45px,14vw,85px);
+  color:#ff39d5;
+  font-size:clamp(42px,13vw,80px);
   font-weight:1000;
   text-shadow:
-    0 0 10px #fff,
-    0 0 25px #ffe000,
-    0 0 50px #ff20d7,
-    0 0 90px #00f5ff;
+    0 0 8px #fff,
+    0 0 20px #ffd83d,
+    0 0 50px #ff00d4,
+    0 0 100px #00f5ff;
 }
 
 .jackpot-text strong{
@@ -793,21 +795,16 @@ button{
   font-size:clamp(25px,8vw,50px);
 }
 
-@keyframes lightningFlash{
-  0%,100%{opacity:.15}
-  50%{opacity:1}
-}
-
 @keyframes jackpotText{
   0%{
     opacity:0;
     transform:translate(-50%,-50%) scale(.1);
   }
-  15%{
+  12%{
     opacity:1;
     transform:translate(-50%,-50%) scale(1.15);
   }
-  30%{
+  28%{
     transform:translate(-50%,-50%) scale(.95);
   }
   50%{
@@ -818,15 +815,8 @@ button{
   }
   100%{
     opacity:0;
-    transform:translate(-50%,-50%) scale(1.25);
+    transform:translate(-50%,-50%) scale(1.3);
   }
-}
-
-@keyframes jackpotFade{
-  0%{opacity:0}
-  10%{opacity:1}
-  80%{opacity:1}
-  100%{opacity:0}
 }
 
 .shake{
@@ -834,16 +824,16 @@ button{
 }
 
 @keyframes shake{
-  0%{transform:translate(0)}
-  25%{transform:translate(5px,-4px)}
-  50%{transform:translate(-5px,5px)}
-  75%{transform:translate(4px,4px)}
-  100%{transform:translate(0)}
+  0%{transform:translate(0);}
+  25%{transform:translate(6px,-4px);}
+  50%{transform:translate(-5px,5px);}
+  75%{transform:translate(4px,4px);}
+  100%{transform:translate(0);}
 }
 
-/* ==========================================
+/* =========================
    FOOTER
-========================================== */
+========================= */
 
 .footer{
   margin-top:20px;
@@ -863,7 +853,6 @@ button{
 .footer-icon{
   width:27px;
   height:27px;
-  border-radius:7px;
 }
 
 .footer small{
@@ -872,6 +861,10 @@ button{
   color:#555;
   font-size:7px;
 }
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:430px){
 
@@ -887,24 +880,23 @@ button{
     font-size:30px;
   }
 
-  .lightning{
-    font-size:100px;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ==========================================
+<!-- =========================
      WARNING
-========================================== -->
+========================= -->
 
 <div class="warning-popup" id="warningPopup">
 
   <div class="warning-box">
 
-    <div class="warning-icon">⚠️</div>
+    <div class="warning-icon">
+      ⚠️
+    </div>
 
     <div class="warning-text">
       !!WARNING INI HANYA GAME SENANG-SENANG
@@ -927,7 +919,9 @@ button{
 
 <div class="app">
 
-<!-- HEADER -->
+<!-- =========================
+     HEADER
+========================= -->
 
 <header class="header">
 
@@ -942,13 +936,19 @@ button{
 </header>
 
 
-<!-- TITLE -->
+<!-- =========================
+     TITLE
+========================= -->
 
 <div class="title">
 
-  <small>VIRTUAL ARCADE GAME</small>
+  <small>
+    VIRTUAL ARCADE GAME
+  </small>
 
-  <h1>LUCKY SPIN</h1>
+  <h1>
+    LUCKY SPIN
+  </h1>
 
   <p>
     Game hiburan dengan saldo virtual
@@ -957,7 +957,9 @@ button{
 </div>
 
 
-<!-- MACHINE -->
+<!-- =========================
+     MACHINE
+========================= -->
 
 <section class="machine">
 
@@ -965,8 +967,6 @@ button{
     ✦ 20 SYMBOL • 6 × 3 ✦
   </div>
 
-
-  <!-- SLOT 18 POSISI -->
 
   <div class="slot" id="slot">
 
@@ -994,280 +994,316 @@ button{
   </div>
 
 
-  <!-- BET -->
+<!-- =========================
+     BET
+========================= -->
 
-  <div class="box">
+<div class="box">
 
-    <div class="label">
-      BET VIRTUAL
-    </div>
+  <div class="label">
+    BET VIRTUAL
+  </div>
 
-    <div class="bet-control">
+  <div class="bet-control">
 
-      <button onclick="changeBet(-1000)">
-        −
-      </button>
+    <button onclick="changeBet(-1000)">
+      −
+    </button>
 
-      <input
-        id="betInput"
-        type="number"
-        min="1000"
-        step="1000"
-        value="20000"
-        inputmode="numeric"
-      >
+    <input
+      id="betInput"
+      type="number"
+      min="1000"
+      step="1000"
+      value="20000"
+      inputmode="numeric"
+    >
 
-      <button onclick="changeBet(1000)">
-        +
-      </button>
-
-    </div>
-
-    <div class="bet-info">
-
-      <span>
-        MIN Rp1.000
-      </span>
-
-      <strong id="betDisplay">
-        Rp20.000
-      </strong>
-
-    </div>
-
-    <div class="hoki-info">
-
-      Peluang hoki berdasarkan bet:<br>
-
-      <strong id="hokiChance">
-        1,5%
-      </strong>
-
-    </div>
+    <button onclick="changeBet(1000)">
+      +
+    </button>
 
   </div>
 
+  <div class="bet-info">
 
-  <!-- JUMLAH SPIN -->
+    <span>
+      MIN Rp1.000
+    </span>
 
-  <div class="box">
-
-    <div class="label">
-      JUMLAH SPIN — MAKSIMAL 100×
-    </div>
-
-    <div class="options">
-
-      <button class="selected"
-        onclick="selectSpin(1,this)">
-        1×
-      </button>
-
-      <button onclick="selectSpin(5,this)">
-        5×
-      </button>
-
-      <button onclick="selectSpin(10,this)">
-        10×
-      </button>
-
-      <button onclick="selectSpin(20,this)">
-        20×
-      </button>
-
-      <button onclick="selectSpin(30,this)">
-        30×
-      </button>
-
-      <button onclick="selectSpin(40,this)">
-        40×
-      </button>
-
-      <button onclick="selectSpin(50,this)">
-        50×
-      </button>
-
-      <button onclick="selectSpin(60,this)">
-        60×
-      </button>
-
-      <button onclick="selectSpin(80,this)">
-        80×
-      </button>
-
-      <button onclick="selectSpin(100,this)">
-        100×
-      </button>
-
-    </div>
+    <strong id="betDisplay">
+      Rp20.000
+    </strong>
 
   </div>
 
+  <div class="reward-info">
 
-  <!-- SPEED -->
+    Hadiah spin acak berdasarkan hasil permainan.<br>
 
-  <div class="box">
-
-    <div class="label">
-      KECEPATAN SPIN
-    </div>
-
-    <div class="speed">
-
-      <button
-        id="normalSpeed"
-        class="selected"
-        onclick="setSpeed('normal')">
-        🐢 NORMAL
-      </button>
-
-      <button
-        id="fastSpeed"
-        onclick="setSpeed('fast')">
-        ⚡ CEPAT
-      </button>
-
-    </div>
+    <strong>
+      Semua saldo dan hadiah hanya virtual.
+    </strong>
 
   </div>
 
+</div>
 
-  <!-- AUTO SPIN -->
 
-  <div class="box">
+<!-- =========================
+     TARGET
+========================= -->
 
-    <div class="label">
-      AUTO SPIN
-    </div>
+<div class="target-box">
 
-    <div class="auto-control">
-
-      <button
-        id="autoOff"
-        class="selected"
-        onclick="setAutoSpin(false)">
-        ⏹ MANUAL
-      </button>
-
-      <button
-        id="autoOn"
-        onclick="setAutoSpin(true)">
-        🔄 AUTO
-      </button>
-
-    </div>
-
+  <div class="target-title">
+    PROGRES TARGET JACKPOT
   </div>
 
+  <div class="target-value" id="targetValue">
+    Rp0 / Rp200.000.000
+  </div>
 
-  <!-- STATUS -->
-
-  <div class="status" id="status">
+  <div class="progress">
 
     <div
-      class="status-main"
-      id="statusMain">
-      SPIN KE-1 / 1
-    </div>
-
-    <div
-      class="status-sub"
-      id="statusSub">
-      Memproses...
+      class="progress-bar"
+      id="progressBar">
     </div>
 
   </div>
 
+  <div class="target-info" id="targetInfo">
+    Kumpulkan total bet Rp200.000.000 untuk membuka jackpot khusus.
+  </div>
 
-  <!-- SPIN -->
-
-  <button
-    class="spin"
-    id="spinButton"
-    onclick="startSpin()">
-
-    🎰 SPIN 1×
-
-  </button>
+</div>
 
 
-  <!-- RESULT -->
+<!-- =========================
+     SPIN OPTIONS
+========================= -->
+
+<div class="box">
+
+  <div class="label">
+    JUMLAH SPIN — MAKSIMAL 100×
+  </div>
+
+  <div class="options">
+
+    <button
+      class="selected"
+      onclick="selectSpin(1,this)">
+      1×
+    </button>
+
+    <button onclick="selectSpin(5,this)">
+      5×
+    </button>
+
+    <button onclick="selectSpin(10,this)">
+      10×
+    </button>
+
+    <button onclick="selectSpin(20,this)">
+      20×
+    </button>
+
+    <button onclick="selectSpin(30,this)">
+      30×
+    </button>
+
+    <button onclick="selectSpin(40,this)">
+      40×
+    </button>
+
+    <button onclick="selectSpin(50,this)">
+      50×
+    </button>
+
+    <button onclick="selectSpin(60,this)">
+      60×
+    </button>
+
+    <button onclick="selectSpin(80,this)">
+      80×
+    </button>
+
+    <button onclick="selectSpin(100,this)">
+      100×
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     SPEED
+========================= -->
+
+<div class="box">
+
+  <div class="label">
+    KECEPATAN SPIN
+  </div>
+
+  <div class="speed">
+
+    <button
+      id="normalSpeed"
+      class="selected"
+      onclick="setSpeed('normal')">
+      🐢 NORMAL
+    </button>
+
+    <button
+      id="fastSpeed"
+      onclick="setSpeed('fast')">
+      ⚡ CEPAT
+    </button>
+
+  </div>
+
+
+  <div class="auto-control">
+
+    <button
+      id="autoButton"
+      onclick="toggleAuto()">
+      🔄 AUTO SPIN: OFF
+    </button>
+
+    <button onclick="stopAuto()">
+      ⛔ STOP AUTO
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     STATUS
+========================= -->
+
+<div
+  class="status"
+  id="status">
 
   <div
-    class="result"
-    id="result">
+    class="status-main"
+    id="statusMain">
+    SPIN 1 / 1
+  </div>
 
-    <h3 id="resultTitle">
-      -
-    </h3>
+  <div
+    class="status-sub"
+    id="statusSub">
+    Memproses...
+  </div>
 
-    <div
-      class="reward"
-      id="resultReward">
+</div>
+
+
+<!-- =========================
+     SPIN BUTTON
+========================= -->
+
+<button
+  class="spin"
+  id="spinButton"
+  onclick="startSpin()">
+
+  🎰 SPIN 1×
+
+</button>
+
+
+<!-- =========================
+     RESULT
+========================= -->
+
+<div
+  class="result"
+  id="result">
+
+  <h3 id="resultTitle">
+    -
+  </h3>
+
+  <div
+    class="reward"
+    id="resultReward">
+    Rp0
+  </div>
+
+  <div
+    class="info"
+    id="resultInfo">
+    -
+  </div>
+
+</div>
+
+
+<!-- =========================
+     SUMMARY
+========================= -->
+
+<div
+  class="summary"
+  id="summary">
+
+  <h3>
+    📊 HASIL SEMUA SPIN
+  </h3>
+
+  <div class="row">
+
+    <span>
+      Jumlah Spin
+    </span>
+
+    <strong id="sumSpins">
+      0×
+    </strong>
+
+  </div>
+
+  <div class="row">
+
+    <span>
+      Total Bet
+    </span>
+
+    <strong id="sumCost">
       Rp0
-    </div>
-
-    <div
-      class="info"
-      id="resultInfo">
-      -
-    </div>
+    </strong>
 
   </div>
 
+  <div class="row">
 
-  <!-- SUMMARY -->
+    <span>
+      Total Reward
+    </span>
 
-  <div
-    class="summary"
-    id="summary">
-
-    <h3>
-      📊 HASIL SEMUA SPIN
-    </h3>
-
-    <div class="row">
-
-      <span>
-        Jumlah Spin
-      </span>
-
-      <strong id="sumSpins">
-        0×
-      </strong>
-
-    </div>
-
-    <div class="row">
-
-      <span>
-        Total Bet
-      </span>
-
-      <strong id="sumCost">
-        Rp0
-      </strong>
-
-    </div>
-
-    <div class="row">
-
-      <span>
-        Total Reward
-      </span>
-
-      <strong id="sumReward">
-        Rp0
-      </strong>
-
-    </div>
+    <strong id="sumReward">
+      Rp0
+    </strong>
 
   </div>
+
+</div>
 
 </section>
 
 
-<!-- STATS -->
+<!-- =========================
+     STATS
+========================= -->
 
 <div class="stats">
 
@@ -1310,39 +1346,9 @@ button{
 </div>
 
 
-<!-- TARGET -->
-
-<div class="target">
-
-  <div class="target-title">
-    🎯 TARGET JACKPOT SPESIAL
-  </div>
-
-  <div class="target-value">
-    <span id="targetCurrent">Rp0</span>
-    /
-    Rp200.000.000
-  </div>
-
-  <div class="target-progress">
-
-    <div
-      class="target-bar"
-      id="targetBar">
-    </div>
-
-  </div>
-
-  <div class="target-info">
-    Setelah total nilai bet mencapai
-    Rp200.000.000, jackpot spesial
-    Rp1.000.000.000 dapat muncul satu kali.
-  </div>
-
-</div>
-
-
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer class="footer">
 
@@ -1360,7 +1366,6 @@ button{
 
   <small>
     YANN SPIN • GAME HIBURAN SALDO VIRTUAL
-    • TIDAK DAPAT DIUANGKAN
   </small>
 
 </footer>
@@ -1368,7 +1373,9 @@ button{
 </div>
 
 
-<!-- AUDIO -->
+<!-- =========================
+     AUDIO
+========================= -->
 
 <audio
   id="spinMusic"
@@ -1387,13 +1394,19 @@ const START_BALANCE = 150000000;
 
 const MIN_BET = 1000;
 
-const BET_STEP = 1000;
-
 const MAX_SPIN = 100;
 
-const JACKPOT_TARGET = 200000000;
+const TARGET_BET = 200000000;
 
-const JACKPOT_REWARD = 1000000000;
+const BIG_JACKPOT = 1000000000;
+
+
+/*
+  Hadiah besar ini hanya diberikan
+  satu kali setelah target tercapai.
+*/
+
+let jackpotClaimed = false;
 
 
 /* ==========================================
@@ -1408,36 +1421,25 @@ let selectedSpins = 1;
 
 let speedMode = "normal";
 
-let autoSpin = false;
-
 let spinning = false;
 
-let totalSpins = 0;
-
-let totalReward = 0;
-
-let level = 1;
-
-let xp = 0;
-
-let totalBetAccumulated = 0;
-
-let specialJackpotUsed = false;
-
-
-/* ==========================================
-   BATCH STATE
-========================================== */
+let autoSpin = false;
 
 let batchReward = 0;
 
 let batchSpins = 0;
 
-let batchBefore = 0;
-
 let batchCost = 0;
 
-let spinsRemaining = 0;
+let totalSpins = 0;
+
+let totalReward = 0;
+
+let totalBetSpent = 0;
+
+let level = 1;
+
+let xp = 0;
 
 
 /* ==========================================
@@ -1568,10 +1570,8 @@ const spinMusic =
 function formatRupiah(value){
 
   return "Rp" +
-    Math.max(
-      0,
-      Math.floor(Number(value))
-    ).toLocaleString("id-ID");
+    Math.max(0,Math.round(Number(value)))
+      .toLocaleString("id-ID");
 
 }
 
@@ -1584,153 +1584,8 @@ function closeWarning(){
 
   document
     .getElementById("warningPopup")
-    .classList.add("hidden");
-
-}
-
-
-/* ==========================================
-   SAVE
-========================================== */
-
-function saveGame(){
-
-  localStorage.setItem(
-    "yannSpinGame",
-    JSON.stringify({
-
-      balance,
-
-      bet,
-
-      totalSpins,
-
-      totalReward,
-
-      level,
-
-      xp,
-
-      totalBetAccumulated,
-
-      specialJackpotUsed
-
-    })
-  );
-
-}
-
-
-/* ==========================================
-   LOAD
-========================================== */
-
-function loadGame(){
-
-  const saved =
-    localStorage.getItem(
-      "yannSpinGame"
-    );
-
-  if(!saved)
-    return;
-
-  try{
-
-    const data =
-      JSON.parse(saved);
-
-    balance =
-      Number.isFinite(data.balance)
-        ? data.balance
-        : START_BALANCE;
-
-    bet =
-      Number.isFinite(data.bet)
-        ? Math.max(MIN_BET,data.bet)
-        : 20000;
-
-    totalSpins =
-      Number.isFinite(data.totalSpins)
-        ? data.totalSpins
-        : 0;
-
-    totalReward =
-      Number.isFinite(data.totalReward)
-        ? data.totalReward
-        : 0;
-
-    level =
-      Number.isFinite(data.level)
-        ? data.level
-        : 1;
-
-    xp =
-      Number.isFinite(data.xp)
-        ? data.xp
-        : 0;
-
-    totalBetAccumulated =
-      Number.isFinite(data.totalBetAccumulated)
-        ? data.totalBetAccumulated
-        : 0;
-
-    specialJackpotUsed =
-      data.specialJackpotUsed === true;
-
-  }
-  catch{
-
-    balance =
-      START_BALANCE;
-
-  }
-
-}
-
-
-/* ==========================================
-   HOKI
-========================================== */
-
-function getHokiChance(){
-
-  if(bet < 100000){
-
-    return 0.015;
-
-  }
-
-  if(bet <= 1000000){
-
-    return 0.03;
-
-  }
-
-  return 0.25;
-
-}
-
-
-/*
-  Untuk bet Rp1.500.000,
-  game memiliki kategori hoki tinggi.
-*/
-
-function updateHokiText(){
-
-  const chance =
-    getHokiChance() * 100;
-
-  document
-    .getElementById("hokiChance")
-    .textContent =
-      chance.toLocaleString(
-        "id-ID",
-        {
-          maximumFractionDigits:1
-        }
-      ) + "%";
+    .classList
+    .add("hidden");
 
 }
 
@@ -1743,14 +1598,16 @@ function normalizeBet(value){
 
   value =
     Math.floor(
-      Number(value) / BET_STEP
-    ) * BET_STEP;
+      Number(value) / 1000
+    ) * 1000;
 
-  if(!Number.isFinite(value))
+  if(!Number.isFinite(value)){
     value = MIN_BET;
+  }
 
-  if(value < MIN_BET)
+  if(value < MIN_BET){
     value = MIN_BET;
+  }
 
   return value;
 
@@ -1759,33 +1616,12 @@ function normalizeBet(value){
 
 function changeBet(amount){
 
-  if(spinning)
-    return;
+  if(spinning) return;
 
   let newBet =
     normalizeBet(
       bet + amount
     );
-
-  /*
-    Bet tidak boleh lebih besar
-    dari saldo saat ini.
-  */
-
-  if(newBet > balance){
-
-    newBet =
-      Math.floor(
-        balance / BET_STEP
-      ) * BET_STEP;
-
-  }
-
-  if(newBet < MIN_BET){
-
-    newBet = MIN_BET;
-
-  }
 
   bet = newBet;
 
@@ -1796,33 +1632,15 @@ function changeBet(amount){
 
 function manualBet(){
 
-  if(spinning)
-    return;
+  if(spinning) return;
 
   let value =
-    Number(
-      document
-        .getElementById("betInput")
-        .value
-    );
+    document
+      .getElementById("betInput")
+      .value;
 
   value =
     normalizeBet(value);
-
-  if(value > balance){
-
-    value =
-      Math.floor(
-        balance / BET_STEP
-      ) * BET_STEP;
-
-  }
-
-  if(value < MIN_BET){
-
-    value = MIN_BET;
-
-  }
 
   bet = value;
 
@@ -1832,7 +1650,7 @@ function manualBet(){
 
 
 /* ==========================================
-   SELECT SPIN
+   SPIN OPTIONS
 ========================================== */
 
 function selectSpin(
@@ -1840,8 +1658,7 @@ function selectSpin(
   button
 ){
 
-  if(spinning)
-    return;
+  if(spinning) return;
 
   selectedSpins =
     Math.min(
@@ -1850,19 +1667,13 @@ function selectSpin(
     );
 
   document
-    .querySelectorAll(
-      ".options button"
-    )
+    .querySelectorAll(".options button")
     .forEach(
-      item =>
-        item.classList.remove(
-          "selected"
-        )
+      b =>
+        b.classList.remove("selected")
     );
 
-  button.classList.add(
-    "selected"
-  );
+  button.classList.add("selected");
 
   updateUI();
 
@@ -1875,21 +1686,22 @@ function selectSpin(
 
 function setSpeed(mode){
 
-  if(spinning)
-    return;
+  if(spinning) return;
 
   speedMode = mode;
 
   document
     .getElementById("normalSpeed")
-    .classList.toggle(
+    .classList
+    .toggle(
       "selected",
       mode === "normal"
     );
 
   document
     .getElementById("fastSpeed")
-    .classList.toggle(
+    .classList
+    .toggle(
       "selected",
       mode === "fast"
     );
@@ -1901,26 +1713,39 @@ function setSpeed(mode){
    AUTO SPIN
 ========================================== */
 
-function setAutoSpin(enabled){
+function toggleAuto(){
 
-  if(spinning)
-    return;
+  autoSpin = !autoSpin;
 
-  autoSpin = enabled;
+  const button =
+    document.getElementById("autoButton");
+
+  button.textContent =
+    autoSpin
+      ? "🔄 AUTO SPIN: ON"
+      : "🔄 AUTO SPIN: OFF";
+
+  button.classList.toggle(
+    "active",
+    autoSpin
+  );
+
+}
+
+
+function stopAuto(){
+
+  autoSpin = false;
 
   document
-    .getElementById("autoOff")
-    .classList.toggle(
-      "selected",
-      !enabled
-    );
+    .getElementById("autoButton")
+    .textContent =
+      "🔄 AUTO SPIN: OFF";
 
   document
-    .getElementById("autoOn")
-    .classList.toggle(
-      "selected",
-      enabled
-    );
+    .getElementById("autoButton")
+    .classList
+    .remove("active");
 
 }
 
@@ -1956,9 +1781,8 @@ function updateUI(){
   document
     .getElementById("totalSpins")
     .textContent =
-      totalSpins.toLocaleString(
-        "id-ID"
-      );
+      totalSpins
+        .toLocaleString("id-ID");
 
   document
     .getElementById("today")
@@ -1970,40 +1794,73 @@ function updateUI(){
     .textContent =
       level;
 
-  updateHokiText();
-
   updateTarget();
 
 }
 
 
 /* ==========================================
-   TARGET JACKPOT
+   TARGET
 ========================================== */
 
 function updateTarget(){
 
-  const current =
-    Math.min(
-      totalBetAccumulated,
-      JACKPOT_TARGET
-    );
-
   const percent =
     Math.min(
       100,
-      (current / JACKPOT_TARGET) * 100
+      (
+        totalBetSpent /
+        TARGET_BET
+      ) * 100
     );
 
   document
-    .getElementById("targetCurrent")
-    .textContent =
-      formatRupiah(current);
-
-  document
-    .getElementById("targetBar")
+    .getElementById("progressBar")
     .style.width =
       percent + "%";
+
+  document
+    .getElementById("targetValue")
+    .textContent =
+      formatRupiah(
+        Math.min(
+          totalBetSpent,
+          TARGET_BET
+        )
+      ) +
+      " / " +
+      formatRupiah(
+        TARGET_BET
+      );
+
+  if(jackpotClaimed){
+
+    document
+      .getElementById("targetInfo")
+      .textContent =
+        "🎉 Jackpot Rp1.000.000.000 sudah diperoleh.";
+
+  }
+
+  else if(
+    totalBetSpent >= TARGET_BET
+  ){
+
+    document
+      .getElementById("targetInfo")
+      .textContent =
+        "🎉 TARGET TERCAPAI — jackpot tersedia!";
+
+  }
+
+  else{
+
+    document
+      .getElementById("targetInfo")
+      .textContent =
+        "Kumpulkan total bet Rp200.000.000 untuk membuka jackpot khusus.";
+
+  }
 
 }
 
@@ -2012,57 +1869,20 @@ function updateTarget(){
    RANDOM SYMBOL
 ========================================== */
 
-function randomNormalSymbol(){
+function randomSymbol(){
 
   return symbols[
     Math.floor(
-      Math.random() * 19
+      Math.random() *
+      symbols.length
     )
   ];
 
 }
 
 
-/*
-  Scatter tidak dibuat selalu sama.
-  Hoki hanya memengaruhi kemungkinan
-  scatter, bukan menjamin jackpot.
-*/
-
-function randomSymbol(){
-
-  let scatterChance = 0.08;
-
-  /*
-    Hoki menambah peluang scatter
-    secara terbatas.
-  */
-
-  if(
-    Math.random() <
-    getHokiChance()
-  ){
-
-    scatterChance += 0.08;
-
-  }
-
-  if(
-    Math.random() <
-    scatterChance
-  ){
-
-    return symbols[19];
-
-  }
-
-  return randomNormalSymbol();
-
-}
-
-
 /* ==========================================
-   RESULT
+   HASIL ACAK
 ========================================== */
 
 function createResult(){
@@ -2087,27 +1907,19 @@ function createResult(){
 
 
 /* ==========================================
-   COUNT
+   HITUNG MATCH
 ========================================== */
 
 function getMatchCount(result){
 
   const counts = {};
 
-  result.forEach(
-    symbol => {
+  result.forEach(symbol => {
 
-      counts[
-        symbol.name
-      ] =
-        (
-          counts[
-            symbol.name
-          ] || 0
-        ) + 1;
+    counts[symbol.name] =
+      (counts[symbol.name] || 0) + 1;
 
-    }
-  );
+  });
 
   return Math.max(
     ...Object.values(counts)
@@ -2115,6 +1927,10 @@ function getMatchCount(result){
 
 }
 
+
+/* ==========================================
+   HITUNG SCATTER
+========================================== */
 
 function getScatterCount(result){
 
@@ -2127,7 +1943,7 @@ function getScatterCount(result){
 
 
 /* ==========================================
-   REWARD
+   HADIAH
 ========================================== */
 
 function getReward(
@@ -2136,7 +1952,8 @@ function getReward(
 ){
 
   /*
-    SCATTER
+    Reward dibuat acak
+    supaya tidak selalu sama.
   */
 
   if(scatterCount >= 18){
@@ -2157,70 +1974,76 @@ function getReward(
 
   }
 
+  if(scatterCount >= 7){
+
+    return randomBetween(
+      250000,
+      900000
+    );
+
+  }
+
   if(scatterCount >= 5){
 
-    return 100000;
+    return randomBetween(
+      50000,
+      250000
+    );
 
   }
-
 
   /*
-    SIMBOL BIASA
+    Kembar biasa
   */
 
-  if(match <= 1){
-
-    return 0;
-
-  }
-
-  if(match === 18){
+  if(match >= 18){
 
     return 1000000;
 
   }
 
-  if(match === 17){
+  if(match >= 15){
 
-    return 100000;
-
-  }
-
-  if(match === 16){
-
-    return 60000;
+    return randomBetween(
+      500000,
+      900000
+    );
 
   }
 
-  if(match === 15){
+  if(match >= 12){
 
-    return 50000;
+    return randomBetween(
+      150000,
+      450000
+    );
 
   }
 
-  /*
-    Hadiah acak mulai
-    Rp500 sampai Rp50.000
-    untuk kemenangan biasa.
-  */
+  if(match >= 8){
 
-  if(match >= 2){
+    return randomBetween(
+      50000,
+      150000
+    );
 
-    const min = 500;
+  }
 
-    const max = 50000;
+  if(match >= 5){
 
-    const randomReward =
-      Math.floor(
-        Math.random() *
-        (
-          max - min + 1
-        )
-      ) + min;
+    return randomBetween(
+      10000,
+      50000
+    );
 
-    return Math.floor(
-      randomReward / 100
-    ) * 100;
+  }
+
+  if(match >= 3){
+
+    return randomBetween(
+      500,
+      5000
+    );
 
   }
 
@@ -2230,66 +2053,243 @@ function getReward(
 
 
 /* ==========================================
-   SPECIAL JACKPOT
+   RANDOM ANGKA
 ========================================== */
 
-function checkSpecialJackpot(){
+function randomBetween(
+  min,
+  max
+){
 
-  /*
-    Jackpot spesial hanya satu kali.
+  const raw =
+    Math.floor(
+      Math.random() *
+      (max - min + 1)
+    ) +
+    min;
 
-    Syarat:
-    total nilai bet >= Rp200.000.000
-  */
-
-  if(
-    !specialJackpotUsed &&
-    totalBetAccumulated >=
-      JACKPOT_TARGET
-  ){
-
-    specialJackpotUsed = true;
-
-    return true;
-
-  }
-
-  return false;
+  return Math.floor(
+    raw / 500
+  ) * 500;
 
 }
 
 
 /* ==========================================
-   ROLL VISUAL
+   SPIN
 ========================================== */
 
-function spinOnce(callback){
+function startSpin(){
 
-  cells.forEach(
-    cell => {
+  if(spinning) return;
 
-      cell.classList.add(
-        "rolling"
+  /*
+    Batasi total biaya batch
+    agar saldo tidak negatif.
+  */
+
+  const totalCost =
+    bet *
+    selectedSpins;
+
+  if(totalCost > balance){
+
+    showNotification(
+      "🪙",
+      "SALDO TIDAK CUKUP",
+      0,
+      "Saldo kamu " +
+      formatRupiah(balance) +
+      ". Total bet batch " +
+      formatRupiah(totalCost) +
+      "."
+    );
+
+    return;
+
+  }
+
+  /*
+    Semua biaya batch
+    langsung dipotong di awal.
+  */
+
+  balance -= totalCost;
+
+  totalBetSpent += totalCost;
+
+  batchCost = totalCost;
+
+  batchReward = 0;
+
+  batchSpins = 0;
+
+  spinning = true;
+
+  document
+    .getElementById("spinButton")
+    .disabled = true;
+
+  document
+    .getElementById("summary")
+    .classList
+    .remove("show");
+
+  document
+    .getElementById("result")
+    .classList
+    .remove("show");
+
+  document
+    .getElementById("status")
+    .classList
+    .add("show");
+
+  updateUI();
+
+  runSpin(0);
+
+}
+
+
+/* ==========================================
+   RUN SPIN
+========================================== */
+
+function runSpin(index){
+
+  if(index >= selectedSpins){
+
+    finishBatch();
+
+    return;
+
+  }
+
+  batchSpins++;
+
+  document
+    .getElementById("statusMain")
+    .textContent =
+      "SPIN " +
+      (index + 1) +
+      " / " +
+      selectedSpins;
+
+  document
+    .getElementById("statusSub")
+    .textContent =
+      "Bet per spin: " +
+      formatRupiah(bet);
+
+  playSpinSound();
+
+  spinOnce(
+    result => {
+
+      const match =
+        getMatchCount(result);
+
+      const scatter =
+        getScatterCount(result);
+
+      let reward =
+        getReward(
+          match,
+          scatter
+        );
+
+      /*
+        Target jackpot:
+        setelah total bet mencapai
+        Rp200.000.000, jackpot
+        Rp1.000.000.000 diberikan
+        satu kali pada spin berikutnya.
+      */
+
+      const targetReached =
+        totalBetSpent >= TARGET_BET;
+
+      if(
+        targetReached &&
+        !jackpotClaimed
+      ){
+
+        reward =
+          BIG_JACKPOT;
+
+        jackpotClaimed = true;
+
+        showJackpotEffect(
+          BIG_JACKPOT
+        );
+
+      }
+
+      /*
+        Reward ditambahkan setelah
+        hasil spin selesai.
+      */
+
+      balance += reward;
+
+      batchReward += reward;
+
+      totalReward += reward;
+
+      totalSpins++;
+
+      addXP(
+        Math.max(
+          1,
+          match
+        )
+      );
+
+      showResult(
+        match,
+        scatter,
+        reward,
+        reward === BIG_JACKPOT
+      );
+
+      updateUI();
+
+      const delay =
+        speedMode === "fast"
+          ? 250
+          : 650;
+
+      setTimeout(
+        () =>
+          runSpin(index + 1),
+        delay
       );
 
     }
   );
 
+}
 
-  const intervalTime =
-    speedMode === "fast"
-      ? 45
-      : 70;
+
+/* ==========================================
+   SINGLE SPIN
+========================================== */
+
+function spinOnce(callback){
+
+  cells.forEach(
+    cell =>
+      cell.classList.add("rolling")
+  );
 
   const duration =
     speedMode === "fast"
-      ? 550
+      ? 500
       : 1100;
-
 
   const timer =
     setInterval(
-
       () => {
 
         cells.forEach(
@@ -2298,13 +2298,12 @@ function spinOnce(callback){
             const symbol =
               randomSymbol();
 
-            cell.innerHTML =
-              `
+            cell.innerHTML = `
               <img
                 src="${symbol.img}"
                 alt="${symbol.name}"
               >
-              `;
+            `;
 
             cell.classList.remove(
               "win",
@@ -2315,33 +2314,21 @@ function spinOnce(callback){
         );
 
       },
-
-      intervalTime
-
+      60
     );
 
-
   setTimeout(
-
     () => {
 
       clearInterval(timer);
 
       cells.forEach(
         cell =>
-          cell.classList.remove(
-            "rolling"
-          )
+          cell.classList.remove("rolling")
       );
-
 
       const result =
         createResult();
-
-
-      /*
-        Tampilkan hasil.
-      */
 
       cells.forEach(
         (cell,index) => {
@@ -2349,13 +2336,12 @@ function spinOnce(callback){
           const symbol =
             result[index];
 
-          cell.innerHTML =
-            `
+          cell.innerHTML = `
             <img
               src="${symbol.img}"
               alt="${symbol.name}"
             >
-            `;
+          `;
 
           cell.classList.remove(
             "win",
@@ -2373,10 +2359,8 @@ function spinOnce(callback){
         }
       );
 
-
       /*
-        Tandai simbol
-        terbanyak.
+        Tandai simbol yang paling banyak.
       */
 
       const counts = {};
@@ -2384,129 +2368,105 @@ function spinOnce(callback){
       result.forEach(
         symbol => {
 
-          counts[
-            symbol.name
-          ] =
-            (
-              counts[
-                symbol.name
-              ] || 0
-            ) + 1;
+          counts[symbol.name] =
+            (counts[symbol.name] || 0) + 1;
 
         }
       );
 
-
       const best =
         Math.max(
-          ...Object.values(
-            counts
-          )
+          ...Object.values(counts)
         );
 
-
-      cells.forEach(
-        (cell,index) => {
+      result.forEach(
+        (symbol,index) => {
 
           if(
-            counts[
-              result[index].name
-            ] === best
+            counts[symbol.name] === best
           ){
 
-            cell.classList.add(
-              "win"
-            );
+            cells[index]
+              .classList
+              .add("win");
 
           }
 
         }
       );
 
-
       callback(result);
 
     },
-
     duration
-
   );
 
 }
 
 
 /* ==========================================
-   RESULT UI
+   HASIL
 ========================================== */
 
 function showResult(
   match,
-  scatterCount,
+  scatter,
   reward,
-  specialJackpot
+  jackpot
 ){
 
-  const resultBox =
-    document.getElementById(
-      "result"
-    );
+  const box =
+    document.getElementById("result");
 
   const title =
-    document.getElementById(
-      "resultTitle"
-    );
+    document.getElementById("resultTitle");
 
   const rewardBox =
-    document.getElementById(
-      "resultReward"
-    );
+    document.getElementById("resultReward");
 
   const info =
-    document.getElementById(
-      "resultInfo"
-    );
+    document.getElementById("resultInfo");
 
+  box.classList.remove(
+    "win",
+    "zonk"
+  );
 
-  if(specialJackpot){
+  if(jackpot){
 
-    title.textContent =
-      "⚡ JACKPOT SPESIAL!";
-
-    rewardBox.textContent =
-      "Rp1.000.000.000";
-
-    info.textContent =
-      "Selamat! Target Rp200.000.000 telah tercapai.";
-
-  }
-
-  else if(scatterCount >= 18){
+    box.classList.add("win");
 
     title.textContent =
-      "⚡ SCATTER JACKPOT!";
-
-    rewardBox.textContent =
-      "Rp2.000.000";
-
-    info.textContent =
-      "Selamat anda mendapatkan jackpot 18 SCATTER!";
-
-  }
-
-  else if(scatterCount >= 17){
-
-    title.textContent =
-      "💎 SCATTER BESAR!";
+      "⚡ JACKPOT BESAR!";
 
     rewardBox.textContent =
       formatRupiah(reward);
 
     info.textContent =
-      "Selamat anda mendapatkan 17 SCATTER!";
+      "Selamat, Anda mendapatkan jackpot target Rp1.000.000.000!";
 
   }
 
-  else if(scatterCount >= 10){
+  else if(scatter >= 18){
+
+    box.classList.add("win");
+
+    title.textContent =
+      "⚡ SCATTER JACKPOT!";
+
+    rewardBox.textContent =
+      formatRupiah(reward);
+
+    info.textContent =
+      "Selamat, Anda mendapatkan " +
+      formatRupiah(reward) +
+      " dari 18 Scatter!";
+
+  }
+
+  else if(scatter >= 10){
+
+    box.classList.add("win");
 
     title.textContent =
       "💎 SCATTER!";
@@ -2515,30 +2475,36 @@ function showResult(
       formatRupiah(reward);
 
     info.textContent =
-      "Selamat anda mendapatkan " +
-      scatterCount +
-      " SCATTER!";
+      "Selamat, Anda mendapatkan " +
+      formatRupiah(reward) +
+      " dari " +
+      scatter +
+      " Scatter.";
 
   }
 
   else if(reward > 0){
 
+    box.classList.add("win");
+
     title.textContent =
-      "🎉 MENANG!";
+      "🎉 SELAMAT!";
 
     rewardBox.textContent =
       formatRupiah(reward);
 
     info.textContent =
-      "Selamat anda mendapatkan " +
+      "Selamat, Anda mendapatkan " +
       formatRupiah(reward) +
-      " dari " +
+      " • Kembar " +
       match +
-      " kembar.";
+      "×.";
 
   }
 
   else{
+
+    box.classList.add("zonk");
 
     title.textContent =
       "💀 ZONK";
@@ -2551,10 +2517,106 @@ function showResult(
 
   }
 
+  box.classList.add("show");
 
-  resultBox.classList.add(
-    "show"
-  );
+}
+
+
+/* ==========================================
+   FINISH BATCH
+========================================== */
+
+function finishBatch(){
+
+  spinning = false;
+
+  document
+    .getElementById("spinButton")
+    .disabled = false;
+
+  document
+    .getElementById("status")
+    .classList
+    .remove("show");
+
+  document
+    .getElementById("sumSpins")
+    .textContent =
+      batchSpins + "×";
+
+  document
+    .getElementById("sumCost")
+    .textContent =
+      formatRupiah(batchCost);
+
+  document
+    .getElementById("sumReward")
+    .textContent =
+      formatRupiah(batchReward);
+
+  document
+    .getElementById("summary")
+    .classList
+    .add("show");
+
+  updateUI();
+
+  /*
+    Jika Auto Spin ON,
+    jalankan batch berikutnya
+    setelah selesai.
+  */
+
+  if(autoSpin){
+
+    setTimeout(
+      () => {
+
+        if(!spinning){
+
+          startSpin();
+
+        }
+
+      },
+      speedMode === "fast"
+        ? 350
+        : 800
+    );
+
+  }
+
+}
+
+
+/* ==========================================
+   XP
+========================================== */
+
+function addXP(amount){
+
+  xp += amount;
+
+  const required =
+    level * 100;
+
+  while(
+    xp >= required
+  ){
+
+    xp -= required;
+
+    level++;
+
+    showNotification(
+      "⭐",
+      "LEVEL UP!",
+      0,
+      "Level kamu sekarang " +
+      level + "."
+    );
+
+  }
 
 }
 
@@ -2564,11 +2626,10 @@ function showResult(
 ========================================== */
 
 function showNotification(
-  title,
   icon,
+  title,
   reward,
-  detail,
-  callback
+  detail
 ){
 
   const old =
@@ -2576,58 +2637,65 @@ function showNotification(
       ".notification"
     );
 
-  if(old)
+  if(old){
     old.remove();
+  }
 
+  const notification =
+    document.createElement("div");
 
-  const box =
-    document.createElement(
-      "div"
-    );
-
-  box.className =
+  notification.className =
     "notification";
 
+  notification.innerHTML = `
 
-  box.innerHTML =
-    `
-      <div class="notification-icon">
-        ${icon}
-      </div>
+    <div class="notification-icon">
+      ${icon}
+    </div>
 
-      <div class="notification-title">
-        ${title}
-      </div>
+    <div class="notification-title">
+      ${title}
+    </div>
 
-      <div class="notification-reward">
-        ${reward}
-      </div>
+    <div class="notification-reward">
+      ${reward > 0 ? formatRupiah(reward) : ""}
+    </div>
 
-      <div class="notification-detail">
-        ${detail}
-      </div>
+    <div class="notification-detail">
+      ${detail}
+    </div>
 
-      <button>
-        LANJUTKAN
-      </button>
-    `;
+    <button>
+      OK
+    </button>
 
+  `;
 
   document.body.appendChild(
-    box
+    notification
   );
 
-
-  box
+  notification
     .querySelector("button")
-    .onclick = () => {
+    .onclick = () =>
+      notification.remove();
 
-      box.remove();
+  setTimeout(
+    () => {
 
-      if(callback)
-        callback();
+      if(
+        document.body.contains(
+          notification
+        )
+      ){
 
-    };
+        notification.remove();
+
+      }
+
+    },
+    3500
+  );
 
 }
 
@@ -2636,62 +2704,59 @@ function showNotification(
    JACKPOT EFFECT
 ========================================== */
 
-function showJackpotEffect(){
+function showJackpotEffect(
+  reward
+){
 
   document.body.classList.add(
     "shake"
   );
 
-
   const effect =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
   effect.className =
     "jackpot-effect";
 
+  effect.innerHTML = `
 
-  effect.innerHTML =
-    `
-      <div class="lightning l1">
-        ⚡
-      </div>
+    <div class="lightning l1">
+      ⚡
+    </div>
 
-      <div class="lightning l2">
-        ⚡
-      </div>
+    <div class="lightning l2">
+      ⚡
+    </div>
 
-      <div class="lightning l3">
-        ⚡
-      </div>
+    <div class="lightning l3">
+      ⚡
+    </div>
 
-      <div class="lightning l4">
-        ⚡
-      </div>
+    <div class="lightning l4">
+      ⚡
+    </div>
 
-      <div class="jackpot-text">
+    <div class="jackpot-text">
 
-        <small>
-          ✦ TARGET Rp200.000.000 TERCAPAI ✦
-        </small>
+      <small>
+        ✦ TARGET RP200.000.000 TERCAPAI ✦
+      </small>
 
-        <h2>
-          JACKPOT!
-        </h2>
+      <h2>
+        JACKPOT!
+      </h2>
 
-        <strong>
-          +Rp1.000.000.000
-        </strong>
+      <strong>
+        +${formatRupiah(reward)}
+      </strong>
 
-      </div>
-    `;
+    </div>
 
+  `;
 
   document.body.appendChild(
     effect
   );
-
 
   setTimeout(
     () => {
@@ -2710,469 +2775,27 @@ function showJackpotEffect(){
 
 
 /* ==========================================
-   START BATCH
+   AUDIO
 ========================================== */
 
-function startSpin(){
-
-  if(spinning)
-    return;
-
-
-  /*
-    Pastikan bet valid.
-  */
-
-  bet =
-    normalizeBet(bet);
-
-
-  const totalCost =
-    bet *
-    selectedSpins;
-
-
-  if(
-    totalCost <= 0
-  ){
-
-    showNotification(
-      "BET TIDAK VALID",
-      "⚠️",
-      "Rp0",
-      "Masukkan bet yang valid."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    balance <
-    totalCost
-  ){
-
-    showNotification(
-      "SALDO TIDAK CUKUP",
-      "💰",
-      formatRupiah(totalCost),
-      "Saldo virtual kamu adalah " +
-      formatRupiah(balance) +
-      "."
-    );
-
-    return;
-
-  }
-
-
-  /*
-    PENTING:
-    seluruh biaya batch langsung dipotong
-    di awal supaya saldo tidak terlihat
-    naik-turun setiap spin.
-  */
-
-  batchBefore =
-    balance;
-
-  batchCost =
-    totalCost;
-
-  batchReward =
-    0;
-
-  batchSpins =
-    selectedSpins;
-
-  spinsRemaining =
-    selectedSpins;
-
-
-  balance -=
-    totalCost;
-
-
-  /*
-    Akumulasi nilai bet.
-  */
-
-  totalBetAccumulated +=
-    totalCost;
-
-
-  spinning = true;
-
-
-  document
-    .getElementById("spinButton")
-    .disabled = true;
-
-
-  document
-    .getElementById("status")
-    .classList.add("show");
-
-
-  document
-    .getElementById("summary")
-    .classList.remove("show");
-
-
-  document
-    .getElementById("result")
-    .classList.remove("show");
-
-
-  saveGame();
-
-  updateUI();
-
-
-  /*
-    Jalankan spin satu per satu.
-  */
-
-  runNextSpin();
-
-}
-
-
-/* ==========================================
-   NEXT SPIN
-========================================== */
-
-function runNextSpin(){
-
-  if(
-    spinsRemaining <= 0
-  ){
-
-    finishBatch();
-
-    return;
-
-  }
-
-
-  const currentNumber =
-    batchSpins -
-    spinsRemaining +
-    1;
-
-
-  spinsRemaining--;
-
-
-  document
-    .getElementById("statusMain")
-    .textContent =
-      "SPIN KE-" +
-      currentNumber +
-      " / " +
-      batchSpins;
-
-
-  document
-    .getElementById("statusSub")
-    .textContent =
-      spinsRemaining +
-      "× SPIN TERSISA";
-
-
-  /*
-    Putar suara jika browser
-    mengizinkan autoplay.
-  */
+function playSpinSound(){
 
   try{
 
     spinMusic.currentTime = 0;
 
-    spinMusic.play()
-      .catch(
-        () => {}
-      );
-
-  }
-  catch{}
-
-
-  spinOnce(
-
-    result => {
-
-      const match =
-        getMatchCount(result);
-
-      const scatterCount =
-        getScatterCount(result);
-
-
-      /*
-        Cek target jackpot.
-        Hanya satu kali.
-      */
-
-      const specialJackpot =
-        checkSpecialJackpot();
-
-
-      let reward =
-        getReward(
-          match,
-          scatterCount
-        );
-
-
-      /*
-        Jika jackpot target aktif,
-        hadiah spin ini menjadi
-        Rp1.000.000.000.
-      */
-
-      if(specialJackpot){
-
-        reward =
-          JACKPOT_REWARD;
-
-      }
-
-
-      /*
-        Tambahkan reward.
-      */
-
-      batchReward +=
-        reward;
-
-      balance +=
-        reward;
-
-      totalReward +=
-        reward;
-
-      totalSpins++;
-
-
-      /*
-        XP.
-      */
-
-      addXP(
-        Math.max(
-          1,
-          match * 2
-        )
-      );
-
-
-      showResult(
-        match,
-        scatterCount,
-        reward,
-        specialJackpot
-      );
-
-
-      saveGame();
-
-      updateUI();
-
-
-      /*
-        Jackpot spesial.
-      */
-
-      if(specialJackpot){
-
-        showJackpotEffect();
-
-
-        setTimeout(
-          () => {
-
-            runNextSpin();
-
-          },
-          4000
-        );
-
-        return;
-
-      }
-
-
-      /*
-        Lanjut spin.
-      */
-
-      const delay =
-        speedMode === "fast"
-          ? 250
-          : 550;
-
-
-      setTimeout(
-        () => {
-
-          runNextSpin();
-
-        },
-        delay
-      );
-
-    }
-
-  );
-
-}
-
-
-/* ==========================================
-   FINISH BATCH
-========================================== */
-
-function finishBatch(){
-
-  spinning = false;
-
-
-  document
-    .getElementById("spinButton")
-    .disabled = false;
-
-
-  document
-    .getElementById("status")
-    .classList.remove(
-      "show"
+    spinMusic.play().catch(
+      () => {}
     );
 
-
-  /*
-    Summary final.
-  */
-
-  document
-    .getElementById("sumSpins")
-    .textContent =
-      batchSpins +
-      "×";
-
-
-  document
-    .getElementById("sumCost")
-    .textContent =
-      formatRupiah(
-        batchCost
-      );
-
-
-  document
-    .getElementById("sumReward")
-    .textContent =
-      formatRupiah(
-        batchReward
-      );
-
-
-  document
-    .getElementById("summary")
-    .classList.add(
-      "show"
-    );
-
-
-  /*
-    Pastikan bet berikutnya
-    tidak melebihi saldo.
-  */
-
-  if(
-    bet > balance
-  ){
-
-    bet =
-      Math.max(
-        MIN_BET,
-        Math.floor(
-          balance / BET_STEP
-        ) * BET_STEP
-      );
-
   }
-
-
-  saveGame();
-
-  updateUI();
-
-
-  /*
-    Auto spin:
-    batch berikutnya dimulai
-    setelah jeda singkat.
-  */
-
-  if(autoSpin){
-
-    if(
-      balance >=
-      bet * selectedSpins
-    ){
-
-      setTimeout(
-        () => {
-
-          startSpin();
-
-        },
-        700
-      );
-
-    }
-    else{
-
-      setAutoSpin(false);
-
-    }
-
-  }
+  catch(error){}
 
 }
 
 
 /* ==========================================
-   XP
-========================================== */
-
-function addXP(amount){
-
-  xp +=
-    amount;
-
-  const required =
-    level * 100;
-
-
-  while(
-    xp >= required
-  ){
-
-    xp -=
-      level * 100;
-
-    level++;
-
-  }
-
-}
-
-
-/* ==========================================
-   INITIALIZE
+   INIT
 ========================================== */
 
 function initializeSlot(){
@@ -3183,13 +2806,12 @@ function initializeSlot(){
       const symbol =
         randomSymbol();
 
-      cell.innerHTML =
-        `
+      cell.innerHTML = `
         <img
           src="${symbol.img}"
           alt="${symbol.name}"
         >
-        `;
+      `;
 
     }
   );
@@ -3198,7 +2820,7 @@ function initializeSlot(){
 
 
 /* ==========================================
-   INPUT EVENTS
+   BET INPUT EVENT
 ========================================== */
 
 document
@@ -3208,19 +2830,10 @@ document
     manualBet
   );
 
-document
-  .getElementById("betInput")
-  .addEventListener(
-    "blur",
-    manualBet
-  );
-
 
 /* ==========================================
-   INIT
+   START
 ========================================== */
-
-loadGame();
 
 initializeSlot();
 
