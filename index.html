@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YANN SPIN — Virtual Arcade</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>YANN SPIN — Spaceman Arcade</title>
 
 <style>
 *{
@@ -19,14 +19,16 @@ body{
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at 50% -10%,#42115d 0,#110914 40%,#040306 85%);
+    radial-gradient(circle at 50% -10%,#35136b 0,#0c0815 42%,#020205 90%);
 }
 
-button,input{
+button,
+input{
   font-family:Arial,Helvetica,sans-serif;
 }
 
 button{
+  border:0;
   cursor:pointer;
 }
 
@@ -36,86 +38,12 @@ button{
   margin:auto;
 }
 
-/* WARNING */
-
-.warning-popup{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.96);
-}
-
-.warning-box{
-  width:100%;
-  max-width:430px;
-  padding:25px 20px;
-  border:2px solid #ffe000;
-  border-radius:24px;
-  background:#0b0911;
-  text-align:center;
-  box-shadow:
-    0 0 35px #ffe00055,
-    0 0 80px #ff20d733;
-}
-
-.warning-icon{
-  font-size:50px;
-  margin-bottom:12px;
-}
-
-.warning-text{
-  color:#ffe000;
-  font-size:15px;
-  line-height:1.6;
-  font-weight:900;
-}
-
-.tiktok{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  margin-top:18px;
-  font-size:14px;
-  font-weight:bold;
-}
-
-.tiktok-icon{
-  width:30px;
-  height:30px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:8px;
-  background:#000;
-  box-shadow:2px 2px #25f4ee,-2px -2px #fe2c55;
-}
-
-.warning-box button{
-  width:100%;
-  margin-top:20px;
-  padding:13px;
-  border:0;
-  border-radius:13px;
-  background:#ffe000;
-  color:#111;
-  font-weight:900;
-}
-
-.warning-popup.hidden{
-  display:none;
-}
-
 /* HEADER */
 
 .header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   margin-bottom:15px;
 }
 
@@ -124,14 +52,14 @@ button{
   font-size:18px;
   font-weight:1000;
   letter-spacing:2px;
-  text-shadow:0 0 15px #00f5ff;
+  text-shadow:0 0 18px #00f5ff;
 }
 
 .balance{
   padding:9px 13px;
   border:1px solid #ffe00055;
   border-radius:20px;
-  background:#15121d;
+  background:#12101a;
   color:#ffe000;
   font-size:11px;
   font-weight:bold;
@@ -140,8 +68,8 @@ button{
 /* TITLE */
 
 .title{
-  text-align:center;
   margin-bottom:15px;
+  text-align:center;
 }
 
 .title small{
@@ -152,10 +80,12 @@ button{
 
 .title h1{
   margin-top:5px;
-  color:#ff20d7;
-  font-size:36px;
+  color:#ff27d8;
+  font-size:38px;
   font-weight:1000;
-  text-shadow:0 0 10px #ff20d7,0 0 35px #ff20d7;
+  text-shadow:
+    0 0 10px #ff27d8,
+    0 0 35px #ff27d8;
 }
 
 .title p{
@@ -164,167 +94,183 @@ button{
   font-size:9px;
 }
 
-/* NAV GAME */
+/* GAME */
 
-.game-nav{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:12px;
-}
-
-.game-nav button{
-  padding:13px;
-  border:1px solid #ffffff0d;
-  border-radius:14px;
-  background:#11101a;
-  color:#777;
-  font-size:10px;
-  font-weight:bold;
-}
-
-.game-nav button.active{
-  color:#001015;
-  background:#00f5ff;
-  box-shadow:0 0 18px #00f5ff44;
-}
-
-/* TARGET */
-
-.target-box{
-  margin-bottom:12px;
-  padding:14px;
-  border:1px solid #ffe00044;
-  border-radius:18px;
-  background:#090810;
-  text-align:center;
-}
-
-.target-title{
-  color:#00f5ff;
-  font-size:8px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-.target-value{
-  margin-top:5px;
-  color:#ffe000;
-  font-size:23px;
-  font-weight:1000;
-  text-shadow:0 0 20px #ffe000;
-}
-
-.target-progress{
-  height:8px;
-  margin-top:10px;
-  overflow:hidden;
-  border-radius:20px;
-  background:#1b1725;
-}
-
-.target-progress-bar{
-  width:0%;
-  height:100%;
-  border-radius:20px;
-  background:linear-gradient(
-    90deg,
-    #00f5ff,
-    #713cff,
-    #ff20d7,
-    #ffe000
-  );
-  transition:width:.4s ease;
-}
-
-.target-info{
-  margin-top:7px;
-  color:#777;
-  font-size:7px;
-}
-
-/* PAGES */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-/* MACHINE */
-
-.machine{
-  padding:13px;
+.game{
+  padding:12px;
   border:2px solid #414152;
-  border-radius:23px;
-  background:linear-gradient(145deg,#181724,#08070c);
+  border-radius:24px;
+  background:linear-gradient(145deg,#181724,#07070c);
   box-shadow:0 15px 60px #000;
 }
 
-.machine-title{
+.game-title{
   margin-bottom:10px;
-  color:#ff20d7;
+  color:#ff27d8;
   text-align:center;
-  font-size:9px;
+  font-size:10px;
   font-weight:bold;
   letter-spacing:3px;
 }
 
-.slot{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:6px;
-  padding:8px;
-  border:3px solid #555568;
-  border-radius:18px;
-  background:#020205;
-}
+/* SKY */
 
-.cell{
-  height:65px;
+.sky{
+  position:relative;
+  height:360px;
   overflow:hidden;
-  border-radius:9px;
+  border:2px solid #30284a;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 20% 20%,#ffffff22 0 1px,transparent 2px),
+    radial-gradient(circle at 70% 35%,#ffffff22 0 1px,transparent 2px),
+    radial-gradient(circle at 40% 70%,#ffffff18 0 1px,transparent 2px),
+    radial-gradient(circle at 85% 80%,#ffffff22 0 1px,transparent 2px),
+    linear-gradient(180deg,#09052a,#02020a);
+  background-size:auto,auto,auto,auto,100% 100%;
+}
+
+/* STARS */
+
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
   background:#fff;
-  box-shadow:0 0 5px #000;
+  opacity:.7;
+  animation:starMove 2s linear infinite;
 }
 
-.cell img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.s1{left:8%;top:15%}
+.s2{left:22%;top:38%;animation-delay:.4s}
+.s3{left:35%;top:10%;animation-delay:.8s}
+.s4{left:52%;top:25%;animation-delay:1s}
+.s5{left:70%;top:13%;animation-delay:.3s}
+.s6{left:87%;top:42%;animation-delay:1.2s}
+.s7{left:15%;top:72%;animation-delay:.6s}
+.s8{left:64%;top:70%;animation-delay:1.4s}
+.s9{left:90%;top:82%;animation-delay:.9s}
+
+@keyframes starMove{
+  from{
+    transform:translateY(0);
+    opacity:.25;
+  }
+  50%{
+    opacity:1;
+  }
+  to{
+    transform:translateY(25px);
+    opacity:.2;
+  }
+}
+
+/* MULTIPLIER */
+
+.multiplier{
+  position:absolute;
+  z-index:5;
+  top:28px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
+  font-size:48px;
+  font-weight:1000;
+  text-shadow:
+    0 0 10px #00f5ff,
+    0 0 30px #713cff;
+}
+
+.multiplier.crashed{
+  color:#ff3155;
+  text-shadow:
+    0 0 10px #ff3155,
+    0 0 30px #ff3155;
+}
+
+/* SPACE LINE */
+
+.space-line{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:80px;
+  height:1px;
+  background:#00f5ff33;
+}
+
+/* ROCKET */
+
+.rocket{
+  position:absolute;
+  z-index:4;
+  left:45px;
+  bottom:75px;
+  width:70px;
+  text-align:center;
+  font-size:55px;
+  filter:
+    drop-shadow(0 0 10px #00f5ff)
+    drop-shadow(0 0 20px #713cff);
+  transform:rotate(-8deg);
+  transition:
+    left .08s linear,
+    bottom .08s linear;
+}
+
+.flame{
   display:block;
+  margin-top:-12px;
+  font-size:28px;
+  animation:flame .12s infinite alternate;
 }
 
-.cell.rolling{
-  animation:rolling .09s linear infinite;
+@keyframes flame{
+  from{
+    transform:scaleY(.8);
+  }
+  to{
+    transform:scaleY(1.3);
+  }
 }
 
-.cell.win{
-  border:3px solid #ffe000;
-  box-shadow:0 0 12px #ffe000,0 0 30px #ff20d7;
-  animation:win .25s infinite alternate;
+/* CRASH */
+
+.crash{
+  position:absolute;
+  z-index:10;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background:#0009;
+  text-align:center;
 }
 
-.cell.scatter{
-  border:3px solid #ff3030;
-  box-shadow:0 0 15px #ff3030,0 0 35px #ff0000;
-  animation:win .2s infinite alternate;
+.crash.show{
+  display:flex;
 }
 
-@keyframes rolling{
-  0%{transform:translateY(-9px)}
-  50%{transform:translateY(9px)}
-  100%{transform:translateY(-9px)}
+.crash-icon{
+  font-size:70px;
 }
 
-@keyframes win{
-  from{transform:scale(1)}
-  to{transform:scale(1.08)}
+.crash h2{
+  margin-top:5px;
+  color:#ff3155;
+  font-size:32px;
+  text-shadow:0 0 20px #ff3155;
 }
 
-/* BOX */
+.crash p{
+  margin-top:6px;
+  color:#aaa;
+  font-size:10px;
+}
+
+/* CONTROLS */
 
 .box{
   margin-top:10px;
@@ -341,8 +287,6 @@ button{
   letter-spacing:2px;
 }
 
-/* BET */
-
 .bet-control{
   display:grid;
   grid-template-columns:48px 1fr 48px;
@@ -350,7 +294,6 @@ button{
 }
 
 .bet-control button{
-  border:0;
   border-radius:11px;
   background:#191724;
   color:#fff;
@@ -358,16 +301,15 @@ button{
   font-weight:bold;
 }
 
-#betInput,
-#diceBetInput{
+#betInput{
   width:100%;
   min-width:0;
   border:1px solid #00f5ff44;
   border-radius:11px;
+  outline:none;
   background:#05050a;
   color:#00f5ff;
   text-align:center;
-  outline:none;
   font-size:15px;
   font-weight:bold;
 }
@@ -384,88 +326,12 @@ button{
   color:#ffe000;
 }
 
-.reward-info{
-  margin-top:9px;
-  padding:10px;
-  border-radius:10px;
-  background:#11101a;
-  text-align:center;
-  color:#888;
-  font-size:8px;
-  line-height:1.8;
-}
+/* BUTTON */
 
-.reward-info strong{
-  color:#ffe000;
-}
-
-/* OPTIONS */
-
-.options{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:6px;
-}
-
-.options button{
-  padding:9px 2px;
-  border:0;
-  border-radius:9px;
-  background:#191724;
-  color:#888;
-  font-size:9px;
-  font-weight:bold;
-}
-
-.options button.selected{
-  background:#00f5ff;
-  color:#001015;
-}
-
-/* SPEED */
-
-.speed{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-}
-
-.speed button,
-.auto-control button{
-  padding:10px;
-  border:0;
-  border-radius:10px;
-  background:#191724;
-  color:#888;
-  font-size:9px;
-  font-weight:bold;
-}
-
-.speed button.selected{
-  background:#713cff;
-  color:#fff;
-}
-
-/* AUTO */
-
-.auto-control{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-}
-
-.auto-control button.active{
-  background:#ff20d7;
-  color:#fff;
-}
-
-/* SPIN */
-
-.spin{
+.start{
   width:100%;
-  padding:16px;
   margin-top:10px;
-  border:0;
+  padding:16px;
   border-radius:15px;
   background:linear-gradient(135deg,#ff20a9,#713cff);
   color:#fff;
@@ -474,36 +340,26 @@ button{
   box-shadow:0 8px 30px #ff20a944;
 }
 
-.spin:disabled{
+.start:disabled{
   opacity:.4;
+  cursor:not-allowed;
 }
 
-/* STATUS */
-
-.status{
-  display:none;
-  margin-top:10px;
-  padding:11px;
-  border:1px solid #00f5ff22;
-  border-radius:14px;
-  background:#05050a;
-  text-align:center;
+.cashout{
+  width:100%;
+  margin-top:8px;
+  padding:16px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#00eaff,#00a8ff);
+  color:#001015;
+  font-size:14px;
+  font-weight:1000;
+  box-shadow:0 8px 30px #00eaff44;
 }
 
-.status.show{
-  display:block;
-}
-
-.status-main{
-  color:#00f5ff;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.status-sub{
-  margin-top:4px;
-  color:#777;
-  font-size:8px;
+.cashout:disabled{
+  opacity:.35;
+  cursor:not-allowed;
 }
 
 /* RESULT */
@@ -522,298 +378,76 @@ button{
   display:block;
 }
 
-.result.jackpot{
-  border-color:#ffe000;
-  box-shadow:0 0 20px #ffe00033;
-}
-
 .result h3{
-  color:#ff20d7;
+  color:#ff27d8;
   font-size:15px;
 }
 
-.reward{
+.result .reward{
   margin-top:6px;
   color:#ffe000;
   font-size:23px;
-  font-weight:bold;
+  font-weight:1000;
 }
 
-.info{
+.result .info{
   margin-top:6px;
   color:#888;
   font-size:8px;
-  line-height:1.7;
 }
 
-/* SUMMARY */
+/* HISTORY */
 
-.summary{
-  display:none;
-  margin-top:10px;
-  padding:13px;
-  border-radius:17px;
-  background:#090810;
-}
-
-.summary.show{
-  display:block;
-}
-
-.summary h3{
-  margin-bottom:8px;
-  color:#00f5ff;
-  text-align:center;
-  font-size:10px;
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  padding:5px 0;
-  color:#777;
-  font-size:8px;
-}
-
-.row strong{
-  color:#fff;
-}
-
-/* STATS */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:11px;
-}
-
-.stat{
-  padding:11px 3px;
-  border-radius:14px;
-  background:#11101a;
-  text-align:center;
-}
-
-.stat strong{
-  display:block;
-  color:#00f5ff;
-  font-size:13px;
-}
-
-.stat span{
-  color:#777;
-  font-size:7px;
-}
-
-/* =========================
-   BATOK KELAPA
-========================= */
-
-.coconut-game{
-  padding:13px;
-  border:2px solid #414152;
-  border-radius:23px;
-  background:linear-gradient(145deg,#181724,#08070c);
-}
-
-.coconut-title{
-  text-align:center;
-  color:#ff20d7;
-  font-size:18px;
-  font-weight:1000;
-}
-
-.coconut-sub{
-  margin-top:5px;
-  color:#777;
-  text-align:center;
-  font-size:8px;
-}
-
-.dice-area{
-  position:relative;
-  min-height:245px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.history{
   margin-top:15px;
   overflow:hidden;
-  border-radius:20px;
-  background:
-    radial-gradient(circle,#2c2035,#090810 70%);
-}
-
-.dices{
-  display:flex;
-  gap:12px;
-  z-index:1;
-}
-
-.die{
-  width:65px;
-  height:65px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border:3px solid #fff;
-  border-radius:14px;
-  background:#f7f7f7;
-  color:#111;
-  font-size:30px;
-  font-weight:1000;
-  box-shadow:0 8px 25px #000;
-}
-
-.die.rolling{
-  animation:diceRoll .12s infinite;
-}
-
-@keyframes diceRoll{
-  0%{transform:rotate(0deg) translateY(0)}
-  25%{transform:rotate(12deg) translateY(-12px)}
-  50%{transform:rotate(-12deg) translateY(8px)}
-  75%{transform:rotate(8deg) translateY(-7px)}
-  100%{transform:rotate(0deg) translateY(0)}
-}
-
-.coconut{
-  position:absolute;
-  z-index:3;
-  width:245px;
-  height:155px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:50% 50% 45% 45%;
-  background:
-    radial-gradient(
-      circle at 35% 25%,
-      #9b6338,
-      #63371e 40%,
-      #28140b 85%
-    );
-  color:#e5b889;
-  font-size:48px;
-  box-shadow:
-    inset 0 -15px 30px #160a05,
-    0 15px 40px #000;
-  transition:.7s ease;
-}
-
-.coconut::after{
-  content:"🥥";
-}
-
-.coconut.open{
-  transform:translateY(-210px) rotate(-5deg);
-  opacity:.25;
-}
-
-.dice-result{
-  margin-top:12px;
-  padding:12px;
-  border-radius:14px;
+  border-radius:17px;
   background:#11101a;
-  text-align:center;
 }
 
-.dice-result-label{
-  color:#777;
-  font-size:8px;
-}
-
-.dice-numbers{
-  margin-top:6px;
-  color:#ffe000;
-  font-size:25px;
-  font-weight:1000;
-  letter-spacing:7px;
-}
-
-.selected-numbers{
-  min-height:32px;
-  margin-top:10px;
-  padding:9px;
-  border-radius:10px;
-  background:#11101a;
+.history-title{
+  padding:13px;
+  border-bottom:1px solid #ffffff0d;
   color:#00f5ff;
-  text-align:center;
   font-size:11px;
   font-weight:bold;
 }
 
-.number-pad{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:6px;
-  margin-top:10px;
+.history-item{
+  display:flex;
+  justify-content:space-between;
+  padding:11px 13px;
+  border-bottom:1px solid #ffffff08;
 }
 
-.number-pad button{
-  padding:12px 2px;
-  border:0;
-  border-radius:10px;
-  background:#191724;
-  color:#fff;
-  font-size:16px;
-  font-weight:1000;
+.history-item:last-child{
+  border-bottom:0;
 }
 
-.number-pad button:active{
-  transform:scale(.92);
+.history-left{
+  display:flex;
+  gap:8px;
+  align-items:center;
 }
 
-.number-pad button.disabled{
-  opacity:.35;
+.history-icon{
+  font-size:20px;
 }
 
-.dice-info{
-  margin-top:9px;
-  color:#777;
-  text-align:center;
-  font-size:8px;
-  line-height:1.7;
-}
-
-.dice-play{
-  width:100%;
-  margin-top:10px;
-  padding:15px;
-  border:0;
-  border-radius:14px;
-  background:linear-gradient(135deg,#00eaff,#713cff);
-  color:#001015;
-  font-weight:1000;
-}
-
-.dice-play:disabled{
-  opacity:.4;
-}
-
-.dice-result-box{
-  display:none;
-  margin-top:10px;
-  padding:14px;
-  border-radius:15px;
-  background:#090810;
-  text-align:center;
-}
-
-.dice-result-box.show{
+.history-item strong{
   display:block;
+  font-size:9px;
 }
 
-.dice-result-box h3{
-  color:#ff20d7;
-  font-size:15px;
+.history-item small{
+  color:#777;
+  font-size:7px;
 }
 
-.dice-reward{
-  margin-top:7px;
+.history-value{
   color:#ffe000;
-  font-size:22px;
-  font-weight:1000;
+  font-size:10px;
+  font-weight:bold;
 }
 
 /* FOOTER */
@@ -830,243 +464,30 @@ button{
   font-size:7px;
 }
 
-/* NAV */
-
-.bottom-nav{
-  position:fixed;
-  z-index:9000;
-  left:50%;
-  bottom:10px;
-  width:min(650px,calc(100% - 20px));
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:5px;
-  padding:7px;
-  border:1px solid #ffffff14;
-  border-radius:20px;
-  background:#0c0b15ee;
-  backdrop-filter:blur(15px);
-  transform:translateX(-50%);
-}
-
-.bottom-nav button{
-  padding:9px;
-  border:0;
-  border-radius:13px;
-  background:transparent;
-  color:#777;
-}
-
-.bottom-nav button.active{
-  color:#00f5ff;
-  background:#00f5ff0c;
-}
-
-/* NOTIFICATION */
-
-.notification{
-  position:fixed;
-  z-index:99999;
-  left:50%;
-  top:50%;
-  width:min(370px,calc(100% - 30px));
-  padding:23px;
-  border:2px solid #ffe000;
-  border-radius:22px;
-  background:#0d0a13;
-  text-align:center;
-  box-shadow:0 0 40px #ffe00066;
-  transform:translate(-50%,-50%);
-  animation:notify .4s forwards;
-}
-
-@keyframes notify{
-  from{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.6);
-  }
-  to{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
-}
-
-.notification-icon{
-  font-size:48px;
-}
-
-.notification-title{
-  margin-top:7px;
-  color:#ff20d7;
-  font-size:20px;
-  font-weight:900;
-}
-
-.notification-reward{
-  margin-top:7px;
-  color:#ffe000;
-  font-size:24px;
-  font-weight:900;
-}
-
-.notification-detail{
-  margin-top:7px;
-  color:#00f5ff;
-  font-size:8px;
-  line-height:1.7;
-}
-
-.notification button{
-  width:100%;
-  margin-top:15px;
-  padding:11px;
-  border:0;
-  border-radius:10px;
-  background:#292536;
-  color:#fff;
-  font-weight:bold;
-}
-
-/* JACKPOT */
-
-.jackpot-effect{
-  position:fixed;
-  inset:0;
-  z-index:50000;
-  pointer-events:none;
-  background:
-    radial-gradient(
-      circle at center,
-      #fff 0%,
-      #fff9 4%,
-      #ffe00055 18%,
-      #ff20d733 40%,
-      transparent 75%
-    );
-  animation:jackpotFade 4s forwards;
-}
-
-@keyframes jackpotFade{
-  0%{opacity:0}
-  8%{opacity:1}
-  75%{opacity:1}
-  100%{opacity:0}
-}
-
-.lightning{
-  position:absolute;
-  color:#fff;
-  font-size:150px;
-  text-shadow:
-    0 0 8px #fff,
-    0 0 20px #00f5ff,
-    0 0 45px #00f5ff,
-    0 0 90px #ff20d7;
-  animation:flash .15s infinite;
-}
-
-.l1{top:-35px;left:-25px}
-.l2{top:-35px;right:-25px}
-.l3{bottom:-35px;left:-25px}
-.l4{right:-25px;bottom:-35px}
-
-@keyframes flash{
-  0%,100%{opacity:.15}
-  50%{opacity:1}
-}
-
-.jackpot-text{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:100%;
-  text-align:center;
-  transform:translate(-50%,-50%);
-}
-
-.jackpot-text small{
-  display:block;
-  color:#00f5ff;
-  font-size:10px;
-  letter-spacing:4px;
-}
-
-.jackpot-text h2{
-  margin:7px 0;
-  color:#ff20d7;
-  font-size:clamp(42px,13vw,80px);
-  font-weight:1000;
-  text-shadow:
-    0 0 8px #fff,
-    0 0 20px #ffe000,
-    0 0 50px #ff20d7;
-}
-
-.jackpot-text strong{
-  color:#ffe000;
-  font-size:clamp(25px,8vw,48px);
-}
-
 /* MOBILE */
 
 @media(max-width:430px){
-  .cell{
-    height:52px;
+
+  .sky{
+    height:310px;
   }
 
-  .options{
-    grid-template-columns:repeat(4,1fr);
+  .multiplier{
+    font-size:40px;
+  }
+
+  .rocket{
+    font-size:48px;
   }
 
   .title h1{
-    font-size:30px;
-  }
-
-  .target-value{
-    font-size:19px;
-  }
-
-  .die{
-    width:58px;
-    height:58px;
-  }
-
-  .coconut{
-    width:220px;
-    height:140px;
+    font-size:31px;
   }
 }
 </style>
 </head>
 
 <body>
-
-<!-- WARNING -->
-
-<div class="warning-popup" id="warningPopup">
-
-  <div class="warning-box">
-
-    <div class="warning-icon">⚠️</div>
-
-    <div class="warning-text">
-      !!WARNING INI HANYA GAME SENANG-SENANG
-      BUATAN YANN BUKAN UNTUK JUDI ONLINE!!
-    </div>
-
-    <div class="tiktok">
-      <div class="tiktok-icon">♪</div>
-      <span>@yanzjoy0</span>
-    </div>
-
-    <button onclick="closeWarning()">
-      SAYA MENGERTI
-    </button>
-
-  </div>
-
-</div>
-
 
 <div class="app">
 
@@ -1077,644 +498,218 @@ button{
   </div>
 
   <div class="balance">
-    💰 <span id="balance">Rp150.000.000</span>
+    🪙 <span id="balance">150.000.000</span>
   </div>
 
 </header>
 
-
 <div class="title">
 
-  <small>VIRTUAL ARCADE GAME</small>
+  <small>
+    VIRTUAL ARCADE GAME
+  </small>
 
-  <h1>YANN SPIN</h1>
+  <h1>
+    SPACEMAN
+  </h1>
 
-  <p>Game hiburan dengan saldo virtual</p>
-
-</div>
-
-
-<!-- GAME NAV -->
-
-<div class="game-nav">
-
-  <button
-    id="navSpin"
-    class="active"
-    onclick="showPage('spin')">
-
-    🎰 LUCKY SPIN
-
-  </button>
-
-  <button
-    id="navDice"
-    onclick="showPage('dice')">
-
-    🥥 BATOK DADU
-
-  </button>
+  <p>
+    Game multiplier dengan saldo virtual
+  </p>
 
 </div>
 
+<section class="game">
 
-<!-- TARGET -->
-
-<div class="target-box">
-
-  <div class="target-title">
-    TARGET JACKPOT SPESIAL
+  <div class="game-title">
+    ✦ SPACEMAN ARCADE ✦
   </div>
 
-  <div
-    class="target-value"
-    id="targetValue">
+  <div class="sky" id="sky">
 
-    Rp200.000.000
+    <span class="star s1"></span>
+    <span class="star s2"></span>
+    <span class="star s3"></span>
+    <span class="star s4"></span>
+    <span class="star s5"></span>
+    <span class="star s6"></span>
+    <span class="star s7"></span>
+    <span class="star s8"></span>
+    <span class="star s9"></span>
+
+    <div
+      class="multiplier"
+      id="multiplier">
+      1.00×
+    </div>
+
+    <div class="space-line"></div>
+
+    <div
+      class="rocket"
+      id="rocket">
+
+      🚀
+
+      <span class="flame">
+        🔥
+      </span>
+
+    </div>
+
+    <div
+      class="crash"
+      id="crash">
+
+      <div class="crash-icon">
+        💥
+      </div>
+
+      <h2>
+        CRASH!
+      </h2>
+
+      <p id="crashText">
+        Pesawat berhenti.
+      </p>
+
+    </div>
 
   </div>
 
-  <div class="target-progress">
+  <!-- BET -->
 
-    <div
-      class="target-progress-bar"
-      id="targetProgress">
+  <div class="box">
+
+    <div class="label">
+      BET KOIN VIRTUAL
     </div>
 
-  </div>
-
-  <div
-    class="target-info"
-    id="targetInfo">
-
-    Total bet terkumpul: Rp0
-
-  </div>
-
-</div>
-
-
-<!-- =======================
-     PAGE SPIN
-======================== -->
-
-<section
-  class="page active"
-  id="spinPage">
-
-  <section class="machine">
-
-    <div class="machine-title">
-      ✦ 20 SYMBOL • 6 × 3 ✦
-    </div>
-
-    <div class="slot">
-
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-
-    </div>
-
-
-    <!-- BET -->
-
-    <div class="box">
-
-      <div class="label">
-        BET VIRTUAL
-      </div>
-
-      <div class="bet-control">
-
-        <button onclick="changeBet(-1000)">
-          −
-        </button>
-
-        <input
-          id="betInput"
-          type="number"
-          min="1000"
-          step="1000"
-          value="20000"
-          oninput="manualBet()"
-        >
-
-        <button onclick="changeBet(1000)">
-          +
-        </button>
-
-      </div>
-
-      <div class="bet-info">
-
-        <span>
-          MIN Rp1.000
-        </span>
-
-        <strong id="betDisplay">
-          Rp20.000
-        </strong>
-
-      </div>
-
-      <div class="reward-info">
-
-        Hadiah acak mengikuti nominal bet.
-        <br>
-
-        <strong id="rewardRange">
-          Rp500 – Rp50.000
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <!-- JUMLAH SPIN -->
-
-    <div class="box">
-
-      <div class="label">
-        JUMLAH SPIN
-      </div>
-
-      <div class="options">
-
-        <button class="selected"
-          onclick="selectSpin(1,this)">1×</button>
-
-        <button onclick="selectSpin(5,this)">5×</button>
-        <button onclick="selectSpin(10,this)">10×</button>
-        <button onclick="selectSpin(20,this)">20×</button>
-        <button onclick="selectSpin(30,this)">30×</button>
-        <button onclick="selectSpin(40,this)">40×</button>
-        <button onclick="selectSpin(50,this)">50×</button>
-        <button onclick="selectSpin(60,this)">60×</button>
-        <button onclick="selectSpin(80,this)">80×</button>
-        <button onclick="selectSpin(100,this)">100×</button>
-
-      </div>
-
-    </div>
-
-
-    <!-- SPEED -->
-
-    <div class="box">
-
-      <div class="label">
-        KECEPATAN SPIN
-      </div>
-
-      <div class="speed">
-
-        <button
-          id="normalSpeed"
-          class="selected"
-          onclick="setSpeed('normal')">
-
-          🐢 NORMAL
-
-        </button>
-
-        <button
-          id="fastSpeed"
-          onclick="setSpeed('fast')">
-
-          ⚡ CEPAT
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- AUTO -->
-
-    <div class="box">
-
-      <div class="label">
-        AUTO SPIN
-      </div>
-
-      <div class="auto-control">
-
-        <button
-          id="autoOff"
-          class="active"
-          onclick="setAuto(false)">
-
-          ⏹ AUTO OFF
-
-        </button>
-
-        <button
-          id="autoOn"
-          onclick="setAuto(true)">
-
-          🔄 AUTO ON
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- STATUS -->
-
-    <div
-      class="status"
-      id="status">
-
-      <div
-        class="status-main"
-        id="statusMain">
-
-        SPIN KE-1 / 1
-
-      </div>
-
-      <div
-        class="status-sub"
-        id="statusSub">
-
-        0× SPIN TERSISA
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="spin"
-      id="spinButton"
-      onclick="startSpin()">
-
-      🎰 SPIN 1×
-
-    </button>
-
-
-    <!-- RESULT -->
-
-    <div
-      class="result"
-      id="result">
-
-      <h3 id="resultTitle">
-        -
-      </h3>
-
-      <div
-        class="reward"
-        id="resultReward">
-
-        Rp0
-
-      </div>
-
-      <div
-        class="info"
-        id="resultInfo">
-
-        -
-
-      </div>
-
-    </div>
-
-
-    <!-- SUMMARY -->
-
-    <div
-      class="summary"
-      id="summary">
-
-      <h3>
-        📊 HASIL SEMUA SPIN
-      </h3>
-
-      <div class="row">
-        <span>Jumlah Spin</span>
-        <strong id="sumSpins">0×</strong>
-      </div>
-
-      <div class="row">
-        <span>Total Bet</span>
-        <strong id="sumCost">Rp0</strong>
-      </div>
-
-      <div class="row">
-        <span>Total Reward</span>
-        <strong id="sumReward">Rp0</strong>
-      </div>
-
-      <div class="row">
-        <span>Saldo Setelah Batch</span>
-        <strong id="sumAfter">Rp0</strong>
-      </div>
-
-    </div>
-
-  </section>
-
-</section>
-
-
-<!-- =======================
-     PAGE BATOK DADU
-======================== -->
-
-<section
-  class="page"
-  id="dicePage">
-
-  <section class="coconut-game">
-
-    <div class="coconut-title">
-      🥥 BATOK 3 DADU
-    </div>
-
-    <div class="coconut-sub">
-      Pilih 1–3 angka. Angka yang sama boleh dipilih lagi.
-    </div>
-
-
-    <div class="dice-area">
-
-      <div class="dices">
-
-        <div class="die" id="die1">?</div>
-        <div class="die" id="die2">?</div>
-        <div class="die" id="die3">?</div>
-
-      </div>
-
-      <div
-        class="coconut"
-        id="coconut">
-      </div>
-
-    </div>
-
-
-    <div class="dice-result">
-
-      <div class="dice-result-label">
-        HASIL DADU
-      </div>
-
-      <div
-        class="dice-numbers"
-        id="diceNumbers">
-
-        ? ? ?
-
-      </div>
-
-    </div>
-
-
-    <!-- BET DADU -->
-
-    <div class="box">
-
-      <div class="label">
-        BET BATOK DADU
-      </div>
-
-      <div class="bet-control">
-
-        <button onclick="changeDiceBet(-1000)">
-          −
-        </button>
-
-        <input
-          id="diceBetInput"
-          type="number"
-          min="1000"
-          step="1000"
-          value="20000"
-          oninput="manualDiceBet()"
-        >
-
-        <button onclick="changeDiceBet(1000)">
-          +
-        </button>
-
-      </div>
-
-      <div class="bet-info">
-
-        <span>
-          BET
-        </span>
-
-        <strong id="diceBetDisplay">
-          Rp20.000
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <!-- PILIH ANGKA -->
-
-    <div class="box">
-
-      <div class="label">
-        PILIH 1–3 ANGKA
-      </div>
-
-      <div
-        class="selected-numbers"
-        id="selectedNumbers">
-
-        Belum memilih angka
-
-      </div>
-
-      <div class="number-pad">
-
-        <button onclick="chooseDiceNumber(1)">1</button>
-        <button onclick="chooseDiceNumber(2)">2</button>
-        <button onclick="chooseDiceNumber(3)">3</button>
-        <button onclick="chooseDiceNumber(4)">4</button>
-        <button onclick="chooseDiceNumber(5)">5</button>
-        <button onclick="chooseDiceNumber(6)">6</button>
-
-      </div>
-
-      <div class="dice-info">
-
-        Contoh pilihan:
-        <strong>6, 6, 6</strong>
-        atau
-        <strong>6, 3, 6</strong>.
-
-      </div>
-
-      <button
-        class="dice-play"
-        id="dicePlay"
-        onclick="playDice()">
-
-        🥥 BUKA BATOK
-
+    <div class="bet-control">
+
+      <button onclick="changeBet(-10000)">
+        −
+      </button>
+
+      <input
+        id="betInput"
+        type="number"
+        min="1000"
+        step="1000"
+        value="20000"
+        oninput="manualBet()"
+      >
+
+      <button onclick="changeBet(10000)">
+        +
       </button>
 
     </div>
 
+    <div class="bet-info">
+
+      <span>
+        MIN Rp1.000
+      </span>
+
+      <strong id="betDisplay">
+        Rp20.000
+      </strong>
+
+    </div>
+
+  </div>
+
+  <button
+    class="start"
+    id="startButton"
+    onclick="startRound()">
+
+    🚀 MULAI ROUND
+
+  </button>
+
+  <button
+    class="cashout"
+    id="cashoutButton"
+    onclick="cashout()"
+    disabled>
+
+    🪙 AMBIL HADIAH
+
+  </button>
+
+  <div
+    class="result"
+    id="result">
+
+    <h3 id="resultTitle">
+      -
+    </h3>
 
     <div
-      class="dice-result-box"
-      id="diceResultBox">
+      class="reward"
+      id="resultReward">
+      Rp0
+    </div>
 
-      <h3 id="diceResultTitle">
-        -
-      </h3>
+    <div
+      class="info"
+      id="resultInfo">
+      -
+    </div>
 
-      <div
-        class="dice-reward"
-        id="diceReward">
+  </div>
 
-        Rp0
+</section>
 
-      </div>
+<!-- HISTORY -->
 
-      <div
-        class="info"
-        id="diceResultInfo">
+<section class="history">
 
-        -
+  <div class="history-title">
+    📜 RIWAYAT ROUND
+  </div>
+
+  <div id="historyList">
+
+    <div class="history-item">
+
+      <div class="history-left">
+
+        <div class="history-icon">
+          🚀
+        </div>
+
+        <div>
+
+          <strong>
+            Belum ada round
+          </strong>
+
+          <small>
+            Mulai permainan untuk melihat riwayat.
+          </small>
+
+        </div>
 
       </div>
 
     </div>
 
-  </section>
+  </div>
 
 </section>
-
-
-<!-- STATS -->
-
-<div class="stats">
-
-  <div class="stat">
-
-    <strong id="totalSpins">
-      0
-    </strong>
-
-    <span>
-      TOTAL SPIN
-    </span>
-
-  </div>
-
-  <div class="stat">
-
-    <strong id="today">
-      Rp0
-    </strong>
-
-    <span>
-      TOTAL REWARD
-    </span>
-
-  </div>
-
-  <div class="stat">
-
-    <strong id="level">
-      1
-    </strong>
-
-    <span>
-      LEVEL
-    </span>
-
-  </div>
-
-</div>
-
 
 <footer class="footer">
 
   <small>
-    YANN SPIN • GAME HIBURAN SALDO VIRTUAL
+    YANN SPIN • SPACEMAN • KOIN VIRTUAL • GAME HIBURAN
   </small>
 
 </footer>
 
 </div>
-
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
-
-  <button
-    id="bottomSpin"
-    class="active"
-    onclick="showPage('spin')">
-
-    🎰<br>
-    Spin
-
-  </button>
-
-  <button
-    id="bottomDice"
-    onclick="showPage('dice')">
-
-    🥥<br>
-    Batok Dadu
-
-  </button>
-
-</nav>
-
-
-<!-- AUDIO -->
-
-<audio
-  id="bgMusic"
-  src="https://files.catbox.moe/470eq8.mp3"
-  loop
-  preload="auto">
-</audio>
-
-<audio
-  id="spinMusic"
-  src="https://files.catbox.moe/zsp80l.mp3"
-  loop
-  preload="auto">
-</audio>
-
 
 <script>
 
@@ -1724,102 +719,79 @@ button{
 
 const START_BALANCE = 150000000;
 const MIN_BET = 1000;
-const MAX_SPIN = 100;
+
+/*
+  Maksimum multiplier hanya digunakan
+  sebagai batas gameplay virtual.
+*/
+
+const MAX_MULTIPLIER = 100;
+
+/* =====================================================
+   STATE
+===================================================== */
 
 let balance = START_BALANCE;
 
 let bet = 20000;
-let diceBet = 20000;
 
-let selectedSpins = 1;
+let multiplier = 1;
 
-let speedMode = "normal";
-let autoSpin = false;
+let flying = false;
 
-let spinning = false;
+let roundNumber = 0;
 
-let batchReward = 0;
-let batchCost = 0;
-let batchSpins = 0;
+let timer = null;
 
-let totalSpins = 0;
-let totalReward = 0;
+let startTime = 0;
 
-let accumulatedBet = 0;
-
-let targetLevel = 1;
-
-let currentSpin = 0;
-let spinsRemaining = 0;
-
-let selectedDiceNumbers = [];
-let dicePlaying = false;
-
-
-/* =====================================================
-   TARGET BERTINGKAT
-===================================================== */
-
-function getTarget(){
-
-  return 200000000 * targetLevel;
-
-}
-
-function getJackpotReward(){
-
-  return 1000000000 * targetLevel;
-
-}
-
-
-/* =====================================================
-   SYMBOL
-===================================================== */
-
-const symbols = [
-
-  {name:"Gambar 1",img:"https://files.catbox.moe/o7z2kk.jpg"},
-  {name:"Gambar 2",img:"https://files.catbox.moe/b8obbf.jpg"},
-  {name:"Gambar 3",img:"https://files.catbox.moe/xt8goq.jpg"},
-  {name:"Gambar 4",img:"https://files.catbox.moe/0thet4.jpg"},
-  {name:"Gambar 5",img:"https://files.catbox.moe/wett95.jpg"},
-  {name:"Gambar 6",img:"https://files.catbox.moe/vv7n51.jpg"},
-  {name:"Gambar 7",img:"https://files.catbox.moe/q4peq9.jpg"},
-  {name:"Gambar 8",img:"https://files.catbox.moe/wiq2m8.jpg"},
-  {name:"Gambar 9",img:"https://files.catbox.moe/ewa0m3.jpg"},
-  {name:"Gambar 10",img:"https://files.catbox.moe/x6x868.jpg"},
-  {name:"Gambar 11",img:"https://files.catbox.moe/i18snn.jpg"},
-  {name:"Gambar 12",img:"https://files.catbox.moe/v7o2ii.jpg"},
-  {name:"Gambar 13",img:"https://files.catbox.moe/2o14hm.jpg"},
-  {name:"Gambar 14",img:"https://files.catbox.moe/qez9aa.jpg"},
-  {name:"Gambar 15",img:"https://files.catbox.moe/khn71a.jpg"},
-  {name:"Gambar 16",img:"https://files.catbox.moe/e825w3.jpg"},
-  {name:"Gambar 17",img:"https://files.catbox.moe/s38w3p.jpg"},
-  {name:"Gambar 18",img:"https://files.catbox.moe/3jeyyl.jpg"},
-  {name:"Gambar 19",img:"https://files.catbox.moe/fth8e5.jpg"},
-  {
-    name:"SCATTER MERAH",
-    img:"https://files.catbox.moe/uw7f71.jpeg",
-    scatter:true
-  }
-
-];
-
+let crashPoint = 1;
 
 /* =====================================================
    ELEMENT
 ===================================================== */
 
-const cells =
-  document.querySelectorAll(".cell");
+const balanceEl =
+  document.getElementById("balance");
 
-const bgMusic =
-  document.getElementById("bgMusic");
+const betInput =
+  document.getElementById("betInput");
 
-const spinMusic =
-  document.getElementById("spinMusic");
+const betDisplay =
+  document.getElementById("betDisplay");
 
+const multiplierEl =
+  document.getElementById("multiplier");
+
+const rocketEl =
+  document.getElementById("rocket");
+
+const crashEl =
+  document.getElementById("crash");
+
+const crashText =
+  document.getElementById("crashText");
+
+const startButton =
+  document.getElementById("startButton");
+
+const cashoutButton =
+  document.getElementById("cashoutButton");
+
+const result =
+  document.getElementById("result");
+
+const resultTitle =
+  document.getElementById("resultTitle");
+
+const resultReward =
+  document.getElementById("resultReward");
+
+const resultInfo =
+  document.getElementById("resultInfo");
+
+const historyList =
+  document.getElementById("historyList");
 
 /* =====================================================
    FORMAT
@@ -1828,254 +800,62 @@ const spinMusic =
 function formatRupiah(value){
 
   return "Rp" +
-    Math.max(
-      0,
-      Math.floor(Number(value)||0)
+    Math.floor(
+      Number(value) || 0
     ).toLocaleString("id-ID");
 
 }
 
-
 /* =====================================================
-   WARNING + AUDIO
+   UPDATE
 ===================================================== */
 
-function closeWarning(){
+function updateUI(){
 
-  document
-    .getElementById("warningPopup")
-    .classList.add("hidden");
+  balanceEl.textContent =
+    Number(balance)
+      .toLocaleString("id-ID");
 
-  /*
-    Browser biasanya mengizinkan
-    audio setelah klik user.
-  */
+  betInput.value =
+    bet;
 
-  bgMusic.volume = 1;
-  spinMusic.volume = 1;
-
-  bgMusic
-    .play()
-    .catch(()=>{});
+  betDisplay.textContent =
+    formatRupiah(bet);
 
 }
 
-
 /* =====================================================
-   NAVIGASI
-===================================================== */
-
-function showPage(page){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(p =>
-      p.classList.remove("active")
-    );
-
-  document
-    .getElementById(
-      page === "spin"
-        ? "spinPage"
-        : "dicePage"
-    )
-    .classList.add("active");
-
-  document
-    .getElementById("navSpin")
-    .classList.toggle(
-      "active",
-      page === "spin"
-    );
-
-  document
-    .getElementById("navDice")
-    .classList.toggle(
-      "active",
-      page === "dice"
-    );
-
-  document
-    .getElementById("bottomSpin")
-    .classList.toggle(
-      "active",
-      page === "spin"
-    );
-
-  document
-    .getElementById("bottomDice")
-    .classList.toggle(
-      "active",
-      page === "dice"
-    );
-
-}
-
-
-/* =====================================================
-   TARGET
-===================================================== */
-
-function updateTarget(){
-
-  const target =
-    getTarget();
-
-  const percent =
-    Math.min(
-      100,
-      (accumulatedBet / target) * 100
-    );
-
-  document
-    .getElementById("targetValue")
-    .textContent =
-      formatRupiah(target);
-
-  document
-    .getElementById("targetProgress")
-    .style.width =
-      percent + "%";
-
-  const remaining =
-    Math.max(
-      0,
-      target - accumulatedBet
-    );
-
-  document
-    .getElementById("targetInfo")
-    .textContent =
-      "Target " +
-      targetLevel +
-      " • Total bet: " +
-      formatRupiah(accumulatedBet) +
-      " • Kurang: " +
-      formatRupiah(remaining);
-
-}
-
-
-/* =====================================================
-   TARGET JACKPOT
-===================================================== */
-
-function checkTarget(){
-
-  const target =
-    getTarget();
-
-  if(
-    accumulatedBet >= target
-  ){
-
-    const reward =
-      getJackpotReward();
-
-    /*
-      Target naik satu level.
-      Reward juga naik satu level.
-    */
-
-    targetLevel++;
-
-    balance += reward;
-
-    totalReward += reward;
-
-    showJackpotEffect(
-      reward,
-      targetLevel - 1
-    );
-
-    showNotification(
-      "JACKPOT TARGET!",
-      "⚡",
-      reward,
-      "Target tercapai! Target berikutnya " +
-      formatRupiah(getTarget()) +
-      "."
-    );
-
-    updateUI();
-
-  }
-
-}
-
-
-/* =====================================================
-   BET SPIN
+   BET
 ===================================================== */
 
 function changeBet(amount){
 
-  if(spinning)
+  if(flying){
     return;
-
-  let newBet =
-    bet + amount;
-
-  newBet =
-    Math.floor(
-      newBet / 1000
-    ) * 1000;
-
-  newBet =
-    Math.max(
-      MIN_BET,
-      newBet
-    );
-
-  newBet =
-    Math.min(
-      balance,
-      newBet
-    );
-
-  newBet =
-    Math.floor(
-      newBet / 1000
-    ) * 1000;
-
-  bet = newBet;
-
-  updateUI();
-
-}
-
-
-function manualBet(){
-
-  if(spinning)
-    return;
+  }
 
   let value =
-    Number(
-      document
-        .getElementById("betInput")
-        .value
-    );
-
-  if(!Number.isFinite(value))
-    value = MIN_BET;
+    bet + amount;
 
   value =
     Math.floor(
       value / 1000
     ) * 1000;
 
-  value =
-    Math.max(
-      MIN_BET,
-      value
-    );
+  if(value < MIN_BET){
+    value = MIN_BET;
+  }
 
-  value =
-    Math.min(
-      balance,
-      value
-    );
+  if(value > balance){
+    value =
+      Math.floor(
+        balance / 1000
+      ) * 1000;
+  }
+
+  if(value < MIN_BET){
+    value = MIN_BET;
+  }
 
   bet = value;
 
@@ -2083,1340 +863,462 @@ function manualBet(){
 
 }
 
+function manualBet(){
 
-/* =====================================================
-   REWARD SPIN
-===================================================== */
-
-function getRewardRange(){
-
-  if(bet < 50000){
-
-    return {
-      min:500,
-      max:50000
-    };
-
-  }
-
-  if(bet < 500000){
-
-    return {
-      min:10000,
-      max:300000
-    };
-
-  }
-
-  if(bet < 1000000){
-
-    return {
-      min:50000,
-      max:700000
-    };
-
-  }
-
-  if(bet < 1500000){
-
-    return {
-      min:100000,
-      max:1000000
-    };
-
-  }
-
-  if(bet === 1500000){
-
-    return {
-      min:100000,
-      max:1300000
-    };
-
-  }
-
-  const max =
-    Math.floor(
-      bet * .85 / 1000
-    ) * 1000;
-
-  const min =
-    Math.max(
-      100000,
-      Math.floor(
-        bet * .10 / 1000
-      ) * 1000
-    );
-
-  return {
-    min:min,
-    max:Math.max(min,max)
-  };
-
-}
-
-
-function randomReward(){
-
-  const range =
-    getRewardRange();
-
-  const steps =
-    Math.floor(
-      (range.max-range.min)/1000
-    );
-
-  return (
-    range.min +
-    Math.floor(
-      Math.random() *
-      (steps+1)
-    ) * 1000
-  );
-
-}
-
-
-/* =====================================================
-   SPIN
-===================================================== */
-
-function selectSpin(amount,button){
-
-  if(spinning)
+  if(flying){
     return;
-
-  selectedSpins =
-    Math.min(
-      MAX_SPIN,
-      amount
-    );
-
-  document
-    .querySelectorAll(".options button")
-    .forEach(
-      b =>
-        b.classList.remove("selected")
-    );
-
-  button.classList.add("selected");
-
-  updateUI();
-
-}
-
-
-function setSpeed(mode){
-
-  if(spinning)
-    return;
-
-  speedMode = mode;
-
-  document
-    .getElementById("normalSpeed")
-    .classList.toggle(
-      "selected",
-      mode === "normal"
-    );
-
-  document
-    .getElementById("fastSpeed")
-    .classList.toggle(
-      "selected",
-      mode === "fast"
-    );
-
-}
-
-
-function setAuto(value){
-
-  if(spinning)
-    return;
-
-  autoSpin = value;
-
-  document
-    .getElementById("autoOff")
-    .classList.toggle(
-      "active",
-      !value
-    );
-
-  document
-    .getElementById("autoOn")
-    .classList.toggle(
-      "active",
-      value
-    );
-
-}
-
-
-function randomSymbol(){
-
-  return symbols[
-    Math.floor(
-      Math.random() *
-      symbols.length
-    )
-  ];
-
-}
-
-
-function createResult(){
-
-  const result=[];
-
-  for(
-    let i=0;
-    i<18;
-    i++
-  ){
-
-    result.push(
-      randomSymbol()
-    );
-
   }
-
-  return result;
-
-}
-
-
-function getMatchCount(result){
-
-  const counts={};
-
-  result.forEach(symbol => {
-
-    counts[symbol.name] =
-      (counts[symbol.name]||0)+1;
-
-  });
-
-  return Math.max(
-    ...Object.values(counts)
-  );
-
-}
-
-
-function getScatterCount(result){
-
-  return result.filter(
-    symbol =>
-      symbol.scatter
-  ).length;
-
-}
-
-
-/* =====================================================
-   SPIN ONCE
-===================================================== */
-
-function spinOnce(callback){
-
-  spinMusic.currentTime=0;
-
-  spinMusic.volume=1;
-
-  spinMusic
-    .play()
-    .catch(()=>{});
-
-  cells.forEach(
-    cell =>
-      cell.classList.add("rolling")
-  );
-
-  const intervalTime =
-    speedMode === "fast"
-      ? 35
-      : 60;
-
-  const duration =
-    speedMode === "fast"
-      ? 700
-      : 1200;
-
-  const timer =
-    setInterval(
-      () => {
-
-        cells.forEach(cell => {
-
-          const symbol =
-            randomSymbol();
-
-          cell.innerHTML =
-            `<img src="${symbol.img}" alt="${symbol.name}">`;
-
-          cell.classList.remove(
-            "win",
-            "scatter"
-          );
-
-        });
-
-      },
-      intervalTime
-    );
-
-  setTimeout(() => {
-
-    clearInterval(timer);
-
-    cells.forEach(
-      cell =>
-        cell.classList.remove("rolling")
-    );
-
-    const result =
-      createResult();
-
-    cells.forEach(
-      (cell,index) => {
-
-        const symbol =
-          result[index];
-
-        cell.innerHTML =
-          `<img src="${symbol.img}" alt="${symbol.name}">`;
-
-        if(symbol.scatter){
-
-          cell.classList.add(
-            "scatter"
-          );
-
-        }
-
-      }
-    );
-
-    const counts={};
-
-    result.forEach(symbol => {
-
-      counts[symbol.name] =
-        (counts[symbol.name]||0)+1;
-
-    });
-
-    const best =
-      Math.max(
-        ...Object.values(counts)
-      );
-
-    cells.forEach(
-      (cell,index) => {
-
-        if(
-          !result[index].scatter &&
-          counts[result[index].name] === best &&
-          best >= 2
-        ){
-
-          cell.classList.add("win");
-
-        }
-
-      }
-    );
-
-    /*
-      Sound spin selesai.
-      Musik utama kembali.
-    */
-
-    spinMusic.pause();
-    spinMusic.currentTime=0;
-
-    bgMusic
-      .play()
-      .catch(()=>{});
-
-    callback(result);
-
-  },duration);
-
-}
-
-
-/* =====================================================
-   HANDLE SPIN RESULT
-===================================================== */
-
-function handleResult(result){
-
-  const match =
-    getMatchCount(result);
-
-  const scatter =
-    getScatterCount(result);
-
-  let reward =
-    randomReward();
-
-  /*
-    Untuk spin besar,
-    reward tetap mengikuti bet.
-  */
-
-  if(match >= 18){
-
-    reward =
-      Math.max(
-        reward,
-        Math.min(
-          1300000,
-          Math.floor(
-            bet * .85 / 1000
-          ) * 1000
-        )
-      );
-
-  }
-
-  if(scatter >= 5){
-
-    reward =
-      Math.max(
-        reward,
-        Math.floor(
-          bet * .60 / 1000
-        ) * 1000
-      );
-
-  }
-
-  /*
-    Jika target sudah tercapai
-    pada spin terakhir, tampilkan
-    scatter merah spesial.
-  */
-
-  if(
-    accumulatedBet + bet >=
-    getTarget()
-  ){
-
-    reward =
-      Math.max(
-        reward,
-        Math.floor(
-          bet * .85 / 1000
-        ) * 1000
-      );
-
-  }
-
-  balance += reward;
-
-  totalReward += reward;
-
-  batchReward += reward;
-
-  totalSpins++;
-
-  batchSpins++;
-
-  showResult(
-    match,
-    scatter,
-    reward
-  );
-
-  checkTarget();
-
-  updateUI();
-
-}
-
-
-/* =====================================================
-   START SPIN
-===================================================== */
-
-function startSpin(){
-
-  if(spinning)
-    return;
-
-  const totalCost =
-    bet * selectedSpins;
-
-  if(totalCost > balance){
-
-    showNotification(
-      "SALDO TIDAK CUKUP",
-      "💰",
-      0,
-      "Saldo virtual tidak cukup untuk batch ini."
-    );
-
-    return;
-
-  }
-
-  const before =
-    balance;
-
-  balance -= totalCost;
-
-  accumulatedBet +=
-    totalCost;
-
-  batchBefore =
-    before;
-
-  batchCost =
-    totalCost;
-
-  batchReward=0;
-
-  batchSpins=0;
-
-  currentSpin=0;
-
-  spinsRemaining=
-    selectedSpins;
-
-  spinning=true;
-
-  document
-    .getElementById("spinButton")
-    .disabled=true;
-
-  document
-    .getElementById("summary")
-    .classList.remove("show");
-
-  document
-    .getElementById("result")
-    .classList.remove("show");
-
-  document
-    .getElementById("status")
-    .classList.add("show");
-
-  updateUI();
-
-  runNextSpin();
-
-}
-
-
-/* =====================================================
-   NEXT SPIN
-===================================================== */
-
-function runNextSpin(){
-
-  if(spinsRemaining <= 0){
-
-    finishBatch();
-
-    return;
-
-  }
-
-  currentSpin++;
-
-  spinsRemaining--;
-
-  updateStatus();
-
-  spinOnce(result => {
-
-    handleResult(result);
-
-    const delay =
-      speedMode === "fast"
-        ? 250
-        : 550;
-
-    if(spinsRemaining > 0){
-
-      setTimeout(
-        runNextSpin,
-        delay
-      );
-
-    }
-    else{
-
-      setTimeout(
-        finishBatch,
-        delay
-      );
-
-    }
-
-  });
-
-}
-
-
-function updateStatus(){
-
-  document
-    .getElementById("statusMain")
-    .textContent =
-      "SPIN KE-" +
-      currentSpin +
-      " / " +
-      selectedSpins;
-
-  document
-    .getElementById("statusSub")
-    .textContent =
-      "KURANG " +
-      spinsRemaining +
-      "× SPIN";
-
-}
-
-
-/* =====================================================
-   FINISH BATCH
-===================================================== */
-
-function finishBatch(){
-
-  spinning=false;
-
-  document
-    .getElementById("spinButton")
-    .disabled=false;
-
-  document
-    .getElementById("status")
-    .classList.remove("show");
-
-  document
-    .getElementById("sumSpins")
-    .textContent =
-      batchSpins+"×";
-
-  document
-    .getElementById("sumCost")
-    .textContent =
-      formatRupiah(batchCost);
-
-  document
-    .getElementById("sumReward")
-    .textContent =
-      formatRupiah(batchReward);
-
-  document
-    .getElementById("sumAfter")
-    .textContent =
-      formatRupiah(balance);
-
-  document
-    .getElementById("summary")
-    .classList.add("show");
-
-  updateUI();
-
-  if(
-    autoSpin &&
-    balance >= bet
-  ){
-
-    setTimeout(
-      startSpin,
-      speedMode === "fast"
-        ? 300
-        : 700
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   SHOW RESULT
-===================================================== */
-
-function showResult(
-  match,
-  scatter,
-  reward
-){
-
-  const box =
-    document.getElementById("result");
-
-  const title =
-    document.getElementById("resultTitle");
-
-  const rewardBox =
-    document.getElementById("resultReward");
-
-  const info =
-    document.getElementById("resultInfo");
-
-  box.classList.remove("jackpot");
-
-  if(scatter >= 18){
-
-    box.classList.add("jackpot");
-
-    title.textContent =
-      "🔴 SCATTER MERAH!";
-
-    rewardBox.textContent =
-      formatRupiah(reward);
-
-    info.textContent =
-      "SCATTER PENUH!";
-
-  }
-
-  else if(match >= 18){
-
-    box.classList.add("jackpot");
-
-    title.textContent =
-      "⚡ JACKPOT 18 KEMBAR!";
-
-    rewardBox.textContent =
-      formatRupiah(reward);
-
-    info.textContent =
-      "18 gambar kembar.";
-
-  }
-
-  else{
-
-    title.textContent =
-      "🎉 SELAMAT ANDA MENDAPATKAN";
-
-    rewardBox.textContent =
-      formatRupiah(reward);
-
-    info.textContent =
-      "Kembar " +
-      match +
-      "× • Bet " +
-      formatRupiah(bet);
-
-  }
-
-  box.classList.add("show");
-
-}
-
-
-/* =====================================================
-   DICE BET
-===================================================== */
-
-function changeDiceBet(amount){
-
-  if(dicePlaying)
-    return;
-
-  let value =
-    diceBet + amount;
-
-  value =
-    Math.floor(
-      value/1000
-    )*1000;
-
-  value =
-    Math.max(
-      MIN_BET,
-      value
-    );
-
-  value =
-    Math.min(
-      balance,
-      value
-    );
-
-  diceBet=value;
-
-  updateUI();
-
-}
-
-
-function manualDiceBet(){
-
-  if(dicePlaying)
-    return;
 
   let value =
     Number(
-      document
-        .getElementById("diceBetInput")
-        .value
+      betInput.value
     );
 
-  if(!Number.isFinite(value))
-    value=MIN_BET;
+  if(!Number.isFinite(value)){
+    value = MIN_BET;
+  }
 
   value =
     Math.floor(
-      value/1000
-    )*1000;
+      value / 1000
+    ) * 1000;
 
-  value =
-    Math.max(
-      MIN_BET,
-      value
-    );
+  if(value < MIN_BET){
+    value = MIN_BET;
+  }
 
-  value =
-    Math.min(
-      balance,
-      value
-    );
+  if(value > balance){
+    value =
+      Math.floor(
+        balance / 1000
+      ) * 1000;
+  }
 
-  diceBet=value;
+  if(value < MIN_BET){
+    value = MIN_BET;
+  }
+
+  bet = value;
 
   updateUI();
 
 }
 
-
 /* =====================================================
-   PILIH ANGKA DADU
+   CRASH POINT
 ===================================================== */
 
-function chooseDiceNumber(number){
-
-  if(dicePlaying)
-    return;
-
-  if(
-    selectedDiceNumbers.length >= 3
-  )
-    return;
+function generateCrashPoint(){
 
   /*
-    Tidak memakai Set.
-    Jadi angka yang sama
-    boleh dipilih lagi.
+    Crash point dibuat acak untuk gameplay.
+    Tidak menggunakan uang asli.
   */
 
-  selectedDiceNumbers.push(
-    number
-  );
+  const r =
+    Math.random();
 
-  updateSelectedDice();
+  if(r < 0.45){
+    return 1.10 +
+      Math.random() * 0.90;
+  }
+
+  if(r < 0.75){
+    return 2 +
+      Math.random() * 2;
+  }
+
+  if(r < 0.93){
+    return 4 +
+      Math.random() * 6;
+  }
+
+  if(r < 0.99){
+    return 10 +
+      Math.random() * 20;
+  }
+
+  return 30 +
+    Math.random() * 70;
 
 }
 
+/* =====================================================
+   START ROUND
+===================================================== */
 
-function updateSelectedDice(){
+function startRound(){
 
-  const box =
-    document.getElementById(
-      "selectedNumbers"
+  if(flying){
+    return;
+  }
+
+  if(balance < bet){
+
+    showResult(
+      "SALDO VIRTUAL TIDAK CUKUP",
+      0,
+      "Koin virtual tidak mencukupi untuk round ini."
     );
 
+    return;
+
+  }
+
+  roundNumber++;
+
+  balance -= bet;
+
+  multiplier = 1;
+
+  crashPoint =
+    Math.min(
+      MAX_MULTIPLIER,
+      generateCrashPoint()
+    );
+
+  flying = true;
+
+  startTime =
+    performance.now();
+
+  crashEl.classList.remove(
+    "show"
+  );
+
+  multiplierEl.classList.remove(
+    "crashed"
+  );
+
+  result.classList.remove(
+    "show"
+  );
+
+  startButton.disabled = true;
+
+  cashoutButton.disabled = false;
+
+  updateUI();
+
+  timer =
+    requestAnimationFrame(
+      updateFlight
+    );
+
+}
+
+/* =====================================================
+   FLIGHT
+===================================================== */
+
+function updateFlight(now){
+
+  if(!flying){
+    return;
+  }
+
+  const elapsed =
+    (now - startTime) / 1000;
+
+  /*
+    Multiplier naik perlahan
+    lalu semakin cepat.
+  */
+
+  multiplier =
+    1 +
+    (
+      elapsed * 0.55
+    ) +
+    (
+      elapsed *
+      elapsed *
+      0.16
+    );
+
+  multiplier =
+    Math.min(
+      multiplier,
+      MAX_MULTIPLIER
+    );
+
+  multiplierEl.textContent =
+    multiplier.toFixed(2) +
+    "×";
+
+  moveRocket(elapsed);
+
   if(
-    selectedDiceNumbers.length === 0
+    multiplier >=
+    crashPoint
   ){
 
-    box.textContent =
-      "Belum memilih angka";
+    crashRound();
 
     return;
 
   }
 
-  box.textContent =
-    "Pilihan: " +
-    selectedDiceNumbers.join(" • ");
+  timer =
+    requestAnimationFrame(
+      updateFlight
+    );
 
 }
 
-
 /* =====================================================
-   MAIN DADU
+   ROCKET
 ===================================================== */
 
-function playDice(){
+function moveRocket(elapsed){
 
-  if(dicePlaying)
-    return;
-
-  if(
-    selectedDiceNumbers.length < 1
-  ){
-
-    showNotification(
-      "PILIH ANGKA",
-      "🎲",
-      0,
-      "Pilih minimal 1 angka dan maksimal 3 angka."
+  const progress =
+    Math.min(
+      1,
+      elapsed / 20
     );
 
-    return;
+  const x =
+    45 +
+    progress * 500;
 
-  }
+  const y =
+    75 +
+    progress * 180;
 
-  if(diceBet > balance){
+  rocketEl.style.left =
+    Math.min(
+      x,
+      570
+    ) + "px";
 
-    showNotification(
-      "SALDO TIDAK CUKUP",
-      "💰",
-      0,
-      "Saldo virtual tidak cukup."
-    );
-
-    return;
-
-  }
-
-  balance -= diceBet;
-
-  accumulatedBet +=
-    diceBet;
-
-  dicePlaying=true;
-
-  document
-    .getElementById("dicePlay")
-    .disabled=true;
-
-  const coconut =
-    document.getElementById(
-      "coconut"
-    );
-
-  coconut.classList.remove("open");
-
-  const diceEls = [
-
-    document.getElementById("die1"),
-    document.getElementById("die2"),
-    document.getElementById("die3")
-
-  ];
-
-  diceEls.forEach(
-    d =>
-      d.classList.add("rolling")
-  );
-
-  let rolls=0;
-
-  const timer =
-    setInterval(() => {
-
-      diceEls.forEach(d => {
-
-        d.textContent =
-          Math.floor(
-            Math.random()*6
-          )+1;
-
-      });
-
-      rolls++;
-
-      if(rolls >= 18){
-
-        clearInterval(timer);
-
-        const result = [
-
-          Math.floor(Math.random()*6)+1,
-          Math.floor(Math.random()*6)+1,
-          Math.floor(Math.random()*6)+1
-
-        ];
-
-        finishDice(
-          result,
-          diceEls
-        );
-
-      }
-
-    },90);
+  rocketEl.style.bottom =
+    Math.min(
+      y,
+      255
+    ) + "px";
 
 }
 
-
 /* =====================================================
-   FINISH DICE
+   CRASH
 ===================================================== */
 
-function finishDice(
-  result,
-  diceEls
-){
+function crashRound(){
 
-  diceEls.forEach(
-    d =>
-      d.classList.remove("rolling")
+  flying = false;
+
+  cancelAnimationFrame(
+    timer
   );
 
-  diceEls.forEach(
-    (d,index) =>
-      d.textContent =
-        result[index]
+  multiplier =
+    crashPoint;
+
+  multiplierEl.textContent =
+    multiplier.toFixed(2) +
+    "×";
+
+  multiplierEl.classList.add(
+    "crashed"
   );
 
-  document
-    .getElementById("diceNumbers")
-    .textContent =
-      result.join(" • ");
+  cashoutButton.disabled =
+    true;
 
-  /*
-    Batok terbuka.
-  */
+  startButton.disabled =
+    false;
 
-  setTimeout(() => {
+  crashText.textContent =
+    "Pesawat berhenti di " +
+    multiplier.toFixed(2) +
+    "×";
 
-    document
-      .getElementById("coconut")
-      .classList.add("open");
-
-  },150);
-
-  /*
-    Hitung kecocokan berdasarkan
-    pilihan yang boleh double.
-  */
-
-  const remaining =
-    [...result];
-
-  let matches=0;
-
-  selectedDiceNumbers.forEach(
-    chosen => {
-
-      const index =
-        remaining.indexOf(chosen);
-
-      if(index !== -1){
-
-        matches++;
-
-        remaining.splice(
-          index,
-          1
-        );
-
-      }
-
-    }
+  crashEl.classList.add(
+    "show"
   );
 
-  /*
-    Hadiah virtual:
-    1 cocok = 2× bet
-    2 cocok = 3× bet
-    3 cocok = 5× bet
-    Tidak cocok = 0
-  */
+  showResult(
+    "💥 CRASH!",
+    0,
+    "Round selesai. Hadiah belum diambil."
+  );
 
-  let multiplier=0;
+  addHistory(
+    "💥",
+    multiplier,
+    false,
+    0
+  );
 
-  if(matches===1)
-    multiplier=2;
+}
 
-  if(matches===2)
-    multiplier=3;
+/* =====================================================
+   CASHOUT
+===================================================== */
 
-  if(matches===3)
-    multiplier=5;
+function cashout(){
+
+  if(!flying){
+    return;
+  }
+
+  flying = false;
+
+  cancelAnimationFrame(
+    timer
+  );
 
   const reward =
-    diceBet * multiplier;
+    Math.floor(
+      bet * multiplier
+    );
 
-  balance += reward;
+  balance +=
+    reward;
 
-  totalReward += reward;
+  cashoutButton.disabled =
+    true;
 
-  if(reward > 0){
+  startButton.disabled =
+    false;
 
-    document
-      .getElementById("diceResultTitle")
-      .textContent =
-        "🎉 MENANG!";
+  showResult(
+    "🚀 HADIAH DIAMBIL!",
+    reward,
+    "Bet virtual " +
+    formatRupiah(bet) +
+    " × " +
+    multiplier.toFixed(2) +
+    "×"
+  );
 
-  }
-  else{
-
-    document
-      .getElementById("diceResultTitle")
-      .textContent =
-        "😅 BELUM BERUNTUNG";
-
-  }
-
-  document
-    .getElementById("diceReward")
-    .textContent =
-      formatRupiah(reward);
-
-  document
-    .getElementById("diceResultInfo")
-    .textContent =
-      "Pilihan: " +
-      selectedDiceNumbers.join(", ") +
-      " • Cocok " +
-      matches +
-      " angka • " +
-      (multiplier
-        ? "×"+multiplier
-        : "Tidak ada hadiah");
-
-  document
-    .getElementById("diceResultBox")
-    .classList.add("show");
-
-  dicePlaying=false;
-
-  document
-    .getElementById("dicePlay")
-    .disabled=false;
-
-  /*
-    Setelah ronde selesai,
-    pilihan dikosongkan.
-  */
-
-  selectedDiceNumbers=[];
-
-  updateSelectedDice();
-
-  checkTarget();
+  addHistory(
+    "🚀",
+    multiplier,
+    true,
+    reward
+  );
 
   updateUI();
 
 }
 
-
 /* =====================================================
-   UPDATE UI
+   RESULT
 ===================================================== */
 
-function updateUI(){
+function showResult(
+  title,
+  reward,
+  info
+){
 
-  document
-    .getElementById("balance")
-    .textContent =
-      formatRupiah(balance);
+  resultTitle.textContent =
+    title;
 
-  document
-    .getElementById("betInput")
-    .value =
-      bet;
+  resultReward.textContent =
+    reward > 0
+      ? formatRupiah(reward)
+      : "Rp0";
 
-  document
-    .getElementById("betDisplay")
-    .textContent =
-      formatRupiah(bet);
+  resultInfo.textContent =
+    info;
 
-  document
-    .getElementById("diceBetInput")
-    .value =
-      diceBet;
-
-  document
-    .getElementById("diceBetDisplay")
-    .textContent =
-      formatRupiah(diceBet);
-
-  document
-    .getElementById("spinButton")
-    .textContent =
-      "🎰 SPIN " +
-      selectedSpins +
-      "×";
-
-  document
-    .getElementById("totalSpins")
-    .textContent =
-      totalSpins.toLocaleString("id-ID");
-
-  document
-    .getElementById("today")
-    .textContent =
-      formatRupiah(totalReward);
-
-  const range =
-    getRewardRange();
-
-  document
-    .getElementById("rewardRange")
-    .textContent =
-      formatRupiah(range.min) +
-      " – " +
-      formatRupiah(range.max);
-
-  updateTarget();
+  result.classList.add(
+    "show"
+  );
 
 }
 
-
 /* =====================================================
-   NOTIFICATION
+   HISTORY
 ===================================================== */
 
-function showNotification(
-  title,
+function addHistory(
   icon,
-  reward,
-  detail
+  multi,
+  won,
+  reward
 ){
 
-  const old =
-    document.querySelector(
-      ".notification"
+  const empty =
+    historyList.querySelector(
+      ".history-item"
     );
 
-  if(old)
-    old.remove();
+  if(
+    empty &&
+    empty.textContent.includes(
+      "Belum ada round"
+    )
+  ){
 
-  const box =
+    historyList.innerHTML =
+      "";
+
+  }
+
+  const item =
     document.createElement(
       "div"
     );
 
-  box.className =
-    "notification";
+  item.className =
+    "history-item";
 
-  box.innerHTML = `
+  item.innerHTML = `
 
-    <div class="notification-icon">
-      ${icon}
+    <div class="history-left">
+
+      <div class="history-icon">
+        ${icon}
+      </div>
+
+      <div>
+
+        <strong>
+          Round #${roundNumber}
+        </strong>
+
+        <small>
+          Multiplier ${multi.toFixed(2)}×
+        </small>
+
+      </div>
+
     </div>
 
-    <div class="notification-title">
-      ${title}
-    </div>
-
-    <div class="notification-reward">
+    <div class="history-value">
       ${
-        reward > 0
-          ? formatRupiah(reward)
-          : ""
+        won
+          ? "+" + formatRupiah(reward)
+          : "CRASH"
       }
     </div>
 
-    <div class="notification-detail">
-      ${detail}
-    </div>
-
-    <button>
-      LANJUTKAN
-    </button>
-
   `;
 
-  box
-    .querySelector("button")
-    .onclick =
-      () =>
-        box.remove();
-
-  document
-    .body
-    .appendChild(box);
-
-}
-
-
-/* =====================================================
-   JACKPOT EFFECT
-===================================================== */
-
-function showJackpotEffect(
-  reward,
-  level
-){
-
-  const effect =
-    document.createElement(
-      "div"
-    );
-
-  effect.className =
-    "jackpot-effect";
-
-  effect.innerHTML = `
-
-    <div class="lightning l1">⚡</div>
-    <div class="lightning l2">⚡</div>
-    <div class="lightning l3">⚡</div>
-    <div class="lightning l4">⚡</div>
-
-    <div class="jackpot-text">
-
-      <small>
-        ✦ TARGET LEVEL ${level} TERCAPAI ✦
-      </small>
-
-      <h2>
-        JACKPOT!
-      </h2>
-
-      <strong>
-        +${formatRupiah(reward)}
-      </strong>
-
-    </div>
-
-  `;
-
-  document
-    .body
-    .appendChild(effect);
-
-  setTimeout(
-    () =>
-      effect.remove(),
-    4000
+  historyList.prepend(
+    item
   );
 
-}
+  while(
+    historyList.children.length > 10
+  ){
 
+    historyList.lastElementChild
+      .remove();
+
+  }
+
+}
 
 /* =====================================================
-   INITIALIZE SLOT
+   INITIALIZE
 ===================================================== */
 
-function initializeSlot(){
-
-  cells.forEach(
-    cell => {
-
-      const symbol =
-        randomSymbol();
-
-      cell.innerHTML =
-        `<img src="${symbol.img}" alt="${symbol.name}">`;
-
-    }
-  );
-
-  updateUI();
-
-}
-
-
-initializeSlot();
+updateUI();
 
 </script>
 
