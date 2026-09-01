@@ -3,13 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>YANN SPIN — Virtual Arcade</title>
+<title>YANN SPIN — Arcade Virtual</title>
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+}
+
+:root{
+  --cyan:#00f5ff;
+  --pink:#ff39d5;
+  --yellow:#ffd83d;
+  --green:#35ff86;
+  --red:#ff3b5f;
+  --bg:#030307;
+  --panel:#11101b;
 }
 
 body{
@@ -28,47 +38,88 @@ button{
 }
 
 button:disabled{
+  opacity:.45;
   cursor:not-allowed;
 }
 
 .app{
   width:min(720px,100%);
   margin:auto;
-  padding:14px 12px 110px;
+  padding:14px 12px 100px;
 }
 
-/* =====================================================
-   HEADER
-===================================================== */
+/* HEADER */
 
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:14px;
+  margin-bottom:15px;
 }
 
 .logo{
-  color:#00f5ff;
+  color:var(--cyan);
   font-size:20px;
   font-weight:1000;
   letter-spacing:2px;
-  text-shadow:0 0 15px #00f5ff;
+  text-shadow:0 0 15px var(--cyan);
 }
 
 .balance{
   padding:9px 14px;
-  border:1px solid #ffd83d;
+  border:1px solid var(--yellow);
   border-radius:30px;
-  color:#ffd83d;
+  color:var(--yellow);
   background:#ffd83d12;
   font-size:13px;
   font-weight:1000;
 }
 
-/* =====================================================
-   TITLE
-===================================================== */
+/* NAVIGATION */
+
+.game-nav{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.game-nav button{
+  min-height:72px;
+  padding:10px 5px;
+  border:1px solid #ffffff12;
+  border-radius:17px;
+  color:#888;
+  background:#0d0c16;
+  font-size:11px;
+  font-weight:1000;
+  transition:.2s;
+}
+
+.game-nav button .nav-icon{
+  display:block;
+  margin-bottom:5px;
+  font-size:25px;
+}
+
+.game-nav button.active{
+  color:var(--cyan);
+  border-color:#00f5ff55;
+  background:#00f5ff0d;
+  box-shadow:0 0 22px #00f5ff18;
+}
+
+/* PAGES */
+
+.game-page{
+  display:none;
+}
+
+.game-page.active{
+  display:block;
+}
+
+/* TITLE */
 
 .title{
   text-align:center;
@@ -76,19 +127,19 @@ button:disabled{
 }
 
 .title small{
-  color:#00f5ff;
+  color:var(--cyan);
   font-size:9px;
   letter-spacing:4px;
 }
 
 .title h1{
   margin-top:5px;
-  color:#ff39d5;
+  color:var(--pink);
   font-size:38px;
   font-weight:1000;
   text-shadow:
-    0 0 10px #ff39d5,
-    0 0 35px #ff39d5;
+    0 0 10px var(--pink),
+    0 0 35px var(--pink);
 }
 
 .title p{
@@ -97,65 +148,79 @@ button:disabled{
   font-size:10px;
 }
 
-/* =====================================================
-   TARGET
-===================================================== */
+/* PANELS */
+
+.panel{
+  padding:15px;
+  margin-bottom:12px;
+  border:1px solid #ffffff0d;
+  border-radius:20px;
+  background:var(--panel);
+}
+
+.panel-title{
+  margin-bottom:10px;
+  color:var(--cyan);
+  text-align:center;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:2px;
+}
+
+/* TARGET */
 
 .target-box{
-  padding:14px;
-  margin-bottom:14px;
+  padding:15px;
+  margin-bottom:12px;
   border:1px solid #ffd83d55;
   border-radius:18px;
   background:#0c0a12;
   text-align:center;
 }
 
-.target-box span{
-  display:block;
+.target-label{
   color:#888;
   font-size:8px;
   letter-spacing:3px;
 }
 
-.target-box strong{
-  display:block;
+.target-value{
   margin-top:4px;
-  color:#ffd83d;
-  font-size:26px;
-  text-shadow:0 0 25px #ffd83d;
+  color:var(--yellow);
+  font-size:27px;
+  font-weight:1000;
+  text-shadow:0 0 20px #ffd83d;
 }
 
 .target-reward{
-  margin-top:4px;
+  margin-top:5px;
+  color:#777;
+  font-size:9px;
+}
+
+.progress{
+  height:8px;
+  overflow:hidden;
+  margin-top:12px;
+  border-radius:20px;
+  background:#22202c;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink));
+  transition:.4s;
+}
+
+.progress-text{
+  margin-top:6px;
   color:#777;
   font-size:8px;
 }
 
-.target-progress{
-  height:8px;
-  margin-top:10px;
-  overflow:hidden;
-  border-radius:20px;
-  background:#191827;
-}
-
-.target-progress-bar{
-  width:0%;
-  height:100%;
-  border-radius:20px;
-  background:
-    linear-gradient(
-      90deg,
-      #00f5ff,
-      #ff39d5,
-      #ffd83d
-    );
-  transition:.3s;
-}
-
-/* =====================================================
-   SLOT
-===================================================== */
+/* SLOT */
 
 .machine{
   padding:14px;
@@ -170,7 +235,7 @@ button:disabled{
 .machine-title{
   margin-bottom:10px;
   text-align:center;
-  color:#ff39d5;
+  color:var(--pink);
   font-size:10px;
   font-weight:1000;
   letter-spacing:4px;
@@ -185,7 +250,6 @@ button:disabled{
   border:3px solid #55556b;
   border-radius:18px;
   background:#010104;
-  box-shadow:inset 0 0 40px #000;
 }
 
 .cell{
@@ -197,9 +261,7 @@ button:disabled{
   align-items:center;
   border-radius:10px;
   background:#fff;
-  box-shadow:
-    inset 0 -5px 8px #999,
-    0 0 4px #000;
+  box-shadow:inset 0 -5px 8px #999;
 }
 
 .cell img{
@@ -207,7 +269,6 @@ button:disabled{
   height:100%;
   object-fit:cover;
   display:block;
-  user-select:none;
   pointer-events:none;
 }
 
@@ -219,9 +280,9 @@ button:disabled{
   z-index:3;
   transform:scale(1.08);
   box-shadow:
-    0 0 10px #ffd83d,
-    0 0 25px #ffd83d,
-    0 0 45px #ff39d5;
+    0 0 10px var(--yellow),
+    0 0 25px var(--yellow),
+    0 0 45px var(--pink);
 }
 
 @keyframes rolling{
@@ -230,50 +291,10 @@ button:disabled{
   100%{transform:translateY(-5px)}
 }
 
-/* =====================================================
-   STATUS
-===================================================== */
-
-.spin-status{
-  display:none;
-  margin-top:10px;
-  padding:11px;
-  border:1px solid #00f5ff25;
-  border-radius:15px;
-  background:#05050b;
-  text-align:center;
-}
-
-.spin-status.show{
-  display:block;
-}
-
-.spin-status .main{
-  color:#00f5ff;
-  font-size:14px;
-  font-weight:1000;
-}
-
-.spin-status .sub{
-  margin-top:4px;
-  color:#777;
-  font-size:9px;
-}
-
-/* =====================================================
-   SELECTOR
-===================================================== */
-
-.selector{
-  margin-top:12px;
-  padding:13px;
-  border:1px solid #ffffff0d;
-  border-radius:17px;
-  background:#07070e;
-}
+/* SPIN SELECTOR */
 
 .selector-title{
-  margin-bottom:10px;
+  margin:12px 0 9px;
   color:#888;
   text-align:center;
   font-size:9px;
@@ -284,7 +305,7 @@ button:disabled{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:6px;
-  max-height:220px;
+  max-height:190px;
   overflow-y:auto;
 }
 
@@ -300,26 +321,10 @@ button:disabled{
 
 .options button.selected{
   color:#001015;
-  background:
-    linear-gradient(
-      135deg,
-      #00f5ff,
-      #668bff
-    );
+  background:linear-gradient(135deg,var(--cyan),#668bff);
 }
 
-.options button:last-child{
-  color:#fff;
-  background:
-    linear-gradient(
-      135deg,
-      #ff008c,
-      #ff9d00,
-      #ffe600
-    );
-}
-
-.cost{
+.spin-info{
   display:flex;
   justify-content:space-between;
   margin-top:10px;
@@ -329,33 +334,23 @@ button:disabled{
   font-size:9px;
 }
 
-.cost strong{
-  color:#ffd83d;
+.spin-info strong{
+  color:var(--yellow);
 }
 
-.spin{
+.main-button{
   width:100%;
   margin-top:11px;
   padding:16px;
   border-radius:16px;
   color:#fff;
-  background:
-    linear-gradient(
-      135deg,
-      #ff19a9,
-      #773cff
-    );
+  background:linear-gradient(135deg,#ff19a9,#773cff);
   font-size:14px;
   font-weight:1000;
+  box-shadow:0 8px 30px #ff19a955;
 }
 
-.spin:disabled{
-  opacity:.4;
-}
-
-/* =====================================================
-   RESULT
-===================================================== */
+/* RESULT */
 
 .result{
   display:none;
@@ -371,21 +366,13 @@ button:disabled{
   display:block;
 }
 
-.result.zonk{
-  border-color:#ff315555;
-}
-
-.result.win{
-  border-color:#35ff8655;
-}
-
 .result h3{
   font-size:18px;
 }
 
 .result .reward{
   margin-top:6px;
-  color:#ffd83d;
+  color:var(--yellow);
   font-size:21px;
   font-weight:1000;
 }
@@ -396,49 +383,346 @@ button:disabled{
   font-size:9px;
 }
 
-/* =====================================================
-   SUMMARY
-===================================================== */
+/* DICE */
 
-.summary{
-  display:none;
-  margin-top:12px;
-  padding:14px;
-  border:1px solid #00f5ff25;
-  border-radius:17px;
-  background:#080810;
-}
-
-.summary.show{
-  display:block;
-}
-
-.summary h3{
-  margin-bottom:10px;
-  color:#00f5ff;
+.dice-arena{
+  padding:22px 12px;
+  border:2px solid #454456;
+  border-radius:25px;
+  background:
+    radial-gradient(circle,#262438,#080810 70%);
   text-align:center;
-  font-size:12px;
 }
 
-.summary-row{
+.bowl{
+  width:250px;
+  height:150px;
   display:flex;
-  justify-content:space-between;
-  padding:5px 0;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:10px auto 18px;
+  border:8px solid #5b3622;
+  border-radius:0 0 125px 125px;
+  background:
+    radial-gradient(circle at 50% 20%,#3a2519,#110b07);
+  box-shadow:
+    inset 0 -20px 30px #000,
+    0 15px 40px #000;
+}
+
+.die{
+  width:55px;
+  height:55px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:12px;
+  color:#111;
+  background:#fff;
+  font-size:27px;
+  font-weight:1000;
+  box-shadow:0 6px 12px #000;
+}
+
+.die.rolling{
+  animation:diceRoll .12s infinite;
+}
+
+@keyframes diceRoll{
+  0%{transform:rotate(0) scale(1)}
+  50%{transform:rotate(12deg) scale(.85)}
+  100%{transform:rotate(-12deg) scale(1)}
+}
+
+.dice-result{
+  margin-top:8px;
+  color:var(--yellow);
+  font-size:24px;
+  font-weight:1000;
+}
+
+.number-select{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:6px;
+  margin-top:12px;
+}
+
+.number-select button{
+  padding:12px 2px;
+  border-radius:10px;
+  color:#aaa;
+  background:#191827;
+  font-weight:1000;
+}
+
+.number-select button.selected{
+  color:#001015;
+  background:var(--cyan);
+}
+
+.selected-numbers{
+  min-height:35px;
+  margin-top:10px;
   color:#888;
   font-size:9px;
 }
 
-.summary-row strong{
+.bet-row{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+}
+
+.bet-row input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ffffff15;
+  border-radius:12px;
+  outline:none;
   color:#fff;
+  background:#080810;
 }
 
-.summary-row.total strong{
-  color:#35ff86;
+.bet-row button{
+  padding:13px 17px;
+  border-radius:12px;
+  color:#001015;
+  background:var(--cyan);
+  font-weight:1000;
 }
 
-/* =====================================================
-   STATS
-===================================================== */
+/* SPACEMAN */
+
+.space-area{
+  position:relative;
+  height:470px;
+  overflow:hidden;
+  border:2px solid #3e3d52;
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 50% 100%,#28114b 0,#090817 45%,#020207 100%);
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle,#fff 1px,transparent 1px);
+  background-size:47px 47px;
+  opacity:.35;
+}
+
+.space-before{
+  position:absolute;
+  z-index:5;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#030307aa;
+}
+
+.space-before img{
+  width:70%;
+  max-width:360px;
+  max-height:330px;
+  object-fit:contain;
+  border-radius:18px;
+}
+
+.space-before.hidden{
+  display:none;
+}
+
+/* ROCKET */
+
+.rocket{
+  position:absolute;
+  z-index:10;
+  left:50%;
+  bottom:45px;
+  width:60px;
+  height:110px;
+  transform:translateX(-50%);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.rocket.active{
+  display:flex;
+}
+
+.rocket-body{
+  position:relative;
+  width:42px;
+  height:82px;
+  border-radius:50% 50% 35% 35%;
+  background:linear-gradient(90deg,#aaa,#fff,#aaa);
+  box-shadow:0 0 18px #fff;
+}
+
+.rocket-window{
+  position:absolute;
+  top:20px;
+  left:50%;
+  width:17px;
+  height:17px;
+  transform:translateX(-50%);
+  border:3px solid #555;
+  border-radius:50%;
+  background:#00bfff;
+}
+
+.rocket-fin{
+  position:absolute;
+  bottom:5px;
+  width:17px;
+  height:35px;
+  background:#d72c58;
+}
+
+.fin-left{
+  left:-12px;
+  transform:skewY(-25deg);
+}
+
+.fin-right{
+  right:-12px;
+  transform:skewY(25deg);
+}
+
+.flame{
+  position:absolute;
+  left:50%;
+  top:74px;
+  width:23px;
+  height:75px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:
+    linear-gradient(#fff,#ffe600,#ff7200,#ff1b00,transparent);
+  filter:drop-shadow(0 0 15px #ff5a00);
+  animation:flame .08s infinite alternate;
+}
+
+@keyframes flame{
+  from{height:60px;transform:translateX(-50%) scaleX(.8)}
+  to{height:90px;transform:translateX(-50%) scaleX(1.15)}
+}
+
+/* METEOR */
+
+.meteor{
+  position:absolute;
+  z-index:9;
+  width:32px;
+  height:32px;
+  display:none;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#aaa,#6b3d26 40%,#24130c);
+  box-shadow:
+    -15px 8px 20px #ff5b1a88;
+  animation:meteorFly 1.5s linear forwards;
+}
+
+@keyframes meteorFly{
+  from{
+    transform:translate(0,0) rotate(0);
+  }
+  to{
+    transform:translate(-230px,220px) rotate(360deg);
+  }
+}
+
+.multiplier{
+  position:absolute;
+  z-index:12;
+  top:20px;
+  left:0;
+  width:100%;
+  text-align:center;
+  color:var(--yellow);
+  font-size:45px;
+  font-weight:1000;
+  text-shadow:0 0 25px #ffd83d;
+}
+
+.space-status{
+  margin-top:10px;
+  text-align:center;
+  color:#888;
+  font-size:9px;
+}
+
+.space-controls{
+  padding:13px;
+  margin-top:10px;
+  border:1px solid #ffffff0d;
+  border-radius:17px;
+  background:#11101b;
+}
+
+.bet-label{
+  margin-bottom:7px;
+  color:#888;
+  font-size:9px;
+}
+
+.bet-input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ffffff15;
+  border-radius:12px;
+  outline:none;
+  color:#fff;
+  background:#080810;
+}
+
+.space-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:8px;
+}
+
+.space-buttons button{
+  padding:14px 5px;
+  border-radius:13px;
+  font-weight:1000;
+}
+
+.start-space{
+  color:#001015;
+  background:var(--cyan);
+}
+
+.stop-space{
+  color:#fff;
+  background:#e33562;
+}
+
+.half-space{
+  margin-top:7px;
+  width:100%;
+  padding:13px;
+  border-radius:13px;
+  color:#001015;
+  background:var(--yellow);
+  font-weight:1000;
+}
+
+.space-message{
+  margin-top:8px;
+  color:#888;
+  text-align:center;
+  font-size:9px;
+}
+
+/* STATS */
 
 .stats{
   display:grid;
@@ -457,7 +741,7 @@ button:disabled{
 
 .stat strong{
   display:block;
-  color:#00f5ff;
+  color:var(--cyan);
   font-size:14px;
 }
 
@@ -466,428 +750,11 @@ button:disabled{
   font-size:7px;
 }
 
-/* =====================================================
-   SPACEMAN
-===================================================== */
-
-.spaceman-game{
-  margin-top:20px;
-  padding:14px;
-  border:1px solid #ffffff12;
-  border-radius:24px;
-  background:#080811;
-  overflow:hidden;
-}
-
-.spaceman-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.spaceman-header small{
-  color:#00f5ff;
-  font-size:8px;
-  letter-spacing:3px;
-}
-
-.spaceman-header h2{
-  margin-top:3px;
-  font-size:20px;
-}
-
-.spaceman-multiplier{
-  color:#ffd83d;
-  font-size:27px;
-  font-weight:1000;
-  text-shadow:0 0 20px #ffd83d;
-}
-
-/* =====================================================
-   AREA TERBANG
-===================================================== */
-
-.space-area{
-  position:relative;
-  height:470px;
-  overflow:hidden;
-  border:2px solid #343448;
-  border-radius:20px;
-  background:
-    radial-gradient(
-      circle at 50% 75%,
-      #241044,
-      #080817 45%,
-      #020208 100%
-    );
-}
-
-.stars{
-  position:absolute;
-  inset:0;
-  opacity:.7;
-  background-image:
-    radial-gradient(circle,#fff 1px,transparent 1px),
-    radial-gradient(circle,#00f5ff 1px,transparent 1px);
-  background-size:
-    70px 70px,
-    110px 110px;
-  animation:starMove 3s linear infinite;
-}
-
-@keyframes starMove{
-  from{
-    background-position:
-      0 0,
-      30px 20px;
-  }
-  to{
-    background-position:
-      0 140px,
-      30px 170px;
-  }
-}
-
-/* =====================================================
-   ROKET
-===================================================== */
-
-.rocket-wrap{
-  position:absolute;
-  z-index:10;
-  left:50%;
-  bottom:35px;
-  width:95px;
-  height:130px;
-  transform:translateX(-50%);
-}
-
-.rocket{
-  position:absolute;
-  width:85px;
-  height:105px;
-  left:5px;
-  top:0;
-  object-fit:contain;
-  transform:rotate(0deg);
-  filter:drop-shadow(0 0 12px #00f5ff);
-}
-
-/* API */
-
-.rocket-fire{
-  position:absolute;
-  left:50%;
-  bottom:-35px;
-  width:45px;
-  height:55px;
-  transform:translateX(-50%);
-}
-
-.rocket-fire span{
-  position:absolute;
-  bottom:0;
-  width:10px;
-  height:42px;
-  border-radius:50% 50% 60% 60%;
-  background:
-    linear-gradient(
-      to bottom,
-      #fff,
-      #ffd83d,
-      #ff6a00,
-      transparent
-    );
-  filter:blur(2px);
-  animation:fire .12s infinite alternate;
-}
-
-.rocket-fire span:nth-child(1){
-  left:4px;
-}
-
-.rocket-fire span:nth-child(2){
-  left:14px;
-  animation-delay:.03s;
-}
-
-.rocket-fire span:nth-child(3){
-  left:24px;
-  animation-delay:.06s;
-}
-
-.rocket-fire span:nth-child(4){
-  left:34px;
-  animation-delay:.09s;
-}
-
-@keyframes fire{
-  from{
-    height:25px;
-    opacity:.6;
-  }
-  to{
-    height:55px;
-    opacity:1;
-  }
-}
-
-/* =====================================================
-   METEOR
-===================================================== */
-
-.meteor{
-  position:absolute;
-  z-index:8;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:
-    radial-gradient(
-      circle at 30% 30%,
-      #fff,
-      #ff9b30 18%,
-      #b63c13 48%,
-      #32100b 80%
-    );
-  box-shadow:
-    0 0 10px #ff6a00,
-    0 0 25px #ff3900;
-  pointer-events:none;
-}
-
-.meteor::after{
-  content:"";
-  position:absolute;
-  width:65px;
-  height:10px;
-  right:25px;
-  top:14px;
-  border-radius:50%;
-  background:
-    linear-gradient(
-      to left,
-      #ffb347,
-      transparent
-    );
-  filter:blur(4px);
-}
-
-/* =====================================================
-   SPACEMAN STATUS
-===================================================== */
-
-.spaceman-message{
-  position:absolute;
-  z-index:20;
-  left:50%;
-  top:20px;
-  transform:translateX(-50%);
-  padding:8px 15px;
-  border-radius:20px;
-  background:#0009;
-  border:1px solid #ffffff15;
-  color:#00f5ff;
-  font-size:10px;
-  font-weight:1000;
-  white-space:nowrap;
-}
-
-/* =====================================================
-   CONTROL
-   SEMUA TOMBOL DI BAWAH
-===================================================== */
-
-.spaceman-controls{
-  margin-top:10px;
-  padding:12px;
-  border-radius:18px;
-  background:#11101b;
-  border:1px solid #ffffff10;
-}
-
-.bet-box label{
-  display:block;
-  margin-bottom:7px;
-  color:#888;
-  font-size:9px;
-  text-align:center;
-}
-
-.bet-row{
-  display:grid;
-  grid-template-columns:50px 1fr 50px;
-  gap:6px;
-}
-
-.bet-row button{
-  border-radius:10px;
-  background:#29283a;
-  color:#fff;
-  font-size:20px;
-}
-
-.bet-row input{
-  width:100%;
-  border:1px solid #ffffff12;
-  border-radius:10px;
-  background:#07070e;
-  color:#ffd83d;
-  text-align:center;
-  font-size:15px;
-  font-weight:1000;
-}
-
-.potential{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:10px;
-  padding:10px;
-  border-radius:12px;
-  background:#080810;
-}
-
-.potential span{
-  color:#777;
-  font-size:8px;
-}
-
-.potential strong{
-  color:#35ff86;
-  font-size:16px;
-}
-
-.spaceman-start,
-.spaceman-stop{
-  width:100%;
-  margin-top:9px;
-  padding:14px;
-  border-radius:13px;
-  color:#fff;
-  font-weight:1000;
-}
-
-.spaceman-start{
-  background:
-    linear-gradient(
-      135deg,
-      #00c6ff,
-      #7b2cff
-    );
-}
-
-.spaceman-stop{
-  background:
-    linear-gradient(
-      135deg,
-      #ff9d00,
-      #ff19a9
-    );
-}
-
-.spaceman-start:disabled,
-.spaceman-stop:disabled{
-  opacity:.35;
-}
-
-/* =====================================================
-   CRASH EFFECT
-===================================================== */
-
-.meteor-hit{
-  animation:meteorExplosion .35s infinite;
-}
-
-@keyframes meteorExplosion{
-  0%{
-    transform:
-      translateX(-50%)
-      scale(1);
-  }
-  50%{
-    transform:
-      translateX(-50%)
-      scale(1.3);
-  }
-  100%{
-    transform:
-      translateX(-50%)
-      scale(.8);
-  }
-}
-
-/* =====================================================
-   MULUNG
-===================================================== */
-
-.section{
-  margin-top:18px;
-}
-
-.section h2{
-  margin-bottom:10px;
-  font-size:15px;
-}
-
-.collect{
-  padding:20px;
-  border:1px solid #ffffff0b;
-  border-radius:22px;
-  background:#11101b;
-  text-align:center;
-}
-
-.coin{
-  width:125px;
-  height:125px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin:5px auto 17px;
-  border:7px solid #fff09b;
-  border-radius:50%;
-  background:
-    radial-gradient(
-      circle at 30% 25%,
-      #fff9ae,
-      #ffd32d 45%,
-      #a66c00
-    );
-  box-shadow:
-    0 0 30px #ffd32d77;
-  cursor:pointer;
-}
-
-.coin::after{
-  content:"C";
-  color:#a66c00;
-  font-size:58px;
-  font-weight:1000;
-}
-
-.collect button{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  color:#001014;
-  background:#00eaff;
-  font-weight:1000;
-}
-
-.collect p{
-  margin-top:8px;
-  color:#777;
-  font-size:9px;
-}
-
-/* =====================================================
-   HISTORY
-===================================================== */
+/* HISTORY */
 
 .history{
   overflow:hidden;
+  margin-top:13px;
   border-radius:17px;
   background:#11101b;
 }
@@ -926,108 +793,38 @@ button:disabled{
 }
 
 .plus{
-  color:#35ff86;
+  color:var(--green);
   font-size:9px;
   font-weight:1000;
 }
 
-/* =====================================================
-   NAV
-===================================================== */
+/* TOAST */
 
-.nav{
+.toast{
   position:fixed;
-  z-index:20;
+  z-index:9999;
   left:50%;
-  bottom:10px;
-  width:min(650px,calc(100% - 20px));
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:5px;
-  padding:7px;
-  border:1px solid #ffffff14;
-  border-radius:20px;
-  background:#0c0b15ee;
-  backdrop-filter:blur(15px);
-  transform:translateX(-50%);
-}
-
-.nav button{
-  padding:8px;
-  border-radius:13px;
-  color:#777;
-  background:transparent;
-}
-
-.nav button.active{
-  color:#00f5ff;
-  background:#00f5ff0c;
-}
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal{
-  position:fixed;
-  z-index:1000;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background:#000c;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(390px,100%);
-  padding:27px 20px;
-  border:1px solid #ffffff18;
-  border-radius:25px;
-  background:#11101b;
-  text-align:center;
-}
-
-.modal-icon{
-  margin:12px;
-  font-size:52px;
-}
-
-.modal-title{
-  font-size:17px;
-  font-weight:1000;
-}
-
-.modal-reward{
-  margin-top:8px;
-  color:#ffd83d;
-  font-size:23px;
-  font-weight:1000;
-}
-
-.modal-info{
-  margin-top:7px;
-  color:#888;
-  font-size:9px;
-}
-
-.close{
-  width:100%;
-  margin-top:18px;
-  padding:13px;
-  border-radius:13px;
+  bottom:95px;
+  max-width:90%;
+  padding:12px 16px;
+  border:1px solid #ffffff20;
+  border-radius:14px;
+  background:#11101bee;
   color:#fff;
-  background:#29283a;
+  font-size:10px;
   font-weight:900;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
 }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* RESPONSIVE */
 
 @media(max-width:430px){
 
@@ -1044,11 +841,19 @@ button:disabled{
   }
 
   .space-area{
-    height:430px;
+    height:420px;
+  }
+
+  .bowl{
+    width:220px;
+  }
+
+  .die{
+    width:48px;
+    height:48px;
   }
 
 }
-
 </style>
 </head>
 
@@ -1057,123 +862,144 @@ button:disabled{
 <div class="app">
 
 <header class="header">
-
-  <div class="logo">
-    YANN SPIN
-  </div>
+  <div class="logo">YANN SPIN</div>
 
   <div class="balance">
-    🪙 <span id="balance">10.000</span>
+    💰 <span id="balance">Rp500.000</span>
   </div>
-
 </header>
 
 
-<div class="title">
+<!-- NAVIGATION 3 GAME -->
 
-  <small>
-    VIRTUAL ARCADE GAME
-  </small>
+<nav class="game-nav">
 
-  <h1>
-    YANN SPIN
-  </h1>
+  <button
+    class="active"
+    onclick="openGame('spin',this)">
 
-  <p>
-    Game hiburan dengan koin virtual
-  </p>
+    <span class="nav-icon">🎰</span>
+    SPIN
 
-</div>
+  </button>
 
+  <button
+    onclick="openGame('dice',this)">
 
-<!-- ===================================================
-     TARGET
-=================================================== -->
+    <span class="nav-icon">🎲</span>
+    DADU
 
-<div class="target-box">
+  </button>
 
-  <span>
-    TARGET AKTIF
-  </span>
+  <button
+    onclick="openGame('space',this)">
 
-  <strong id="targetValue">
-    1.000.000
-  </strong>
+    <span class="nav-icon">🚀</span>
+    SPACEMAN
 
-  <div class="target-reward">
-    HADIAH TARGET:
-    <b id="targetReward">
-      1.000.000
-    </b>
-    🪙
-  </div>
+  </button>
 
-  <div class="target-progress">
-    <div
-      class="target-progress-bar"
-      id="targetProgress">
-    </div>
-  </div>
-
-</div>
+</nav>
 
 
-<!-- ===================================================
-     SLOT
-=================================================== -->
+<!-- =================================================
+     SPIN
+================================================= -->
 
-<section class="machine">
+<section
+  id="spinGame"
+  class="game-page active">
 
-  <div class="machine-title">
-    ✦ 18 REEL • 6 × 3 ✦
-  </div>
+  <div class="title">
 
-  <div class="slot" id="slot">
+    <small>VIRTUAL ARCADE</small>
 
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
+    <h1>LUCKY SPIN</h1>
 
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
+    <p>
+      Saldo Rp hanya digunakan sebagai nilai virtual.
+    </p>
 
   </div>
 
 
-  <div
-    class="spin-status"
-    id="spinStatus">
+  <!-- TARGET HANYA DI SPIN -->
 
-    <div
-      class="main"
-      id="spinStatusMain">
-      SPIN KE-1 / 1
+  <div class="target-box">
+
+    <div class="target-label">
+      TARGET SPIN
     </div>
 
     <div
-      class="sub"
-      id="spinStatusSub">
-      0× SPIN TERSISA
+      class="target-value"
+      id="targetValue">
+      Rp1.000.000
+    </div>
+
+    <div class="target-reward">
+
+      HADIAH TARGET:
+      <strong id="targetReward">
+        Rp1.000.000
+      </strong>
+
+    </div>
+
+    <div class="progress">
+
+      <div
+        class="progress-bar"
+        id="targetProgress">
+      </div>
+
+    </div>
+
+    <div
+      class="progress-text"
+      id="targetProgressText">
+
+      Rp0 / Rp1.000.000
+
     </div>
 
   </div>
 
 
-  <div class="selector">
+  <section class="machine">
+
+    <div class="machine-title">
+      ✦ 21 SYMBOL • 6 × 3 ✦
+    </div>
+
+
+    <div
+      class="slot"
+      id="slot">
+
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+
+    </div>
+
 
     <div class="selector-title">
       PILIH JUMLAH SPIN
@@ -1187,694 +1013,546 @@ button:disabled{
         1×
       </button>
 
-      <button onclick="selectSpin(5,this)">
-        5×
-      </button>
-
-      <button onclick="selectSpin(10,this)">
-        10×
-      </button>
-
-      <button onclick="selectSpin(15,this)">
-        15×
-      </button>
-
-      <button onclick="selectSpin(20,this)">
-        20×
-      </button>
-
-      <button onclick="selectSpin(25,this)">
-        25×
-      </button>
-
-      <button onclick="selectSpin(30,this)">
-        30×
-      </button>
-
-      <button onclick="selectSpin(35,this)">
-        35×
-      </button>
-
-      <button onclick="selectSpin(40,this)">
-        40×
-      </button>
-
-      <button onclick="selectSpin(45,this)">
-        45×
-      </button>
-
-      <button onclick="selectSpin(50,this)">
-        50×
-      </button>
-
-      <button onclick="selectSpin(55,this)">
-        55×
-      </button>
-
-      <button onclick="selectSpin(60,this)">
-        60×
-      </button>
-
-      <button onclick="selectSpin(65,this)">
-        65×
-      </button>
-
-      <button onclick="selectSpin(70,this)">
-        70×
-      </button>
-
-      <button onclick="selectSpin(75,this)">
-        75×
-      </button>
-
-      <button onclick="selectSpin(80,this)">
-        80×
-      </button>
-
-      <button onclick="selectSpin(85,this)">
-        85×
-      </button>
-
-      <button onclick="selectSpin(90,this)">
-        90×
-      </button>
-
-      <button onclick="selectSpin(95,this)">
-        95×
-      </button>
-
-      <button onclick="selectSpin(100,this)">
-        ⚡100×
-      </button>
+      <button onclick="selectSpin(5,this)">5×</button>
+      <button onclick="selectSpin(10,this)">10×</button>
+      <button onclick="selectSpin(15,this)">15×</button>
+      <button onclick="selectSpin(20,this)">20×</button>
+      <button onclick="selectSpin(25,this)">25×</button>
+      <button onclick="selectSpin(30,this)">30×</button>
+      <button onclick="selectSpin(35,this)">35×</button>
+      <button onclick="selectSpin(40,this)">40×</button>
+      <button onclick="selectSpin(45,this)">45×</button>
+      <button onclick="selectSpin(50,this)">50×</button>
+      <button onclick="selectSpin(55,this)">55×</button>
+      <button onclick="selectSpin(60,this)">60×</button>
+      <button onclick="selectSpin(65,this)">65×</button>
+      <button onclick="selectSpin(70,this)">70×</button>
+      <button onclick="selectSpin(75,this)">75×</button>
+      <button onclick="selectSpin(80,this)">80×</button>
+      <button onclick="selectSpin(85,this)">85×</button>
+      <button onclick="selectSpin(90,this)">90×</button>
+      <button onclick="selectSpin(95,this)">95×</button>
+      <button onclick="selectSpin(100,this)">⚡100×</button>
 
     </div>
 
-    <div class="cost">
 
-      <span id="spinCount">
-        1× SPIN
+    <div class="spin-info">
+
+      <span>
+        SPIN:
+        <strong id="spinCount">1×</strong>
+      </span>
+
+      <span>
+        KURANG:
+        <strong id="spinRemaining">1×</strong>
       </span>
 
       <span>
         BIAYA:
-        <strong id="spinCost">
-          20
-        </strong>
-        🪙
+        <strong id="spinCost">Rp20</strong>
       </span>
-
-    </div>
-
-  </div>
-
-
-  <button
-    class="spin"
-    id="spinButton"
-    onclick="startSpin()">
-
-    🎰 SPIN 1×
-
-  </button>
-
-
-  <div
-    class="result"
-    id="result">
-
-    <h3 id="resultTitle">
-      -
-    </h3>
-
-    <div
-      class="reward"
-      id="resultReward">
-      +0 KOIN
-    </div>
-
-    <div
-      class="info"
-      id="resultInfo">
-      -
-    </div>
-
-  </div>
-
-
-  <div
-    class="summary"
-    id="summary">
-
-    <h3>
-      📊 RINGKASAN SPIN
-    </h3>
-
-    <div class="summary-row">
-      <span>Total Spin</span>
-      <strong id="sumSpins">0×</strong>
-    </div>
-
-    <div class="summary-row">
-      <span>Total Biaya</span>
-      <strong id="sumCost">0 🪙</strong>
-    </div>
-
-    <div class="summary-row">
-      <span>Total Hadiah</span>
-      <strong id="sumReward">0 🪙</strong>
-    </div>
-
-    <div class="summary-row">
-      <span>Saldo Sebelum</span>
-      <strong id="sumBefore">0 🪙</strong>
-    </div>
-
-    <div class="summary-row total">
-      <span>Saldo Sekarang</span>
-      <strong id="sumAfter">0 🪙</strong>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ===================================================
-     STATISTIK
-=================================================== -->
-
-<div class="stats">
-
-  <div class="stat">
-    <strong id="today">0</strong>
-    <span>KOIN DIDAPAT</span>
-  </div>
-
-  <div class="stat">
-    <strong id="totalSpins">0</strong>
-    <span>TOTAL SPIN</span>
-  </div>
-
-  <div class="stat">
-    <strong id="level">1</strong>
-    <span>LEVEL</span>
-  </div>
-
-</div>
-
-
-<!-- ===================================================
-     SPACEMAN
-=================================================== -->
-
-<section
-  class="spaceman-game"
-  id="spacemanSection">
-
-  <div class="spaceman-header">
-
-    <div>
-
-      <small>
-        YANN ARCADE
-      </small>
-
-      <h2>
-        🚀 SPACEMAN
-      </h2>
-
-    </div>
-
-    <div
-      class="spaceman-multiplier"
-      id="spacemanMultiplier">
-
-      ×1.00
-
-    </div>
-
-  </div>
-
-
-  <!-- AREA TERBANG
-       TOMBOL TIDAK ADA DI SINI -->
-
-  <div
-    class="space-area"
-    id="spaceArea">
-
-    <div class="stars"></div>
-
-    <div id="meteorContainer"></div>
-
-    <div
-      class="rocket-wrap"
-      id="rocketWrap">
-
-      <img
-        class="rocket"
-        src="https://files.catbox.moe/g2i7jh.jpeg"
-        alt="Roket Spaceman"
-      >
-
-      <div class="rocket-fire">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="spaceman-message"
-      id="spacemanMessage">
-
-      SIAP TERBANG
-
-    </div>
-
-  </div>
-
-
-  <!-- KONTROL SELALU DI BAWAH -->
-
-  <div class="spaceman-controls">
-
-    <div class="bet-box">
-
-      <label>
-        BET SPACEMAN
-      </label>
-
-      <div class="bet-row">
-
-        <button
-          onclick="changeBet(-1000)">
-          −
-        </button>
-
-        <input
-          type="number"
-          id="spacemanBet"
-          value="20000"
-          min="1000"
-        >
-
-        <button
-          onclick="changeBet(1000)">
-          +
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="potential">
-
-      <span>
-        HADIAH SAAT INI
-      </span>
-
-      <strong id="spacemanReward">
-        0 🪙
-      </strong>
 
     </div>
 
 
     <button
-      class="spaceman-start"
-      id="spacemanStart"
-      onclick="startSpaceman()">
+      class="main-button"
+      id="spinButton"
+      onclick="startSpin()">
 
-      🚀 MULAI RONDE
-
-    </button>
-
-
-    <button
-      class="spaceman-stop"
-      id="spacemanStop"
-      onclick="stopSpaceman()"
-      disabled>
-
-      💰 AMBIL HADIAH
+      🎰 SPIN 1×
 
     </button>
 
-  </div>
+
+    <div
+      class="result"
+      id="spinResult">
+
+      <h3 id="spinResultTitle">
+        -
+      </h3>
+
+      <div
+        class="reward"
+        id="spinReward">
+        Rp0
+      </div>
+
+      <div
+        class="info"
+        id="spinResultInfo">
+        -
+      </div>
+
+    </div>
+
+  </section>
 
 </section>
 
 
-<!-- ===================================================
-     MULUNG
-=================================================== -->
+<!-- =================================================
+     DADU
+================================================= -->
 
 <section
-  class="section"
-  id="collectSection">
+  id="diceGame"
+  class="game-page">
 
-  <h2>
-    🪙 Mulung Koin
-  </h2>
+  <div class="title">
 
-  <div class="collect">
+    <small>VIRTUAL DICE</small>
 
-    <div
-      class="coin"
-      onclick="collectCoin()">
-    </div>
-
-    <button onclick="collectCoin()">
-      🪙 TAP UNTUK MULUNG
-    </button>
+    <h1>3 DADU</h1>
 
     <p>
-      Setiap tap mendapatkan 1–10 koin virtual.
+      Tiga dadu dikocok secara acak.
     </p>
 
   </div>
 
+
+  <section class="panel">
+
+    <div class="panel-title">
+      🎲 KOCOK DADU
+    </div>
+
+    <div class="dice-arena">
+
+      <div class="bowl">
+
+        <div
+          class="die"
+          id="die1">
+          1
+        </div>
+
+        <div
+          class="die"
+          id="die2">
+          1
+        </div>
+
+        <div
+          class="die"
+          id="die3">
+          1
+        </div>
+
+      </div>
+
+
+      <div
+        class="dice-result"
+        id="diceResult">
+        111
+      </div>
+
+      <button
+        class="main-button"
+        id="diceButton"
+        onclick="rollDice()">
+
+        🎲 KOCOK DADU
+
+      </button>
+
+    </div>
+
+
+    <div class="panel-title" style="margin-top:18px">
+
+      PILIH ANGKA 1–6
+
+    </div>
+
+
+    <div class="number-select">
+
+      <button onclick="toggleNumber(1,this)">1</button>
+      <button onclick="toggleNumber(2,this)">2</button>
+      <button onclick="toggleNumber(3,this)">3</button>
+      <button onclick="toggleNumber(4,this)">4</button>
+      <button onclick="toggleNumber(5,this)">5</button>
+      <button onclick="toggleNumber(6,this)">6</button>
+
+    </div>
+
+
+    <div
+      class="selected-numbers"
+      id="selectedNumbers">
+
+      Belum memilih angka.
+
+    </div>
+
+
+    <div class="bet-row">
+
+      <input
+        type="number"
+        id="diceBet"
+        min="1"
+        value="20000"
+        placeholder="Bet virtual">
+
+      <button onclick="playDice()">
+        MAIN
+      </button>
+
+    </div>
+
+  </section>
+
 </section>
 
 
-<!-- ===================================================
-     HISTORY
-=================================================== -->
+<!-- =================================================
+     SPACEMAN
+================================================= -->
 
-<section class="section">
+<section
+  id="spaceGame"
+  class="game-page">
 
-  <h2>
-    📜 Riwayat Aktivitas
-  </h2>
+  <div class="title">
 
-  <div
-    class="history"
-    id="history">
+    <small>VIRTUAL SPACE ARCADE</small>
+
+    <h1>SPACEMAN</h1>
+
+    <p>
+      Titik meteor ditentukan secara acak ×3–×5000.
+    </p>
+
   </div>
 
+
+  <section class="panel">
+
+    <div class="space-area">
+
+      <div class="stars"></div>
+
+
+      <!-- GAMBAR HANYA SAAT BELUM MULAI -->
+
+      <div
+        class="space-before"
+        id="spaceBefore">
+
+        <img
+          src="https://files.catbox.moe/g2i7jh.jpeg"
+          alt="Spaceman">
+
+      </div>
+
+
+      <div
+        class="multiplier"
+        id="multiplier">
+
+        ×1.00
+
+      </div>
+
+
+      <!-- ROKET CSS TRANSPARAN -->
+
+      <div
+        class="rocket"
+        id="rocket">
+
+        <div class="rocket-body">
+
+          <div class="rocket-window"></div>
+
+          <div
+            class="rocket-fin fin-left">
+          </div>
+
+          <div
+            class="rocket-fin fin-right">
+          </div>
+
+          <div class="flame"></div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="space-status"
+        id="spaceStatus">
+
+        Belum ada ronde.
+
+      </div>
+
+    </div>
+
+
+    <!-- KONTROL DI BAWAH AREA TERBANG -->
+
+    <div class="space-controls">
+
+      <div class="bet-label">
+        BET VIRTUAL
+      </div>
+
+      <input
+        class="bet-input"
+        type="number"
+        id="spaceBet"
+        min="1"
+        value="20000">
+
+
+      <div class="space-buttons">
+
+        <button
+          class="start-space"
+          id="startSpaceButton"
+          onclick="startSpaceRound()">
+
+          🚀 MULAI RONDE
+
+        </button>
+
+        <button
+          class="stop-space"
+          id="stopSpaceButton"
+          onclick="stopSpaceRound()"
+          disabled>
+
+          🛑 BERHENTI
+
+        </button>
+
+      </div>
+
+
+      <button
+        class="half-space"
+        id="halfSpaceButton"
+        onclick="takeHalfSpace()"
+        disabled>
+
+        💰 AMBIL 50% & LANJUT
+
+      </button>
+
+
+      <div
+        class="space-message"
+        id="spaceMessage">
+
+        Tabrakan acak: ×3–×5000.
+
+      </div>
+
+    </div>
+
+  </section>
+
 </section>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+  <div class="stat">
+
+    <strong id="totalSpins">
+      0
+    </strong>
+
+    <span>
+      TOTAL SPIN
+    </span>
+
+  </div>
+
+  <div class="stat">
+
+    <strong id="totalWins">
+      0
+    </strong>
+
+    <span>
+      MENANG
+    </span>
+
+  </div>
+
+  <div class="stat">
+
+    <strong id="level">
+      1
+    </strong>
+
+    <span>
+      LEVEL
+    </span>
+
+  </div>
 
 </div>
 
 
-<!-- ===================================================
-     NAV
-=================================================== -->
+<!-- HISTORY -->
 
-<nav class="nav">
+<div class="history" id="history">
 
-  <button
-    class="active"
-    onclick="scrollToTop()">
-    🏠<br>
-    Beranda
-  </button>
+  <div class="history-item">
 
-  <button onclick="scrollToSlot()">
-    🎰<br>
-    Slot
-  </button>
+    <div class="history-left">
 
-  <button onclick="scrollToSpaceman()">
-    🚀<br>
-    Spaceman
-  </button>
+      <div class="history-icon">
+        📭
+      </div>
 
-  <button onclick="scrollToCollect()">
-    🪙<br>
-    Mulung
-  </button>
+      <div>
 
-</nav>
+        <strong>
+          Belum ada aktivitas
+        </strong>
 
+        <br>
 
-<!-- ===================================================
-     MODAL
-=================================================== -->
+        <small>
+          Mulai permainan virtual.
+        </small>
 
-<div
-  class="modal"
-  id="modal">
+      </div>
 
-  <div class="modal-box">
-
-    <div
-      class="modal-title"
-      id="modalTitle">
-      HASIL
     </div>
-
-    <div
-      class="modal-icon"
-      id="modalIcon">
-      🎰
-    </div>
-
-    <div
-      class="modal-reward"
-      id="modalReward">
-      +0 KOIN
-    </div>
-
-    <div
-      class="modal-info"
-      id="modalInfo">
-      -
-    </div>
-
-    <button
-      class="close"
-      onclick="closeModal()">
-
-      LANJUTKAN
-
-    </button>
 
   </div>
 
+</div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast">
 </div>
 
 
 <script>
 
 /* =====================================================
-   KONFIGURASI
+   DATA
 ===================================================== */
 
 const SPIN_PRICE = 20;
 
-const GAME_VERSION = "YANN-SPIN-V7";
-
-
-/* =====================================================
-   21 GAMBAR
-===================================================== */
-
 const symbols = [
 
-  {
-    name:"Icon 1",
-    img:"https://files.catbox.moe/o7z2kk.jpg"
-  },
+  "https://files.catbox.moe/o7z2kk.jpg",
+  "https://files.catbox.moe/b8obbf.jpg",
+  "https://files.catbox.moe/xt8goq.jpg",
+  "https://files.catbox.moe/0thet4.jpg",
+  "https://files.catbox.moe/wett95.jpg",
+  "https://files.catbox.moe/vv7n51.jpg",
+  "https://files.catbox.moe/q4peq9.jpg",
+  "https://files.catbox.moe/wiq2m8.jpg",
+  "https://files.catbox.moe/ewa0m3.jpg",
+  "https://files.catbox.moe/x6x868.jpg",
+  "https://files.catbox.moe/i18snn.jpg",
+  "https://files.catbox.moe/v7o2ii.jpg",
+  "https://files.catbox.moe/2o14hm.jpg",
+  "https://files.catbox.moe/qez9aa.jpg",
+  "https://files.catbox.moe/khn71a.jpg",
+  "https://files.catbox.moe/e825w3.jpg",
+  "https://files.catbox.moe/s38w3p.jpg",
+  "https://files.catbox.moe/3jeyyl.jpg",
 
-  {
-    name:"Icon 2",
-    img:"https://files.catbox.moe/b8obbf.jpg"
-  },
+  /* scatter merah */
+  "https://files.catbox.moe/uw7f71.jpeg",
 
-  {
-    name:"Icon 3",
-    img:"https://files.catbox.moe/xt8goq.jpg"
-  },
-
-  {
-    name:"Icon 4",
-    img:"https://files.catbox.moe/0thet4.jpg"
-  },
-
-  {
-    name:"Icon 5",
-    img:"https://files.catbox.moe/wett95.jpg"
-  },
-
-  {
-    name:"Icon 6",
-    img:"https://files.catbox.moe/vv7n51.jpg"
-  },
-
-  {
-    name:"Icon 7",
-    img:"https://files.catbox.moe/q4peq9.jpg"
-  },
-
-  {
-    name:"Icon 8",
-    img:"https://files.catbox.moe/wiq2m8.jpg"
-  },
-
-  {
-    name:"Icon 9",
-    img:"https://files.catbox.moe/ewa0m3.jpg"
-  },
-
-  {
-    name:"Icon 10",
-    img:"https://files.catbox.moe/x6x868.jpg"
-  },
-
-  {
-    name:"Icon 11",
-    img:"https://files.catbox.moe/i18snn.jpg"
-  },
-
-  {
-    name:"Icon 12",
-    img:"https://files.catbox.moe/v7o2ii.jpg"
-  },
-
-  {
-    name:"Icon 13",
-    img:"https://files.catbox.moe/2o14hm.jpg"
-  },
-
-  {
-    name:"Icon 14",
-    img:"https://files.catbox.moe/qez9aa.jpg"
-  },
-
-  {
-    name:"Icon 15",
-    img:"https://files.catbox.moe/khn71a.jpg"
-  },
-
-  {
-    name:"Icon 16",
-    img:"https://files.catbox.moe/e825w3.jpg"
-  },
-
-  {
-    name:"Icon 17",
-    img:"https://files.catbox.moe/s38w3p.jpg"
-  },
-
-  {
-    name:"Icon 18",
-    img:"https://files.catbox.moe/3jeyyl.jpg"
-  },
-
-  {
-    name:"SCATTER",
-    img:"https://files.catbox.moe/fth8e5.jpg",
-    scatter:true
-  },
-
-  {
-    name:"SCATTER MERAH",
-    img:"https://files.catbox.moe/uw7f71.jpeg",
-    redScatter:true
-  }
+  "https://files.catbox.moe/fth8e5.jpg",
+  "https://files.catbox.moe/g2i7jh.jpeg"
 
 ];
 
 
 /* =====================================================
-   GAME DATA
+   GAME STATE
 ===================================================== */
 
-let game =
-  JSON.parse(
-    localStorage.getItem(
-      "yannSpinGame"
-    )
-  );
+let game = JSON.parse(
+  localStorage.getItem("yannSpinGame")
+);
 
-const savedVersion =
-  localStorage.getItem(
-    "yannSpinVersion"
-  );
-
-if(
-  !game ||
-  savedVersion !== GAME_VERSION
-){
+if(!game){
 
   game = {
 
-    balance:10000,
+    balance:500000,
 
-    today:0,
+    totalSpins:0,
 
-    spins:0,
+    totalWins:0,
 
     level:1,
 
-    xp:0,
-
-    history:[],
-
     target:1000000,
 
-    targetReward:1000000000
+    targetReward:1000000,
+
+    targetProgress:0,
+
+    history:[]
 
   };
 
-  localStorage.setItem(
-    "yannSpinVersion",
-    GAME_VERSION
-  );
-
-  localStorage.setItem(
-    "yannSpinGame",
-    JSON.stringify(game)
-  );
+  save();
 
 }
 
-
-/* =====================================================
-   STATE SLOT
-===================================================== */
 
 let selectedSpins = 1;
 
 let spinning = false;
 
-let spinsRemaining = 0;
+let spinRemaining = 0;
 
-let activeBatch = 0;
+let diceSelected = [];
 
-let currentBatchSpin = 0;
+let spaceRunning = false;
 
-let batchReward = 0;
+let spaceTimer = null;
 
-let batchBefore = 0;
+let spaceMultiplier = 1;
 
+let spaceCrash = 0;
 
-/* =====================================================
-   CELLS
-===================================================== */
+let spaceBet = 0;
 
-const cells =
-  document.querySelectorAll(
-    ".cell"
-  );
+let spacePotential = 0;
+
+let spaceHalfTaken = false;
 
 
 /* =====================================================
    FORMAT
 ===================================================== */
 
-function formatNumber(number){
+function rupiah(value){
 
-  return Number(number)
-    .toLocaleString("id-ID");
+  return "Rp" +
+    Number(value)
+      .toLocaleString("id-ID");
 
 }
 
@@ -1894,7 +1572,7 @@ function save(){
 
 
 /* =====================================================
-   UPDATE
+   UI
 ===================================================== */
 
 function updateUI(){
@@ -1902,42 +1580,84 @@ function updateUI(){
   document.getElementById(
     "balance"
   ).textContent =
-    formatNumber(
-      game.balance
-    );
+    rupiah(game.balance);
 
-  document.getElementById(
-    "today"
-  ).textContent =
-    formatNumber(
-      game.today
-    );
 
   document.getElementById(
     "totalSpins"
   ).textContent =
-    formatNumber(
-      game.spins
-    );
+    game.totalSpins;
+
+
+  document.getElementById(
+    "totalWins"
+  ).textContent =
+    game.totalWins;
+
 
   document.getElementById(
     "level"
   ).textContent =
     game.level;
 
+
+  document.getElementById(
+    "targetValue"
+  ).textContent =
+    rupiah(game.target);
+
+
+  document.getElementById(
+    "targetReward"
+  ).textContent =
+    rupiah(game.targetReward);
+
+
+  const percent =
+    Math.min(
+      100,
+      game.targetProgress /
+      game.target *
+      100
+    );
+
+
+  document.getElementById(
+    "targetProgress"
+  ).style.width =
+    percent + "%";
+
+
+  document.getElementById(
+    "targetProgressText"
+  ).textContent =
+    rupiah(game.targetProgress) +
+    " / " +
+    rupiah(game.target);
+
+
   document.getElementById(
     "spinCount"
   ).textContent =
-    selectedSpins +
-    "× SPIN";
+    selectedSpins + "×";
+
+
+  document.getElementById(
+    "spinRemaining"
+  ).textContent =
+    spinning
+      ? spinRemaining + "×"
+      : selectedSpins + "×";
+
 
   document.getElementById(
     "spinCost"
   ).textContent =
-    formatNumber(
+    rupiah(
       selectedSpins *
       SPIN_PRICE
     );
+
 
   document.getElementById(
     "spinButton"
@@ -1946,34 +1666,6 @@ function updateUI(){
     selectedSpins +
     "×";
 
-  document.getElementById(
-    "targetValue"
-  ).textContent =
-    formatNumber(
-      game.target
-    );
-
-  document.getElementById(
-    "targetReward"
-  ).textContent =
-    formatNumber(
-      game.targetReward
-    );
-
-  const progress =
-    Math.min(
-      100,
-      (
-        game.today /
-        game.target
-      ) * 100
-    );
-
-  document.getElementById(
-    "targetProgress"
-  ).style.width =
-    progress +
-    "%";
 
   renderHistory();
 
@@ -1981,34 +1673,73 @@ function updateUI(){
 
 
 /* =====================================================
-   SELECT SPIN
+   NAV
 ===================================================== */
 
-function selectSpin(
-  amount,
-  button
-){
+function openGame(name,button){
+
+  if(spinning || spaceRunning)
+    return;
+
+  document
+    .querySelectorAll(".game-page")
+    .forEach(
+      page =>
+        page.classList.remove("active")
+    );
+
+
+  document
+    .getElementById(
+      name === "spin"
+        ? "spinGame"
+        : name === "dice"
+        ? "diceGame"
+        : "spaceGame"
+    )
+    .classList.add("active");
+
+
+  document
+    .querySelectorAll(".game-nav button")
+    .forEach(
+      b =>
+        b.classList.remove("active")
+    );
+
+
+  button.classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =====================================================
+   SPIN SELECT
+===================================================== */
+
+function selectSpin(amount,button){
 
   if(spinning)
     return;
 
-  selectedSpins =
-    amount;
+
+  selectedSpins = amount;
+
 
   document
-    .querySelectorAll(
-      ".options button"
-    )
+    .querySelectorAll(".options button")
     .forEach(
-      item =>
-        item.classList.remove(
-          "selected"
-        )
+      b =>
+        b.classList.remove("selected")
     );
 
-  button.classList.add(
-    "selected"
-  );
+
+  button.classList.add("selected");
 
   updateUI();
 
@@ -2016,46 +1747,7 @@ function selectSpin(
 
 
 /* =====================================================
-   MULUNG
-===================================================== */
-
-function collectCoin(){
-
-  if(spinning || spacemanRunning)
-    return;
-
-  const reward =
-    Math.floor(
-      Math.random() * 10
-    ) + 1;
-
-  game.balance +=
-    reward;
-
-  game.today +=
-    reward;
-
-  addHistory(
-    "🪙",
-    "Mulung Koin",
-    "+" +
-    formatNumber(
-      reward
-    ) +
-    " koin"
-  );
-
-  addXP(2);
-
-  save();
-
-  updateUI();
-
-}
-
-
-/* =====================================================
-   START SLOT
+   SPIN
 ===================================================== */
 
 function startSpin(){
@@ -2063,622 +1755,220 @@ function startSpin(){
   if(spinning)
     return;
 
-  const totalCost =
+
+  const cost =
     selectedSpins *
     SPIN_PRICE;
 
-  if(
-    game.balance <
-    totalCost
-  ){
 
-    showModal(
-      "KOIN TIDAK CUKUP",
-      "🪙",
-      "BUTUH " +
-      formatNumber(
-        totalCost
-      ) +
-      " KOIN",
-      "Saldo kamu hanya " +
-      formatNumber(
-        game.balance
-      ) +
-      " koin."
+  if(game.balance < cost){
+
+    showToast(
+      "Saldo virtual tidak cukup."
     );
 
     return;
 
   }
 
-  batchBefore =
-    game.balance;
 
-  game.balance -=
-    totalCost;
+  game.balance -= cost;
 
-  activeBatch =
+  spinRemaining =
     selectedSpins;
 
-  spinsRemaining =
-    selectedSpins;
+  spinning = true;
 
-  currentBatchSpin =
-    0;
-
-  batchReward =
-    0;
-
-  spinning =
-    true;
 
   document.getElementById(
     "spinButton"
-  ).disabled =
-    true;
+  ).disabled = true;
 
-  document.getElementById(
-    "summary"
-  ).classList.remove(
-    "show"
-  );
 
-  document.getElementById(
-    "spinStatus"
-  ).classList.add(
-    "show"
-  );
-
-  save();
-
-  updateUI();
-
-  runNextSpin();
+  runSpin();
 
 }
 
 
-/* =====================================================
-   NEXT SPIN
-===================================================== */
+function runSpin(){
 
-function runNextSpin(){
+  if(spinRemaining <= 0){
 
-  if(
-    spinsRemaining <= 0
-  ){
+    spinning = false;
 
-    finishBatch();
+    document.getElementById(
+      "spinButton"
+    ).disabled = false;
+
+    save();
+    updateUI();
 
     return;
 
   }
 
-  currentBatchSpin++;
 
-  spinsRemaining--;
+  spinRemaining--;
 
-  updateSpinStatus();
+  const cells =
+    document.querySelectorAll(
+      ".cell"
+    );
 
-  spinOnce(
-    result => {
-
-      const match =
-        getMatchCount(
-          result
-        );
-
-      const scatterCount =
-        getScatterCount(
-          result
-        );
-
-      const reward =
-        getReward(
-          match,
-          result
-        );
-
-      batchReward +=
-        reward;
-
-      game.balance +=
-        reward;
-
-      game.today +=
-        reward;
-
-      game.spins++;
-
-      addXP(
-        Math.max(
-          1,
-          match * 4
-        )
-      );
-
-      addHistory(
-        reward === 0
-          ? "💀"
-          : "🎰",
-        reward === 0
-          ? "ZONK"
-          : match +
-            " Kembar",
-        "+" +
-        formatNumber(
-          reward
-        ) +
-        " koin"
-      );
-
-      showSpinResult(
-        match,
-        scatterCount,
-        reward
-      );
-
-      checkTarget();
-
-      save();
-
-      updateUI();
-
-      setTimeout(
-        runNextSpin,
-        550
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   STATUS SPIN
-===================================================== */
-
-function updateSpinStatus(){
-
-  document.getElementById(
-    "spinStatusMain"
-  ).textContent =
-    "SPIN KE-" +
-    currentBatchSpin +
-    " / " +
-    activeBatch;
-
-  document.getElementById(
-    "spinStatusSub"
-  ).textContent =
-    spinsRemaining +
-    "× SPIN TERSISA";
-
-}
-
-
-/* =====================================================
-   SLOT ONCE
-===================================================== */
-
-function spinOnce(
-  callback
-){
 
   cells.forEach(
-    cell =>
-      cell.classList.add(
-        "rolling"
-      )
+    c =>
+      c.classList.add("rolling")
   );
+
 
   const timer =
-    setInterval(
-      () => {
+    setInterval(() => {
 
-        cells.forEach(
-          cell => {
+      cells.forEach(cell => {
 
-            const random =
-              randomSymbol();
+        const index =
+          Math.floor(
+            Math.random() *
+            symbols.length
+          );
 
-            cell.innerHTML =
-              `<img src="${random.img}" alt="${random.name}">`;
+        cell.innerHTML =
+          `<img src="${symbols[index]}">`;
 
-            cell.classList.remove(
-              "win"
-            );
+      });
 
-          }
-        );
+    },60);
 
-      },
-      60
+
+  setTimeout(() => {
+
+    clearInterval(timer);
+
+
+    cells.forEach(
+      c =>
+        c.classList.remove("rolling")
     );
 
-  setTimeout(
-    () => {
 
-      clearInterval(
-        timer
-      );
-
-      cells.forEach(
-        cell =>
-          cell.classList.remove(
-            "rolling"
+    const result =
+      Array.from(
+        {length:18},
+        () =>
+          Math.floor(
+            Math.random() *
+            symbols.length
           )
       );
 
-      let result =
-        Array.from(
-          {
-            length:18
-          },
-          () =>
-            randomSymbol()
-        );
 
+    cells.forEach(
+      (cell,index) => {
 
-      /* JACKPOT */
+        cell.innerHTML =
+          `<img src="${symbols[result[index]]}">`;
 
-      if(
-        Math.random() <
-        0.001
-      ){
-
-        const symbol =
-          symbols[
-            Math.floor(
-              Math.random() *
-              18
-            )
-          ];
-
-        result =
-          Array(
-            18
-          ).fill(
-            symbol
-          );
+        cell.classList.remove("win");
 
       }
+    );
 
 
-      /* FULL RED SCATTER
-         ketika target tercapai */
+    const counts = {};
 
-      if(
-        game.today >=
-        game.target
-      ){
+    result.forEach(
+      x =>
+        counts[x] =
+          (counts[x] || 0) + 1
+    );
 
-        result =
-          Array(
-            18
-          ).fill(
-            symbols[19]
-          );
+
+    const best =
+      Math.max(
+        ...Object.values(counts)
+      );
+
+
+    cells.forEach(
+      (cell,index) => {
+
+        if(
+          counts[result[index]]
+          === best
+        ){
+
+          cell.classList.add("win");
+
+        }
 
       }
+    );
 
 
-      cells.forEach(
-        (cell,index) => {
-
-          cell.innerHTML =
-            `<img src="${result[index].img}" alt="${result[index].name}">`;
-
-          cell.classList.remove(
-            "win"
-          );
-
-        }
-      );
+    const reward =
+      best >= 18
+        ? 1000000
+        : best >= 15
+        ? 30000
+        : best >= 10
+        ? 5000
+        : best >= 5
+        ? 500
+        : 0;
 
 
-      const counts = {};
+    if(reward > 0){
 
-      result.forEach(
-        symbol => {
+      game.balance += reward;
 
-          counts[
-            symbol.name
-          ] =
-            (
-              counts[
-                symbol.name
-              ] || 0
-            ) + 1;
+      game.totalWins++;
 
-        }
-      );
-
-
-      const best =
-        Math.max(
-          ...Object.values(
-            counts
-          )
-        );
-
-
-      cells.forEach(
-        (cell,index) => {
-
-          if(
-            counts[
-              result[index].name
-            ] === best
-          ){
-
-            cell.classList.add(
-              "win"
-            );
-
-          }
-
-        }
-      );
-
-
-      callback(
-        result
-      );
-
-    },
-    1200
-  );
-
-}
-
-
-/* =====================================================
-   RANDOM SYMBOL
-===================================================== */
-
-function randomSymbol(){
-
-  return symbols[
-    Math.floor(
-      Math.random() *
-      symbols.length
-    )
-  ];
-
-}
-
-
-/* =====================================================
-   MATCH
-===================================================== */
-
-function getMatchCount(
-  result
-){
-
-  const counts = {};
-
-  result.forEach(
-    symbol => {
-
-      counts[
-        symbol.name
-      ] =
-        (
-          counts[
-            symbol.name
-          ] || 0
-        ) + 1;
+      game.targetProgress += reward;
 
     }
-  );
-
-  return Math.max(
-    ...Object.values(
-      counts
-    )
-  );
-
-}
 
 
-/* =====================================================
-   SCATTER
-===================================================== */
-
-function getScatterCount(
-  result
-){
-
-  return result.filter(
-    symbol =>
-      symbol.scatter === true ||
-      symbol.redScatter === true
-  ).length;
-
-}
+    game.totalSpins++;
 
 
-/* =====================================================
-   REWARD
-===================================================== */
-
-function getReward(
-  match,
-  result
-){
-
-  const redScatter =
-    result.filter(
-      symbol =>
-        symbol.redScatter === true
-    ).length;
-
-
-  if(
-    redScatter >= 18
-  ){
-
-    return game.targetReward;
-
-  }
-
-
-  const scatter =
-    getScatterCount(
-      result
+    addHistory(
+      reward > 0 ? "🎉" : "💀",
+      best >= 18
+        ? "JACKPOT"
+        : reward > 0
+        ? "Menang Spin"
+        : "Zonk",
+      reward
     );
 
 
-  if(scatter >= 15)
-    return 55000;
+    if(
+      game.targetProgress >=
+      game.target
+    ){
 
-  if(scatter >= 10)
-    return 25000;
+      completeTarget();
 
-  if(scatter >= 5)
-    return 10000;
-
-  if(match <= 1)
-    return 0;
-
-  if(match === 15)
-    return 30000;
-
-  if(match === 16)
-    return 60000;
-
-  if(match === 17)
-    return 100000;
-
-  if(match === 18)
-    return 1000000;
-
-  if(
-    match >= 2 &&
-    match <= 14
-  ){
-
-    return 30 +
-      (
-        match - 2
-      ) * 30;
-
-  }
-
-  return 0;
-
-}
+    }
 
 
-/* =====================================================
-   HASIL
-===================================================== */
-
-function showSpinResult(
-  match,
-  scatterCount,
-  reward
-){
-
-  const box =
-    document.getElementById(
-      "result"
+    showSpinResult(
+      best,
+      reward
     );
 
-  const title =
-    document.getElementById(
-      "resultTitle"
+
+    save();
+    updateUI();
+
+
+    setTimeout(
+      runSpin,
+      600
     );
 
-  const rewardBox =
-    document.getElementById(
-      "resultReward"
-    );
-
-  const info =
-    document.getElementById(
-      "resultInfo"
-    );
-
-  box.classList.remove(
-    "zonk",
-    "win"
-  );
-
-  if(
-    reward >=
-    game.targetReward
-  ){
-
-    box.classList.add(
-      "win"
-    );
-
-    title.textContent =
-      "🔴 FULL SCATTER!";
-
-    rewardBox.textContent =
-      "+" +
-      formatNumber(
-        reward
-      ) +
-      " KOIN";
-
-    info.textContent =
-      "18 SCATTER MERAH! TARGET TERCAPAI.";
-
-  }
-
-  else if(
-    reward === 0
-  ){
-
-    box.classList.add(
-      "zonk"
-    );
-
-    title.textContent =
-      "💀 ZONK!";
-
-    rewardBox.textContent =
-      "+0 KOIN";
-
-    info.textContent =
-      "Kembar " +
-      match +
-      "×";
-
-  }
-
-  else{
-
-    box.classList.add(
-      "win"
-    );
-
-    title.textContent =
-      "🎉 MENANG!";
-
-    rewardBox.textContent =
-      "+" +
-      formatNumber(
-        reward
-      ) +
-      " KOIN";
-
-    info.textContent =
-      "Kembar " +
-      match +
-      "×";
-
-  }
-
-  box.classList.add(
-    "show"
-  );
+  },850);
 
 }
 
@@ -2687,106 +1977,481 @@ function showSpinResult(
    TARGET
 ===================================================== */
 
-function checkTarget(){
+function completeTarget(){
 
-  if(
-    game.today >=
-    game.target
-  ){
+  const oldTarget =
+    game.target;
 
-    /*
-      Setelah target tercapai:
-      target +1.000.000.000
-      hadiah +1.000.000.000
-    */
 
-    game.target +=
-      1000000000;
+  /*
+    Target bertambah
+    Rp1.000.000.000
+    setiap target tercapai.
+  */
 
-    game.targetReward +=
-      1000000000;
+  game.targetProgress = 0;
 
-    addHistory(
-      "🔴",
-      "TARGET NAIK",
-      "Target +" +
-      formatNumber(
-        1000000000
-      )
-    );
+  game.target =
+    oldTarget +
+    1000000000;
 
-  }
+  game.targetReward =
+    game.targetReward +
+    1000000000;
+
+
+  showToast(
+    "🎯 TARGET TERCAPAI! Target berikutnya " +
+    rupiah(game.target)
+  );
 
 }
 
 
 /* =====================================================
-   FINISH
+   SPIN RESULT
 ===================================================== */
 
-function finishBatch(){
+function showSpinResult(
+  match,
+  reward
+){
 
-  spinning =
-    false;
+  const box =
+    document.getElementById(
+      "spinResult"
+    );
 
-  document.getElementById(
-    "spinButton"
-  ).disabled =
-    false;
-
-  document.getElementById(
-    "spinStatus"
-  ).classList.remove(
-    "show"
-  );
 
   document.getElementById(
-    "sumSpins"
+    "spinResultTitle"
   ).textContent =
-    activeBatch +
-    "×";
+    reward > 0
+      ? "🎉 MENANG!"
+      : "💀 ZONK";
+
 
   document.getElementById(
-    "sumCost"
-  ).textContent =
-    formatNumber(
-      activeBatch *
-      SPIN_PRICE
-    ) +
-    " 🪙";
-
-  document.getElementById(
-    "sumReward"
+    "spinReward"
   ).textContent =
     "+" +
-    formatNumber(
-      batchReward
-    ) +
-    " 🪙";
+    rupiah(reward);
+
 
   document.getElementById(
-    "sumBefore"
+    "spinResultInfo"
   ).textContent =
-    formatNumber(
-      batchBefore
-    ) +
-    " 🪙";
+    "Kembar " +
+    match +
+    "×";
+
+
+  box.classList.add("show");
+
+}
+
+
+/* =====================================================
+   DICE
+===================================================== */
+
+function toggleNumber(
+  number,
+  button
+){
+
+  const index =
+    diceSelected.indexOf(number);
+
+
+  if(index >= 0){
+
+    diceSelected.splice(index,1);
+
+    button.classList.remove(
+      "selected"
+    );
+
+  }
+
+  else{
+
+    /*
+      Maksimal 3 pilihan,
+      tetapi angka yang sama
+      dapat dipilih lagi secara
+      konseptual melalui hasil dadu.
+    */
+
+    if(diceSelected.length >= 3){
+
+      showToast(
+        "Maksimal pilih 3 angka."
+      );
+
+      return;
+
+    }
+
+    diceSelected.push(number);
+
+    button.classList.add(
+      "selected"
+    );
+
+  }
+
 
   document.getElementById(
-    "sumAfter"
+    "selectedNumbers"
   ).textContent =
-    formatNumber(
-      game.balance
-    ) +
-    " 🪙";
+    diceSelected.length
+      ? "Pilihan: " +
+        diceSelected.join(", ")
+      : "Belum memilih angka.";
 
-  document.getElementById(
-    "summary"
-  ).classList.add(
-    "show"
+}
+
+
+function rollDice(){
+
+  const dice = [
+    document.getElementById("die1"),
+    document.getElementById("die2"),
+    document.getElementById("die3")
+  ];
+
+
+  dice.forEach(
+    d =>
+      d.classList.add("rolling")
   );
 
+
+  let count = 0;
+
+
+  const timer =
+    setInterval(() => {
+
+      dice.forEach(
+        d =>
+          d.textContent =
+            Math.floor(
+              Math.random()*6
+            ) + 1
+      );
+
+      count++;
+
+      if(count >= 12){
+
+        clearInterval(timer);
+
+        dice.forEach(
+          d =>
+            d.classList.remove(
+              "rolling"
+            )
+        );
+
+        const a =
+          Math.floor(
+            Math.random()*6
+          ) + 1;
+
+        const b =
+          Math.floor(
+            Math.random()*6
+          ) + 1;
+
+        const c =
+          Math.floor(
+            Math.random()*6
+          ) + 1;
+
+        dice[0].textContent = a;
+        dice[1].textContent = b;
+        dice[2].textContent = c;
+
+
+        document.getElementById(
+          "diceResult"
+        ).textContent =
+          "" + a + b + c;
+
+      }
+
+    },80);
+
+}
+
+
+function playDice(){
+
+  if(!diceSelected.length){
+
+    showToast(
+      "Pilih minimal 1 angka."
+    );
+
+    return;
+
+  }
+
+
+  const bet =
+    Number(
+      document.getElementById(
+        "diceBet"
+      ).value
+    );
+
+
+  if(
+    !Number.isFinite(bet) ||
+    bet <= 0
+  ){
+
+    showToast(
+      "Masukkan bet virtual yang valid."
+    );
+
+    return;
+
+  }
+
+
+  if(game.balance < bet){
+
+    showToast(
+      "Saldo virtual tidak cukup."
+    );
+
+    return;
+
+  }
+
+
+  game.balance -= bet;
+
+
+  const a =
+    Math.floor(
+      Math.random()*6
+    ) + 1;
+
+  const b =
+    Math.floor(
+      Math.random()*6
+    ) + 1;
+
+  const c =
+    Math.floor(
+      Math.random()*6
+    ) + 1;
+
+
+  document.getElementById(
+    "die1"
+  ).textContent = a;
+
+  document.getElementById(
+    "die2"
+  ).textContent = b;
+
+  document.getElementById(
+    "die3"
+  ).textContent = c;
+
+
+  document.getElementById(
+    "diceResult"
+  ).textContent =
+    "" + a + b + c;
+
+
+  const result =
+    [a,b,c];
+
+
+  const hits =
+    result.filter(
+      x =>
+        diceSelected.includes(x)
+    ).length;
+
+
+  let multiplier = 0;
+
+
+  if(
+    hits === 1 &&
+    diceSelected.length === 1
+  ){
+
+    multiplier = 3;
+
+  }
+
+  else if(
+    hits >= 1 &&
+    diceSelected.length === 2
+  ){
+
+    multiplier = 2;
+
+  }
+
+  else if(
+    hits >= 1 &&
+    diceSelected.length === 3
+  ){
+
+    multiplier = 1;
+
+  }
+
+
+  const reward =
+    bet * multiplier;
+
+
+  if(reward > 0){
+
+    game.balance += reward;
+
+    game.totalWins++;
+
+  }
+
+
+  addHistory(
+    reward > 0 ? "🎲" : "💀",
+    "Dadu " +
+      a + b + c,
+    reward
+  );
+
+
   save();
+  updateUI();
+
+
+  showToast(
+    reward > 0
+      ? "🎉 Menang " + rupiah(reward)
+      : "💀 Tidak cocok."
+  );
+
+}
+
+
+/* =====================================================
+   SPACEMAN
+===================================================== */
+
+function startSpaceRound(){
+
+  if(spaceRunning)
+    return;
+
+
+  const bet =
+    Number(
+      document.getElementById(
+        "spaceBet"
+      ).value
+    );
+
+
+  if(
+    !Number.isFinite(bet) ||
+    bet <= 0
+  ){
+
+    showToast(
+      "Masukkan bet virtual."
+    );
+
+    return;
+
+  }
+
+
+  if(game.balance < bet){
+
+    showToast(
+      "Saldo virtual tidak cukup."
+    );
+
+    return;
+
+  }
+
+
+  game.balance -= bet;
+
+  spaceBet = bet;
+
+  spaceMultiplier = 1;
+
+  spaceHalfTaken = false;
+
+  /*
+    TITIK TABRAKAN ACAK
+    MINIMUM ×3
+    MAKSIMUM ×5000
+  */
+
+  spaceCrash =
+    Math.floor(
+      Math.random() *
+      (5000 - 3 + 1)
+    ) + 3;
+
+
+  spacePotential = bet;
+
+  spaceRunning = true;
+
+
+  document.getElementById(
+    "spaceBefore"
+  ).classList.add("hidden");
+
+
+  document.getElementById(
+    "rocket"
+  ).classList.add("active");
+
+
+  document.getElementById(
+    "startSpaceButton"
+  ).disabled = true;
+
+
+  document.getElementById(
+    "stopSpaceButton"
+  ).disabled = false;
+
+
+  document.getElementById(
+    "halfSpaceButton"
+  ).disabled = false;
+
+
+  document.getElementById(
+    "spaceMessage"
+  ).textContent =
+    "Meteor sudah ditentukan secara acak. Berhenti sebelum tertabrak.";
+
+
+  spaceTimer =
+    setInterval(
+      updateSpace,
+      50
+    );
 
   updateUI();
 
@@ -2794,31 +2459,360 @@ function finishBatch(){
 
 
 /* =====================================================
-   XP
+   SPACEMAN UPDATE
 ===================================================== */
 
-function addXP(
-  amount
-){
+function updateSpace(){
 
-  game.xp +=
-    amount;
+  if(!spaceRunning)
+    return;
 
-  const required =
-    game.level *
-    100;
 
-  if(
-    game.xp >=
-    required
-  ){
+  /*
+    Semakin tinggi multiplier,
+    semakin cepat kenaikannya.
+  */
 
-    game.xp -=
-      required;
+  let speed;
 
-    game.level++;
+  if(spaceMultiplier < 500){
+
+    speed = .55;
 
   }
+
+  else if(spaceMultiplier < 2500){
+
+    speed = 1.05;
+
+  }
+
+  else{
+
+    speed = 1.7;
+
+  }
+
+
+  spaceMultiplier +=
+    speed *
+    .05;
+
+
+  if(
+    spaceMultiplier >=
+    spaceCrash
+  ){
+
+    crashSpace();
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "multiplier"
+  ).textContent =
+    "×" +
+    spaceMultiplier.toFixed(2);
+
+
+  /*
+    Posisi roket naik.
+  */
+
+  const rocket =
+    document.getElementById(
+      "rocket"
+    );
+
+
+  const progress =
+    Math.min(
+      1,
+      spaceMultiplier /
+      spaceCrash
+    );
+
+
+  const bottom =
+    45 +
+    progress *
+    260;
+
+
+  rocket.style.bottom =
+    bottom + "px";
+
+
+  /*
+    Meteor muncul acak.
+  */
+
+  if(
+    Math.random() < .045
+  ){
+
+    spawnMeteor();
+
+  }
+
+}
+
+
+/* =====================================================
+   METEOR
+===================================================== */
+
+function spawnMeteor(){
+
+  const area =
+    document.querySelector(
+      ".space-area"
+    );
+
+
+  const meteor =
+    document.createElement(
+      "div"
+    );
+
+
+  meteor.className =
+    "meteor";
+
+
+  meteor.style.left =
+    (Math.random()*80 + 10) +
+    "%";
+
+
+  meteor.style.top =
+    (Math.random()*55 + 5) +
+    "%";
+
+
+  area.appendChild(
+    meteor
+  );
+
+
+  setTimeout(
+    () => meteor.remove(),
+    1600
+  );
+
+}
+
+
+/* =====================================================
+   STOP / CASH OUT VIRTUAL
+===================================================== */
+
+function stopSpaceRound(){
+
+  if(!spaceRunning)
+    return;
+
+
+  const reward =
+    Math.floor(
+      spaceBet *
+      spaceMultiplier
+    );
+
+
+  endSpaceRound(
+    true,
+    reward
+  );
+
+}
+
+
+/* =====================================================
+   AMBIL 50%
+===================================================== */
+
+function takeHalfSpace(){
+
+  if(!spaceRunning)
+    return;
+
+
+  if(spaceHalfTaken){
+
+    showToast(
+      "Pilihan 50% sudah digunakan."
+    );
+
+    return;
+
+  }
+
+
+  const reward =
+    Math.floor(
+      spaceBet *
+      spaceMultiplier *
+      .5
+    );
+
+
+  game.balance += reward;
+
+  spaceHalfTaken = true;
+
+  spacePotential =
+    Math.floor(
+      spaceBet *
+      spaceMultiplier *
+      .5
+    );
+
+
+  document.getElementById(
+    "halfSpaceButton"
+  ).disabled = true;
+
+
+  addHistory(
+    "💰",
+    "Ambil 50% Spaceman",
+    reward
+  );
+
+
+  save();
+  updateUI();
+
+
+  showToast(
+    "50% poin virtual berhasil diambil. Ronde masih lanjut."
+  );
+
+}
+
+
+/* =====================================================
+   CRASH
+===================================================== */
+
+function crashSpace(){
+
+  if(!spaceRunning)
+    return;
+
+
+  /*
+    Jika belum berhenti sendiri,
+    ronde gagal.
+  */
+
+  endSpaceRound(
+    false,
+    0
+  );
+
+}
+
+
+/* =====================================================
+   END SPACE
+===================================================== */
+
+function endSpaceRound(
+  stopped,
+  reward
+){
+
+  clearInterval(
+    spaceTimer
+  );
+
+
+  spaceRunning = false;
+
+
+  document.getElementById(
+    "rocket"
+  ).classList.remove(
+    "active"
+  );
+
+
+  document.getElementById(
+    "spaceBefore"
+  ).classList.remove(
+    "hidden"
+  );
+
+
+  document.getElementById(
+    "startSpaceButton"
+  ).disabled = false;
+
+
+  document.getElementById(
+    "stopSpaceButton"
+  ).disabled = true;
+
+
+  document.getElementById(
+    "halfSpaceButton"
+  ).disabled = true;
+
+
+  if(reward > 0){
+
+    game.balance += reward;
+
+    game.totalWins++;
+
+    addHistory(
+      "🚀",
+      stopped
+        ? "Spaceman Berhenti"
+        : "Spaceman",
+      reward
+    );
+
+  }
+
+  else{
+
+    addHistory(
+      "💥",
+      "Spaceman Tertabrak",
+      0
+    );
+
+  }
+
+
+  document.getElementById(
+    "spaceMessage"
+  ).textContent =
+    stopped
+      ? "Berhenti di ×" +
+        spaceMultiplier.toFixed(2) +
+        " — +" +
+        rupiah(reward)
+      : "💥 TERTABRAK di ×" +
+        spaceCrash +
+        " — Rp0";
+
+
+  document.getElementById(
+    "multiplier"
+  ).textContent =
+    "×" +
+    spaceMultiplier.toFixed(2);
+
+
+  save();
+  updateUI();
 
 }
 
@@ -2833,29 +2827,28 @@ function addHistory(
   amount
 ){
 
-  const now =
-    new Date()
-      .toLocaleTimeString(
-        "id-ID",
-        {
-          hour:"2-digit",
-          minute:"2-digit"
-        }
-      );
-
   game.history.unshift({
 
     icon,
     title,
     amount,
-    time:now
+    time:
+      new Date()
+        .toLocaleTimeString(
+          "id-ID",
+          {
+            hour:"2-digit",
+            minute:"2-digit"
+          }
+        )
 
   });
+
 
   game.history =
     game.history.slice(
       0,
-      50
+      40
     );
 
 }
@@ -2868,29 +2861,21 @@ function renderHistory(){
       "history"
     );
 
-  if(
-    !game.history.length
-  ){
 
-    box.innerHTML =
-      `
+  if(!game.history.length){
+
+    box.innerHTML = `
       <div class="history-item">
         <div class="history-left">
-          <div class="history-icon">
-            📭
-          </div>
+          <div class="history-icon">📭</div>
           <div>
-            <strong>
-              Belum ada aktivitas
-            </strong>
+            <strong>Belum ada aktivitas</strong>
             <br>
-            <small>
-              Mulung koin untuk mulai bermain.
-            </small>
+            <small>Mulai permainan virtual.</small>
           </div>
         </div>
       </div>
-      `;
+    `;
 
     return;
 
@@ -2900,8 +2885,8 @@ function renderHistory(){
   box.innerHTML =
     game.history
       .map(
-        item =>
-          `
+        item => `
+
           <div class="history-item">
 
             <div class="history-left">
@@ -2927,11 +2912,16 @@ function renderHistory(){
             </div>
 
             <div class="plus">
-              ${item.amount}
+              ${
+                item.amount > 0
+                  ? "+" + rupiah(item.amount)
+                  : "Rp0"
+              }
             </div>
 
           </div>
-          `
+
+        `
       )
       .join("");
 
@@ -2939,1237 +2929,75 @@ function renderHistory(){
 
 
 /* =====================================================
-   MODAL
+   TOAST
 ===================================================== */
 
-function showModal(
-  title,
-  icon,
-  reward,
-  info
-){
+let toastTimer;
 
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
-    title;
+function showToast(message){
 
-  document.getElementById(
-    "modalIcon"
-  ).textContent =
-    icon;
+  const toast =
+    document.getElementById(
+      "toast"
+    );
 
-  document.getElementById(
-    "modalReward"
-  ).textContent =
-    reward;
 
-  document.getElementById(
-    "modalInfo"
-  ).textContent =
-    info;
+  toast.textContent =
+    message;
 
-  document.getElementById(
-    "modal"
-  ).classList.add(
+
+  toast.classList.add(
     "show"
-  );
-
-}
-
-
-function closeModal(){
-
-  document.getElementById(
-    "modal"
-  ).classList.remove(
-    "show"
-  );
-
-}
-
-
-/* =====================================================
-   SPACEMAN STATE
-===================================================== */
-
-let spacemanRunning =
-  false;
-
-let spacemanMultiplier =
-  1;
-
-let spacemanBetValue =
-  20000;
-
-let spacemanAnimation =
-  null;
-
-let meteorTimer =
-  null;
-
-let meteorList =
-  [];
-
-let spacemanRoundId =
-  0;
-
-
-/* =====================================================
-   BET SPACEMAN
-===================================================== */
-
-function changeBet(
-  amount
-){
-
-  if(
-    spacemanRunning
-  )
-    return;
-
-  spacemanBetValue +=
-    amount;
-
-  if(
-    spacemanBetValue <
-    1000
-  ){
-
-    spacemanBetValue =
-      1000;
-
-  }
-
-  document.getElementById(
-    "spacemanBet"
-  ).value =
-    spacemanBetValue;
-
-}
-
-
-document.getElementById(
-  "spacemanBet"
-).addEventListener(
-  "input",
-  function(){
-
-    let value =
-      Number(
-        this.value
-      );
-
-    if(
-      !Number.isFinite(
-        value
-      ) ||
-      value < 1000
-    ){
-
-      value =
-        1000;
-
-    }
-
-    spacemanBetValue =
-      value;
-
-  }
-);
-
-
-/* =====================================================
-   KECEPATAN SESUAI MULTIPLIER
-===================================================== */
-
-function getFlightSpeed(){
-
-  /*
-    ×1 - ×500
-    = SEDANG
-
-    ×501 - ×2500
-    = CEPAT
-
-    ×2501 - ×5000
-    = SANGAT CEPAT
-  */
-
-  if(
-    spacemanMultiplier <= 500
-  ){
-
-    return 1;
-
-  }
-
-  if(
-    spacemanMultiplier <= 2500
-  ){
-
-    return 2.2;
-
-  }
-
-  return 4;
-
-}
-
-
-/* =====================================================
-   MULAI SPACEMAN
-===================================================== */
-
-function startSpaceman(){
-
-  if(
-    spacemanRunning
-  )
-    return;
-
-
-  spacemanBetValue =
-    Number(
-      document.getElementById(
-        "spacemanBet"
-      ).value
-    );
-
-
-  if(
-    !Number.isFinite(
-      spacemanBetValue
-    ) ||
-    spacemanBetValue <
-    1000
-  ){
-
-    showModal(
-      "BET TIDAK VALID",
-      "⚠️",
-      "MINIMAL 1.000",
-      "Masukkan jumlah bet yang benar."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    game.balance <
-    spacemanBetValue
-  ){
-
-    showModal(
-      "KOIN TIDAK CUKUP",
-      "🪙",
-      "BUTUH " +
-      formatNumber(
-        spacemanBetValue
-      ),
-      "Saldo kamu tidak mencukupi."
-    );
-
-    return;
-
-  }
-
-
-  game.balance -=
-    spacemanBetValue;
-
-  save();
-
-  updateUI();
-
-
-  spacemanRunning =
-    true;
-
-  spacemanMultiplier =
-    1;
-
-  spacemanRoundId++;
-
-
-  document.getElementById(
-    "spacemanStart"
-  ).disabled =
-    true;
-
-  document.getElementById(
-    "spacemanStop"
-  ).disabled =
-    false;
-
-
-  document.getElementById(
-    "spacemanMessage"
-  ).textContent =
-    "🚀 TERBANG...";
-
-
-  document.getElementById(
-    "spacemanMultiplier"
-  ).textContent =
-    "×1.00";
-
-
-  document.getElementById(
-    "spacemanReward"
-  ).textContent =
-    "0 🪙";
-
-
-  document.getElementById(
-    "rocketWrap"
-  ).style.bottom =
-    "35px";
-
-
-  clearMeteors();
-
-  startMeteorSpawner();
-
-  startRocketFlight();
-
-}
-
-
-/* =====================================================
-   ROKET TERBANG
-===================================================== */
-
-function startRocketFlight(){
-
-  const rocket =
-    document.getElementById(
-      "rocketWrap"
-    );
-
-  let bottom =
-    35;
-
-
-  function fly(){
-
-    if(
-      !spacemanRunning
-    )
-      return;
-
-
-    const speed =
-      getFlightSpeed();
-
-
-    /*
-      Semakin tinggi multiplier,
-      gerakan semakin cepat.
-    */
-
-    bottom +=
-      0.45 +
-      (
-        speed *
-        0.35
-      );
-
-
-    const area =
-      document.getElementById(
-        "spaceArea"
-      );
-
-
-    const maxHeight =
-      area.clientHeight -
-      125;
-
-
-    if(
-      bottom >
-      maxHeight
-    ){
-
-      bottom =
-        maxHeight;
-
-    }
-
-
-    rocket.style.bottom =
-      bottom +
-      "px";
-
-
-    /*
-      Multiplier terus naik.
-    */
-
-    let increase =
-      0.004;
-
-
-    if(
-      spacemanMultiplier >
-      500
-    ){
-
-      increase =
-        0.009;
-
-    }
-
-
-    if(
-      spacemanMultiplier >
-      2500
-    ){
-
-      increase =
-        0.018;
-
-    }
-
-
-    spacemanMultiplier +=
-      increase;
-
-
-    if(
-      spacemanMultiplier >
-      5000
-    ){
-
-      spacemanMultiplier =
-        5000;
-
-      crashSpaceman(
-        "💥 BATAS ×5000!"
-      );
-
-      return;
-
-    }
-
-
-    document.getElementById(
-      "spacemanMultiplier"
-    ).textContent =
-      "×" +
-      spacemanMultiplier
-        .toFixed(2);
-
-
-    const reward =
-      Math.floor(
-        spacemanBetValue *
-        spacemanMultiplier
-      );
-
-
-    document.getElementById(
-      "spacemanReward"
-    ).textContent =
-      formatNumber(
-        reward
-      ) +
-      " 🪙";
-
-
-    spacemanAnimation =
-      requestAnimationFrame(
-        fly
-      );
-
-  }
-
-
-  fly();
-
-}
-
-
-/* =====================================================
-   METEOR SPAWNER
-===================================================== */
-
-function startMeteorSpawner(){
-
-  /*
-    Meteor terus muncul.
-    Kecepatan dan jumlahnya
-    ikut multiplier.
-  */
-
-  const spawn =
-    () => {
-
-      if(
-        !spacemanRunning
-      )
-        return;
-
-
-      spawnMeteor();
-
-
-      const delay =
-        spacemanMultiplier <= 500
-          ? 850
-          : spacemanMultiplier <= 2500
-            ? 500
-            : 260;
-
-
-      meteorTimer =
-        setTimeout(
-          spawn,
-          delay
-        );
-
-    };
-
-
-  spawn();
-
-}
-
-
-/* =====================================================
-   SPAWN METEOR ACAK
-===================================================== */
-
-function spawnMeteor(){
-
-  if(
-    !spacemanRunning
-  )
-    return;
-
-
-  const area =
-    document.getElementById(
-      "spaceArea"
-    );
-
-
-  const container =
-    document.getElementById(
-      "meteorContainer"
-    );
-
-
-  const meteor =
-    document.createElement(
-      "div"
-    );
-
-
-  meteor.className =
-    "meteor";
-
-
-  const width =
-    area.clientWidth;
-
-  const height =
-    area.clientHeight;
-
-
-  /*
-    Meteor bisa muncul:
-    kiri,
-    kanan,
-    atas.
-  */
-
-  const side =
-    Math.floor(
-      Math.random() * 3
-    );
-
-
-  let startX;
-  let startY;
-
-
-  if(
-    side === 0
-  ){
-
-    startX =
-      -50;
-
-    startY =
-      Math.random() *
-      (
-        height - 80
-      );
-
-  }
-
-  else if(
-    side === 1
-  ){
-
-    startX =
-      width + 50;
-
-    startY =
-      Math.random() *
-      (
-        height - 80
-      );
-
-  }
-
-  else{
-
-    startX =
-      Math.random() *
-      width;
-
-    startY =
-      -50;
-
-  }
-
-
-  meteor.style.left =
-    startX +
-    "px";
-
-  meteor.style.top =
-    startY +
-    "px";
-
-
-  container.appendChild(
-    meteor
-  );
-
-
-  meteorList.push(
-    meteor
-  );
-
-
-  /*
-    Target meteor dibuat
-    secara acak.
-  */
-
-  const targetX =
-    width / 2 +
-    (
-      Math.random() *
-      180 -
-      90
-    );
-
-
-  const targetY =
-    80 +
-    Math.random() *
-    (
-      height - 180
-    );
-
-
-  const dx =
-    targetX -
-    startX;
-
-  const dy =
-    targetY -
-    startY;
-
-
-  const distance =
-    Math.sqrt(
-      dx * dx +
-      dy * dy
-    );
-
-
-  /*
-    Kecepatan meteor
-    mengikuti multiplier.
-  */
-
-  let speed;
-
-
-  if(
-    spacemanMultiplier <= 500
-  ){
-
-    speed =
-      2 +
-      Math.random() * 2;
-
-  }
-
-  else if(
-    spacemanMultiplier <= 2500
-  ){
-
-    speed =
-      4 +
-      Math.random() * 3;
-
-  }
-
-  else{
-
-    speed =
-      7 +
-      Math.random() * 5;
-
-  }
-
-
-  /*
-    Kadang meteor diarahkan
-    lebih dekat ke roket.
-    Ini membuat tabrakan
-    tidak dapat diprediksi.
-  */
-
-  if(
-    Math.random() <
-    0.35
-  ){
-
-    const rocket =
-      document.getElementById(
-        "rocketWrap"
-      ).getBoundingClientRect();
-
-    const areaRect =
-      area.getBoundingClientRect();
-
-
-    const rocketX =
-      rocket.left -
-      areaRect.left +
-      rocket.width / 2;
-
-
-    const rocketY =
-      rocket.top -
-      areaRect.top +
-      rocket.height / 2;
-
-
-    const newDX =
-      rocketX -
-      startX;
-
-
-    const newDY =
-      rocketY -
-      startY;
-
-
-    const newDistance =
-      Math.sqrt(
-        newDX * newDX +
-        newDY * newDY
-      );
-
-
-    moveMeteor(
-      meteor,
-      startX,
-      startY,
-      rocketX,
-      rocketY,
-      newDistance /
-      speed
-    );
-
-    return;
-
-  }
-
-
-  moveMeteor(
-    meteor,
-    startX,
-    startY,
-    targetX,
-    targetY,
-    distance /
-    speed
-  );
-
-}
-
-
-/* =====================================================
-   GERAK METEOR
-===================================================== */
-
-function moveMeteor(
-  meteor,
-  startX,
-  startY,
-  targetX,
-  targetY,
-  duration
-){
-
-  const start =
-    performance.now();
-
-
-  function animate(
-    now
-  ){
-
-    if(
-      !spacemanRunning
-    ){
-
-      meteor.remove();
-
-      return;
-
-    }
-
-
-    const progress =
-      Math.min(
-        1,
-        (
-          now -
-          start
-        ) /
-        duration
-      );
-
-
-    const x =
-      startX +
-      (
-        targetX -
-        startX
-      ) *
-      progress;
-
-
-    const y =
-      startY +
-      (
-        targetY -
-        startY
-      ) *
-      progress;
-
-
-    meteor.style.left =
-      x +
-      "px";
-
-    meteor.style.top =
-      y +
-      "px";
-
-
-    /*
-      Tabarakan dicek terus.
-    */
-
-    if(
-      checkMeteorCollision(
-        meteor
-      )
-    ){
-
-      crashSpaceman(
-        "💥 ROKET TERTABRAK METEOR!"
-      );
-
-      return;
-
-    }
-
-
-    if(
-      progress <
-      1
-    ){
-
-      requestAnimationFrame(
-        animate
-      );
-
-    }
-    else{
-
-      meteor.remove();
-
-    }
-
-  }
-
-
-  requestAnimationFrame(
-    animate
-  );
-
-}
-
-
-/* =====================================================
-   COLLISION
-===================================================== */
-
-function checkMeteorCollision(
-  meteor
-){
-
-  const rocket =
-    document.getElementById(
-      "rocketWrap"
-    );
-
-
-  const r =
-    rocket.getBoundingClientRect();
-
-  const m =
-    meteor.getBoundingClientRect();
-
-
-  const padding =
-    10;
-
-
-  return !(
-    r.right <
-      m.left +
-      padding ||
-
-    r.left >
-      m.right -
-      padding ||
-
-    r.bottom <
-      m.top +
-      padding ||
-
-    r.top >
-      m.bottom -
-      padding
-  );
-
-}
-
-
-/* =====================================================
-   CRASH
-===================================================== */
-
-function crashSpaceman(
-  reason
-){
-
-  if(
-    !spacemanRunning
-  )
-    return;
-
-
-  spacemanRunning =
-    false;
-
-
-  cancelAnimationFrame(
-    spacemanAnimation
   );
 
 
   clearTimeout(
-    meteorTimer
+    toastTimer
   );
 
 
-  meteorTimer =
-    null;
-
-
-  document.getElementById(
-    "spacemanStart"
-  ).disabled =
-    false;
-
-
-  document.getElementById(
-    "spacemanStop"
-  ).disabled =
-    true;
-
-
-  document.getElementById(
-    "spacemanMessage"
-  ).textContent =
-    reason;
-
-
-  /*
-    Crash = 0 hadiah.
-  */
-
-  document.getElementById(
-    "spacemanReward"
-  ).textContent =
-    "0 🪙";
-
-
-  document.getElementById(
-    "spacemanMultiplier"
-  ).textContent =
-    "💥 ×" +
-    spacemanMultiplier
-      .toFixed(2);
-
-
-  document.getElementById(
-    "rocketWrap"
-  ).classList.add(
-    "meteor-hit"
-  );
-
-
-  addHistory(
-    "☄️",
-    "SPACEMAN CRASH",
-    "+0 koin"
-  );
-
-
-  save();
-
-  updateUI();
-
-
-  setTimeout(
-    () => {
-
-      document.getElementById(
-        "rocketWrap"
-      ).classList.remove(
-        "meteor-hit"
-      );
-
-      clearMeteors();
-
-    },
-    800
-  );
-
-}
-
-
-/* =====================================================
-   STOP SENDIRI
-===================================================== */
-
-function stopSpaceman(){
-
-  if(
-    !spacemanRunning
-  )
-    return;
-
-
-  spacemanRunning =
-    false;
-
-
-  cancelAnimationFrame(
-    spacemanAnimation
-  );
-
-
-  clearTimeout(
-    meteorTimer
-  );
-
-
-  meteorTimer =
-    null;
-
-
-  clearMeteors();
-
-
-  const reward =
-    Math.floor(
-      spacemanBetValue *
-      spacemanMultiplier
+  toastTimer =
+    setTimeout(
+      () =>
+        toast.classList.remove(
+          "show"
+        ),
+      2600
     );
 
-
-  game.balance +=
-    reward;
-
-  game.today +=
-    reward;
-
-  game.spins++;
-
-
-  addHistory(
-    "🚀",
-    "SPACEMAN ×" +
-    spacemanMultiplier
-      .toFixed(2),
-    "+" +
-    formatNumber(
-      reward
-    ) +
-    " koin"
-  );
-
-
-  save();
-
-  updateUI();
-
-
-  document.getElementById(
-    "spacemanStart"
-  ).disabled =
-    false;
-
-  document.getElementById(
-    "spacemanStop"
-  ).disabled =
-    true;
-
-
-  document.getElementById(
-    "spacemanMessage"
-  ).textContent =
-    "💰 HADIAH DIAMANKAN!";
-
-
-  document.getElementById(
-    "spacemanReward"
-  ).textContent =
-    formatNumber(
-      reward
-    ) +
-    " 🪙";
-
 }
 
 
 /* =====================================================
-   CLEAR METEOR
-===================================================== */
-
-function clearMeteors(){
-
-  const container =
-    document.getElementById(
-      "meteorContainer"
-    );
-
-  if(
-    !container
-  )
-    return;
-
-  container.innerHTML =
-    "";
-
-  meteorList =
-    [];
-
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function scrollToTop(){
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function scrollToSlot(){
-
-  document
-    .querySelector(
-      ".machine"
-    )
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-}
-
-
-function scrollToSpaceman(){
-
-  document
-    .getElementById(
-      "spacemanSection"
-    )
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-}
-
-
-function scrollToCollect(){
-
-  document
-    .getElementById(
-      "collectSection"
-    )
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-}
-
-
-/* =====================================================
-   INIT SLOT
+   INITIALIZE SLOT
 ===================================================== */
 
 function initializeSlot(){
 
-  cells.forEach(
-    cell => {
+  document
+    .querySelectorAll(".cell")
+    .forEach(
+      cell => {
 
-      const symbol =
-        randomSymbol();
+        const index =
+          Math.floor(
+            Math.random() *
+            symbols.length
+          );
 
-      cell.innerHTML =
-        `<img src="${symbol.img}" alt="${symbol.name}">`;
 
-    }
-  );
+        cell.innerHTML =
+          `<img src="${symbols[index]}">`;
+
+      }
+    );
 
 }
 
+
+/* =====================================================
+   INIT
+===================================================== */
 
 initializeSlot();
 
